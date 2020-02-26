@@ -15,11 +15,11 @@ class Order extends Model implements OrderInterface
       
       public function user()
       {
-            return $this->belongsTo ('User::class');
+            return $this->belongsTo (User::class, 'user_id');
       }
       
       public function products()
       {
-            return $this->belongsToMany ('Product::class', 'order_product', 'order_id', 'product_id')->withPivot ('quantity', 'total_amount');
+            return $this->belongsToMany (Product::class, 'order_product', 'product_id', 'order_id')->withPivot ('quantity', 'total_amount');
       }
 }

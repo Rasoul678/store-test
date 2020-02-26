@@ -43,6 +43,6 @@ class User extends Model implements UserInterface
     
     public function orders()
     {
-          return $this->hasMany ('Order::class');
+          return $this->hasMany (Order::class);
     }
 }

@@ -17,7 +17,12 @@ class Product extends Model implements ProductInterface
       
       public function orders()
       {
-            return $this->belongsToMany ('Order::class');
+            return $this->belongsToMany (Order::class);
+      }
+      
+      public function categories()
+      {
+            return $this->belongsToMany(Category::class);
       }
     
     
