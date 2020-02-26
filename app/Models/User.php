@@ -40,4 +40,9 @@ class User extends Model implements UserInterface
     {
         return $this->belongsToMany('Role::class', 'role_id');
     }
+    
+    public function orders()
+    {
+          return $this->hasMany ('Order::class');
+    }
 }
