@@ -26,10 +26,11 @@ class Role extends Model implements RoleInterface
 
     public function permissions()
     {
-        return $this->belongsToMany('permissions','permission_id');
+        return $this->belongsToMany('Permission::class','permission_role');
     }
+
     public function users()
     {
-        return $this->belongsToMany('users','user_id');
+        return $this->belongsToMany('User::class');
     }
 }

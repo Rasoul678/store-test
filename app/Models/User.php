@@ -38,11 +38,11 @@ class User extends Model implements UserInterface
 
     public function roles()
     {
-        return $this->belongsToMany('Role::class', 'role_id');
+        return $this->belongsToMany('Role::class', 'role_user');
     }
-    
+
     public function orders()
     {
-          return $this->hasMany (Order::class);
+        return $this->hasMany(Order::class);
     }
 }
