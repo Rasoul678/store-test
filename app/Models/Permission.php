@@ -24,7 +24,7 @@ class Permission extends Model implements PermissionInterface
         'deleted_at',
     ];
 
-    public function roles()
+    public function getRoles()
     {
         return $this->belongsToMany('Role::class','permission_role');
     }

@@ -24,12 +24,12 @@ class Role extends Model implements RoleInterface
         'deleted_at',
     ];
 
-    public function permissions()
+    public function getPermissions()
     {
         return $this->belongsToMany('Permission::class','permission_role');
     }
 
-    public function users()
+    public function getUsers()
     {
         return $this->belongsToMany('User::class');
     }

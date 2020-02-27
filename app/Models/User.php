@@ -13,8 +13,9 @@ class User extends Model implements UserInterface
     protected $table = 'users';
 
     protected $dates = [
+        'date_of_birth',
         'created_at',
-        'updated_at' .
+        'updated_at',
         'deleted_at',
     ];
 
@@ -22,6 +23,7 @@ class User extends Model implements UserInterface
         'name',
         'email',
         'password',
+        'date_of_birth',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -36,13 +38,18 @@ class User extends Model implements UserInterface
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles()
+    public function getRoles()
     {
         return $this->belongsToMany('Role::class', 'role_user');
     }
 
-    public function orders()
+    public function getOrders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function getAddresses()
+    {
+        return $this->hasMany('Address::class');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 interface RoleInterface
 {
-    public function permissions();
-    public function users();
+    public function getPermissions();
+
+    public function getUsers();
 }
