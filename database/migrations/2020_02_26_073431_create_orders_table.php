@@ -15,12 +15,16 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('order_number')->unique();
+            
             $table->bigInteger ('user_id')->unsigned ()->nullable ();
             $table->foreign ('user_id')->references ('id')->on ('users')
                               ->onUpdate ('cascade')->onDelete ('set null');
+            
             $table->integer ('total_price');
-            $table->boolean ('shipped')->default (false);
-            $table->boolean ('delivered')->default (false);
+            $table->boolean ('is_shipped')->default (false);
+            $table->boolean ('is_delivered')->default (false);
+            $table->enum('order_status', ['pending', 'processing', 'completed', 'decline'])->default('pending');
 
             $table->softDeletes();
             $table->timestamps();

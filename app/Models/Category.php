@@ -18,17 +18,17 @@ class Category extends Model implements CategoryInterface
       ];
       
       
-      public function children()
+      public function getChildren()
       {
             return $this->hasMany(Category::class, 'parent_id');
       }
       
-      public function parent()
+      public function getParent()
       {
             return $this->belongsTo(Category::class, 'parent_id');
       }
       
-      public function products()
+      public function getProducts()
       {
             return $this->belongsToMany(Product::class, 'category_product', 'product_id', 'category_id');
       }

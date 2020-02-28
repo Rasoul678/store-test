@@ -11,14 +11,14 @@ class Order extends Model implements OrderInterface
       
       protected $table = 'orders';
       
-      protected $fillable = ['total_price', 'shipped','delivered'];
+      protected $fillable = ['order_number', 'total_price', 'is_shipped','is_delivered', 'order_status'];
       
-      public function user()
+      public function getUser()
       {
             return $this->belongsTo (User::class, 'user_id');
       }
       
-      public function products()
+      public function getProducts()
       {
             return $this->belongsToMany (Product::class, 'order_product', 'product_id', 'order_id')->withPivot ('quantity', 'total_amount');
       }

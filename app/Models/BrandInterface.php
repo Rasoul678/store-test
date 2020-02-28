@@ -1,8 +1,7 @@
 <?php
       namespace App\Models;
       
-      interface OrderInterface
+      interface BrandInterface
       {
-            public function getUser();
             public function getProducts();
       }

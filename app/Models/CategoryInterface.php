@@ -3,7 +3,7 @@
       
       interface CategoryInterface
       {
-            public function children();
-            public function parent();
-            public function products();
+            public function getChildren();
+            public function getParent();
+            public function getProducts();
       }

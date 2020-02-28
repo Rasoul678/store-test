@@ -12,17 +12,27 @@ class Product extends Model implements ProductInterface
       
       protected $table = 'products';
       
-      protected $fillable = ['name', 'description', 'image', 'price', 'type'];
+      protected $fillable = ['brand_id', 'name', 'description', 'image', 'price', 'type'];
       
       
-      public function orders()
+      public function getOrders()
       {
             return $this->belongsToMany (Order::class);
       }
       
-      public function categories()
+      public function getCategories()
       {
             return $this->belongsToMany(Category::class);
+      }
+      
+      public function getBrand()
+      {
+            return $this->belongsTo(Brand::class);
+      }
+      
+      public function getImages()
+      {
+            return $this->hasMany(ProductImage::class);
       }
     
     

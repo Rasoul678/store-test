@@ -4,6 +4,8 @@
       
       interface ProductInterface
       {
-            public function orders();
-            public function categories();
+            public function getOrders();
+            public function getCategories();
+            public function getBrand();
+            public function getImages();
       }
