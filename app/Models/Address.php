@@ -25,11 +25,11 @@ class Address extends Model implements AddressInterface
 
     public function getUser()
     {
-        return $this->belongsTo('User::class', 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function getCity()
     {
-        return $this->belongsTo('City::class', 'city_id', 'id');
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
 }

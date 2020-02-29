@@ -1,7 +1,8 @@
 <?php
-      namespace App\Models;
-      
-      interface ProductImageInterface
-      {
-            public function getProduct();
-      }
+
+namespace App\Models;
+
+interface ProductImageInterface
+{
+    public function getProduct();
+}

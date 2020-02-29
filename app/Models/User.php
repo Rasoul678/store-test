@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Model implements UserInterface
 {
-    use SoftDeletes, Notifiable;
+    use SoftDeletes;
 
     protected $table = 'users';
 
@@ -40,7 +39,7 @@ class User extends Model implements UserInterface
 
     public function getRoles()
     {
-        return $this->belongsToMany('Role::class', 'role_user');
+        return $this->belongsToMany(Role::class, 'role_user');
     }
 
     public function getOrders()
@@ -50,6 +49,6 @@ class User extends Model implements UserInterface
 
     public function getAddresses()
     {
-        return $this->hasMany('Address::class');
+        return $this->hasMany(Address::class);
     }
 }

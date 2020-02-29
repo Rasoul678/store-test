@@ -26,6 +26,6 @@ class Permission extends Model implements PermissionInterface
 
     public function getRoles()
     {
-        return $this->belongsToMany('Role::class','permission_role');
+        return $this->belongsToMany(Role::class, 'permission_role');
     }
 }

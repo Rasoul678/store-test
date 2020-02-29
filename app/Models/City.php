@@ -8,18 +8,15 @@ class City extends Model implements CityInterface
 {
     protected $table = 'cities';
 
+    public $timestamps = false;
+
     protected $fillable = [
-        'name',
+        'city',
         'country',
     ];
 
-    public function getCountyName()
-    {
-        return $this->country;
-    }
-
     public function getAddresses()
     {
-        return $this->hasMany('Address::class');
+        return $this->hasMany(Address::class);
     }
 }

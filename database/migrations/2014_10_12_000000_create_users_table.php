@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->date('date_of_birth')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
