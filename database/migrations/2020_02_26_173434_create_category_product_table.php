@@ -15,11 +15,13 @@ class CreateCategoryProductTable extends Migration
     {
         Schema::create('category_product', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('category_id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
+            $table->unsignedBigInteger('category_id')->nullable ();
+            $table->unsignedBigInteger('product_id')->nullable ();
 
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('category_id')->references('id')->on('categories')
+                              ->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('product_id')->references('id')->on('products')
+                              ->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
         });
     }

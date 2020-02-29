@@ -12,7 +12,23 @@ class Product extends Model implements ProductInterface
       
       protected $table = 'products';
       
-      protected $fillable = ['brand_id', 'name', 'description', 'image', 'price', 'type'];
+      protected $dates = [
+          'created_at',
+          'updated_at',
+          'deleted_at',
+      ];
+      
+      protected $fillable = [
+          'brand_id',
+          'name',
+          'description',
+          'image',
+          'price',
+          'type',
+          'created_at',
+          'updated_at',
+          'deleted_at'
+      ];
       
       
       public function getOrders()

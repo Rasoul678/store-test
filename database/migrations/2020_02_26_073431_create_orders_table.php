@@ -17,9 +17,9 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('order_number')->unique();
             
-            $table->bigInteger ('user_id')->unsigned ()->nullable ();
+            $table->unsignedBigInteger('user_id');
             $table->foreign ('user_id')->references ('id')->on ('users')
-                              ->onUpdate ('cascade')->onDelete ('set null');
+                              ->onDelete ('cascade');
             
             $table->integer ('total_price');
             $table->boolean ('is_shipped')->default (false);

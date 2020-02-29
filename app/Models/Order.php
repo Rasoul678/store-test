@@ -11,7 +11,23 @@ class Order extends Model implements OrderInterface
       
       protected $table = 'orders';
       
-      protected $fillable = ['order_number', 'total_price', 'is_shipped','is_delivered', 'order_status'];
+      protected $dates = [
+          'created_at',
+          'updated_at',
+          'deleted_at',
+      ];
+      
+      protected $fillable = [
+          'order_number',
+          'user_id',
+          'total_price',
+          'is_shipped',
+          'is_delivered',
+          'order_status',
+          'created_at',
+          'updated_at',
+          'deleted_at'
+          ];
       
       public function getUser()
       {
@@ -20,6 +36,7 @@ class Order extends Model implements OrderInterface
       
       public function getProducts()
       {
-            return $this->belongsToMany (Product::class, 'order_product', 'product_id', 'order_id')->withPivot ('quantity', 'total_amount');
+            return $this->belongsToMany (Product::class, 'order_product', 'order_id', 'product_id')
+                                    ->withPivot ('quantity', 'total_amount')->withTimestamps();
       }
 }

@@ -4,12 +4,32 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model implements CategoryInterface
 {
+      use SoftDeletes;
+      
       protected $table = 'categories';
       
-      protected $fillable = ['name', 'slug', 'description', 'parent_id', 'featured', 'menu', 'image'];
+      protected $dates = [
+          'created_at',
+          'updated_at',
+          'deleted_at',
+      ];
+      
+      protected $fillable = [
+          'name',
+          'slug',
+          'description',
+          'parent_id',
+          'featured',
+          'menu',
+          'image',
+          'created_at',
+          'updated_at',
+          'deleted_at'
+          ];
       
       protected $casts = [
           'parent_id' =>  'integer',
@@ -30,7 +50,7 @@ class Category extends Model implements CategoryInterface
       
       public function getProducts()
       {
-            return $this->belongsToMany(Product::class, 'category_product', 'product_id', 'category_id');
+            return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id')->withTimestamps();
       }
       
 }
