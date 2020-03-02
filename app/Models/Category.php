@@ -23,18 +23,9 @@ class Category extends Model implements CategoryInterface
         'slug',
         'description',
         'parent_id',
-        'featured',
-        'menu',
-        'image',
         'created_at',
         'updated_at',
         'deleted_at'
-    ];
-
-    protected $casts = [
-        'parent_id' => 'integer',
-        'featured' => 'boolean',
-        'menu' => 'boolean'
     ];
 
 
