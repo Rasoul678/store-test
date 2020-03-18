@@ -3,12 +3,14 @@
 namespace App\Models;
 
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model implements CategoryInterface
 {
     use SoftDeletes;
+    use Sluggable;
 
     protected $table = 'categories';
 
@@ -22,23 +24,39 @@ class Category extends Model implements CategoryInterface
         'name',
         'slug',
         'description',
-        'parent_id',
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
-
-    public function getChildren()
+    /**
+     * Get the route key for the model.
+     * It is needed for slug urls.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
     {
-        return $this->hasMany(Category::class, 'parent_id');
+        return 'slug';
     }
 
-    public function getParent()
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
     {
-        return $this->belongsTo(Category::class, 'parent_id');
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function getProducts()
     {
         return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id')

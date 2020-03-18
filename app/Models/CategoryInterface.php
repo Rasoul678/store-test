@@ -4,9 +4,8 @@ namespace App\Models;
 
 interface CategoryInterface
 {
-    public function getChildren();
-
-    public function getParent();
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function getProducts();
 }
