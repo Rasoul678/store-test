@@ -76,7 +76,7 @@ class CategoryController extends Controller implements CategoryInterface
     {
         $category->update($this->validatedData($request));
         flash($category->name . ' has been updated successfully.');
-        return view('category.show', compact($category));
+        return view('category.show', compact('category'));
     }
 
     /**
@@ -88,10 +88,10 @@ class CategoryController extends Controller implements CategoryInterface
      */
     public function destroy(Category $category)
     {
-        $name=$category->name;
+        $name = $category->name;
         $category->delete();
         flash($name . ' has been deleted successfully.');
-        return redirect('/categories');
+        return redirect(route('categories.index'));
     }
 
     /**

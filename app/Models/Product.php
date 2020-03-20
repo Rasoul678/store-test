@@ -19,10 +19,8 @@ class Product extends Model implements ProductInterface
     ];
 
     protected $fillable = [
-        'brand_id',
         'name',
         'description',
-        'image',
         'price',
         'type',
         'created_at',
@@ -31,25 +29,14 @@ class Product extends Model implements ProductInterface
     ];
 
 
-    public function getOrders()
+    public function getOrderItems()
     {
-        return $this->belongsToMany(Order::class, 'order_product');
+        return $this->hasMany(OrderItem::class, 'product_id');
     }
 
     public function getCategories()
     {
         return $this->belongsToMany(Category::class, 'category_product');
     }
-
-    public function getBrand()
-    {
-        return $this->belongsTo(Brand::class);
-    }
-
-    public function getImages()
-    {
-        return $this->hasMany(ProductImage::class);
-    }
-
 
 }

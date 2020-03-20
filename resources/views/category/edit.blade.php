@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Categories</h1>
-        <form action="{{route('categories.update',['category'=>'slug'])}}" method="POST">
+        <form action="{{route('categories.update',['category'=>$category->slug])}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="form-group">
