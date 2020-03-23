@@ -17,14 +17,14 @@ interface CategoryInterface
     public function index();
 
     /**
-     * Show the form for creating a new category.
+     * Show the form for creating a new categories.
      *
      * @return View
      */
     public function create();
 
     /**
-     * Store a newly created category in storage.
+     * Store a newly created categories in storage.
      *
      * @param Request $request
      * @return RedirectResponse
@@ -32,7 +32,7 @@ interface CategoryInterface
     public function store(Request $request);
 
     /**
-     * Display the specified category.
+     * Display the specified categories.
      *
      * @param Category $category
      * @return View
@@ -40,7 +40,7 @@ interface CategoryInterface
     public function show(Category $category);
 
     /**
-     * Show the form for editing the specified category.
+     * Show the form for editing the specified categories.
      *
      * @param Category $category
      * @return View
@@ -48,7 +48,7 @@ interface CategoryInterface
     public function edit(Category $category);
 
     /**
-     * Update the specified category in storage.
+     * Update the specified categories in storage.
      *
      * @param Request $request
      * @param Category $category
@@ -57,7 +57,7 @@ interface CategoryInterface
     public function update(Request $request, Category $category);
 
     /**
-     * Remove the specified category from storage.
+     * Remove the specified categories from storage.
      *
      * @param Category $category
      * @return RedirectResponse

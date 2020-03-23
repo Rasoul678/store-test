@@ -17,21 +17,21 @@ class CategoryController extends Controller implements CategoryInterface
     public function index()
     {
         $categories = Category::all();
-        return view('category.index', compact('categories'));
+        return view('categories.index', compact('categories'));
     }
 
     /**
-     * Show the form for creating a new category.
+     * Show the form for creating a new categories.
      *
      * @return View
      */
     public function create()
     {
-        return view('category.create');
+        return view('categories.create');
     }
 
     /**
-     * Store a newly created category in storage.
+     * Store a newly created categories in storage.
      *
      * @param Request $request
      * @return RedirectResponse
@@ -44,29 +44,29 @@ class CategoryController extends Controller implements CategoryInterface
     }
 
     /**
-     * Display the specified category.
+     * Display the specified categories.
      *
      * @param Category $category
      * @return View
      */
     public function show(Category $category)
     {
-        return view('category.show', compact('category'));
+        return view('categories.show', compact('category'));
     }
 
     /**
-     * Show the form for editing the specified category.
+     * Show the form for editing the specified categories.
      *
      * @param Category $category
      * @return View
      */
     public function edit(Category $category)
     {
-        return view('category.edit', compact('category'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
-     * Update the specified category in storage.
+     * Update the specified categories in storage.
      *
      * @param Request $request
      * @param Category $category
@@ -76,11 +76,11 @@ class CategoryController extends Controller implements CategoryInterface
     {
         $category->update($this->validatedData($request));
         flash($category->name . ' has been updated successfully.');
-        return view('category.show', compact('category'));
+        return view('categories.show', compact('category'));
     }
 
     /**
-     * Remove the specified category from storage.
+     * Remove the specified categories from storage.
      *
      * @param Category $category
      * @return RedirectResponse

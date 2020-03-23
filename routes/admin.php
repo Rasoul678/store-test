@@ -36,7 +36,7 @@
             
             Route::group(['prefix' => 'orders'], function () {
                 Route::get('/', 'Admin\OrderController@index')->name('admin.orders.index');
-                Route::get('/{order}/show', 'Admin\OrderController@show')->name('admin.orders.show');
+                Route::get('/{orders}/show', 'Admin\OrderController@show')->name('admin.orders.show');
             });
             
         });

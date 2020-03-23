@@ -35,7 +35,7 @@
                     <label class="form-check-label" for="defaultCheck1">
                         {{$category->name}}
                     </label>
-                    @error('category')
+                    @error('categories')
                     <div class="alert alert-danger">{{$message}}</div>
                     @enderror
                 </div>

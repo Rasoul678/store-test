@@ -47,7 +47,7 @@ class ProductController extends Controller
         $product->type = $data['type'];
         $product->description = $data['description'];
         $product->save();
-        $category = Category::where('slug', $data['category'])->first();
+        $category = Category::where('slug', $data['categories'])->first();
         $product->getCategories()->attach($category);
         return redirect(route('products.index'));
     }
@@ -77,7 +77,7 @@ class ProductController extends Controller
         $data = $this->validatedData($request);
         $product->update($data);
         $product->getCategories()->detach();
-        $category = Category::where('slug', $data['category'])->first();
+        $category = Category::where('slug', $data['categories'])->first();
         $product->getCategories()->attach($category);
         $product->save();
         flash($product_name . ' has been updated successfully.');
@@ -96,7 +96,7 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'category' => 'required',
+            'categories' => 'required',
             'description' => 'nullable',
             'type' => 'nullable',
             'price' => 'nullable|numeric',

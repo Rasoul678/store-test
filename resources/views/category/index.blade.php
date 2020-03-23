@@ -15,7 +15,7 @@
             @forelse($categories as $category)
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
-                    <td><a href="{{route('categories.show',['category'=>$category->slug])}}">{{$category->name}}</a></td>
+                    <td><a href="{{route('categories.show',['categories'=>$category->slug])}}">{{$category->name}}</a></td>
                     <td>{{$category->slug}}</td>
                     @empty
                         <p>The are not any categories added yet!</p>

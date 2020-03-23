@@ -16,8 +16,8 @@
             <td>{{$category->name}}</td>
             <td>{{$category->slug}}</td>
             <td>
-                <button class="btn btn-info"><a href="{{route('categories.edit',['category'=>$category->slug])}}">Edit</a></button>
-                <form action="{{route('categories.destroy',['category'=>$category->slug])}}" method="POST">
+                <button class="btn btn-info"><a href="{{route('categories.edit',['categories'=>$category->slug])}}">Edit</a></button>
+                <form action="{{route('categories.destroy',['categories'=>$category->slug])}}" method="POST">
                     @method('DELETE')
                     @csrf
                     <button class="btn btn-danger">Delete</button>
