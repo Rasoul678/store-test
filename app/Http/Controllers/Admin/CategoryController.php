@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,8 +17,8 @@ class CategoryController extends Controller implements CategoryInterface
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -27,7 +28,7 @@ class CategoryController extends Controller implements CategoryInterface
      */
     public function create()
     {
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -40,7 +41,7 @@ class CategoryController extends Controller implements CategoryInterface
     {
         $category = Category::create($this->validatedData($request));
         flash($category->name . ' has been created successfully.')->success();
-        return redirect(route('categories.index'));
+        return redirect(route('admin.categories.index'));
     }
 
     /**
@@ -51,7 +52,7 @@ class CategoryController extends Controller implements CategoryInterface
      */
     public function show(Category $category)
     {
-        return view('categories.show', compact('category'));
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -62,7 +63,7 @@ class CategoryController extends Controller implements CategoryInterface
      */
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category'));
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -76,7 +77,8 @@ class CategoryController extends Controller implements CategoryInterface
     {
         $category->update($this->validatedData($request));
         flash($category->name . ' has been updated successfully.');
-        return view('categories.show', compact('category'));
+        return view('admin.categories.show')
+            ->with(compact('category'));
     }
 
     /**
@@ -91,7 +93,7 @@ class CategoryController extends Controller implements CategoryInterface
         $name = $category->name;
         $category->delete();
         flash($name . ' has been deleted successfully.');
-        return redirect(route('categories.index'));
+        return redirect(route('admin.categories.index'));
     }
 
     /**

@@ -3,12 +3,13 @@
 =@section('content')
 
     <div class="container">
-        <div class="mt-4">
+        <div class="mt-2">
             <h2>Edit Product</h2>
         </div>
     </div>
-    <div class="container mt-5">
-        <form action="{{ route('admin.products.update') }}" method="POST">
+    <div class="container mt-3">
+        <form action="{{ route('admin.products.update',['product'=>$product->id]) }}" method="POST">
+            @method('PATCH')
             @csrf
             <h4>Product Information</h4>
             <hr>
@@ -16,75 +17,63 @@
                 <div class="col md-6">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $product->name) }}">
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    </div>
-                </div>
-                <div class="col md-6">
-                    <div class="form-group">
-                        <label for="sku">SKU</label>
-                        <input type="text" class="form-control" id="sku" name="sku" value="{{ old('sku', $product->sku) }}">
+                        @error('name')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                        <input type="text" class="form-control" id="name" name="name"
+                               value="{{ old('name', $product->name) }}">
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col md-6">
-                    <div class="form-group">
-                        <label for="weight">Weight</label>
-                        <input type="text" class="form-control" id="weight" name="weight" value="{{ old('weight', $product->weight) }}">
-                    </div>
-                </div>
                 <div class="col md-6">
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" value="{{ old('price', $product->price) }}">
+                        @error('price')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                        <input type="text" class="form-control" id="price" name="price"
+                               value="{{ old('price', $product->price) }}">
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col md-6">
-                    <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity', $product->quantity) }}">
+                    <label class="form-check-label">Select Category: </label>
+                    <div class="form-group custom-control-inline">
+                        @foreach($categories as $category)
+                            <div class="form-check">
+                                @php $check = in_array($category->id, $product->getCategories->pluck('id')->toArray()) ? 'checked' : ''@endphp
+                                <input {{$check}} name="categories[]" class="form-check-input" type="checkbox"
+                                       value="{{$category->slug}}"
+                                       id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    {{$category->name}}&nbsp&nbsp&nbsp&nbsp;
+                                </label>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
-                <div class="col md-6">
-                    <div class="form-group">
-                        <label for="category">Categories</label>
-                        <select class="form-control" name="categories[]" id="category">
-                            @foreach($categories as $category)
-                                @php $check = in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'selected' : ''@endphp
-                                <option value="{{ $category->id }}" {{ $check }}>{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    @error('categories')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description">{{ old('description', $product->description) }}</textarea>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" {{ $product->status == 1 ? 'checked' : '' }} value="" id="status" name="status">
-                <label class="form-check-label" for="featured">
-                    Status
-                </label>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" {{ $product->featured == 1 ? 'checked' : '' }} value="" id="featured" name="featured">
-                <label class="form-check-label" for="featured">
-                    Featured
-                </label>
+                @error('description')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+                <textarea class="form-control" id="description"
+                          name="description">{{ old('description', $product->description) }}</textarea>
             </div>
 
             <div class="mt-3">
                 <button type="submit" class="btn btn-primary">Update Product</button>
-                <a class="btn btn-danger" role="button" href="{{ route('admin.products.index') }}">Cancel</a>
+                <a class="btn btn-danger" role="button"
+                   href="{{ route('admin.products.show',['product'=>$product->id]) }}">Cancel</a>
             </div>
 
         </form>

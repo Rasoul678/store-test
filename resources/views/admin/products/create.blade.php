@@ -3,11 +3,11 @@
 @section('content')
 
     <div class="container">
-        <div class="mt-4">
+        <div class="mt-2">
             <h2>Create Product</h2>
         </div>
     </div>
-    <div class="container mt-5">
+    <div class="container mt-3">
         <form action="{{ route('admin.products.store') }}" method="POST">
             @csrf
             <h4>Product Information</h4>
@@ -16,27 +16,29 @@
                 <div class="col md-6">
                     <div class="form-group">
                         <label for="name">Name</label>
+                        @error('name')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                     </div>
                 </div>
                 <div class="col md-6">
                     <div class="form-group">
-                        <label for="sku">SKU</label>
-                        <input type="text" class="form-control" id="sku" name="sku" value="{{ old('sku') }}">
+                        <label for="type">Type</label>
+                        @error('type')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                        <input type="text" class="form-control" id="name" name="type" value="{{ old('type') }}">
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col md-6">
                     <div class="form-group">
-                        <label for="weight">Weight</label>
-                        <input type="text" class="form-control" id="weight" name="weight" value="{{ old('weight') }}">
-                    </div>
-                </div>
-                <div class="col md-6">
-                    <div class="form-group">
                         <label for="price">Price</label>
+                        @error('price')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                         <input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}">
                     </div>
                 </div>
@@ -44,40 +46,31 @@
 
             <div class="row">
                 <div class="col md-6">
-                    <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity') }}">
+                    <label class="form-check-label">Select Category: </label>
+                    <div class="form-group custom-control-inline">
+                        @foreach($categories as $category)
+                            <div class="form-check">
+                                <input name="categories[]" class="form-check-input" type="checkbox"
+                                       value="{{$category->slug}}"
+                                       id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    {{$category->name}}&nbsp&nbsp&nbsp&nbsp;
+                                </label>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
-                <div class="col md-6">
-                    <div class="form-group">
-                        <label for="category">Parent Category</label>
-                        <select class="form-control" name="categories[]" id="category">
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}"> {{ $category->name }} </option>
-                            @endforeach
-                        </select>
-                    </div>
+                    @error('categories')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
+                @error('description')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
                 <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="status" name="status">
-                <label class="form-check-label" for="featured">
-                    Status
-                </label>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="featured" name="featured">
-                <label class="form-check-label" for="featured">
-                    Featured
-                </label>
             </div>
 
             <div class="mt-3">

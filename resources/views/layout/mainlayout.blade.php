@@ -5,7 +5,6 @@
 </head>
 <body>
 @include('layout.partials.nav')
-@include('layout.partials.header')
 @include('flash::message')
 @yield('content')
 @include('layout.partials.footer')

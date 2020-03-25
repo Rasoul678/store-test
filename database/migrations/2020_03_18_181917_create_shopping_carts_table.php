@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShoppongCartsTable extends Migration
+class CreateShoppingCartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateShoppongCartsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shoppong_carts', function (Blueprint $table) {
+        Schema::create('shopping_carts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('customer_id');
+            $table->enum('cart_status', ['active', 'checkout', 'completed', 'abandoned'])
+                ->default('active'); //TODO:check enum definition in laravel
             $table->timestamps();
         });
     }

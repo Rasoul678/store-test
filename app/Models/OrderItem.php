@@ -12,8 +12,10 @@ class OrderItem extends Model implements OrderItemInterface
         'updated_at',
     ];
     protected $fillable = [
+        'product_id',
         'quantity',
         'price',
+        'total_price',
     ];
 
     public function getProduct()

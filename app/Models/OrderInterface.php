@@ -6,5 +6,5 @@ interface OrderInterface
 {
     public function getUser();
 
-    public function getProducts();
+    public function getOrderItem();
 }

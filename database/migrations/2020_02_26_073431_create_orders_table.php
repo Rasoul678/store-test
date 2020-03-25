@@ -15,18 +15,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('order_number')->unique();
-
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('cascade');
-
+            $table->unsignedBigInteger('customer_id');
             $table->float('total_price');
-            $table->boolean('is_shipped')->default(false);
-            $table->boolean('is_delivered')->default(false);
-            $table->enum('order_status', ['pending', 'processing', 'completed', 'decline'])
+            $table->enum('order_status', ['pending', 'completed', 'cancelled'])
                 ->default('pending');
-
             $table->softDeletes();
             $table->timestamps();
         });

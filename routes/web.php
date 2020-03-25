@@ -14,13 +14,11 @@
 require 'admin.php';
 Auth::routes();
 
+require 'cart.php';
+require 'order.php';
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::resource('categories', 'CategoryController');
-Route::resource('products', 'ProductController');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('products', 'ProductController')->only(['index', 'show']);

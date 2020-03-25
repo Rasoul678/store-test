@@ -4,17 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class cartItem extends Model implements CartItemInterface
+class CartItem extends Model implements CartItemInterface
 {
     protected $table = 'cart_items';
+    protected $fillable = [
+        'product_id',
+        'shopping_cart_id',
+        'quantity',
+        'price',
+        'total_price',
+    ];
     protected $dates = [
         'created_at',
         'updated_at',
     ];
-    protected $fillable = [
-        'quantity',
-        'price',
-    ];
+
+    static public function totalPrice($cart_item)
+    {
+        return $cart_item->quantity * $cart_item->price;
+    }
 
     public function getProduct()
     {

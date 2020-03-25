@@ -10,6 +10,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Type</th>
                 <th scope="col">Price</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -19,6 +20,14 @@
                     <td><a href="{{route('products.show',['product'=>$product->id])}}">{{$product->name}}</a></td>
                     <td>{{$product->type}}</td>
                     <td>{{$product->price}}</td>
+                    <td>
+                        <form action="{{route('cart.add',['product'=>$product->id])}}" method="post">
+                            @csrf
+                            <button class="btn btn-primary" type="submit"><i
+                                    class="material-icons">add_shopping_cart</i>Add to cart
+                            </button>
+                        </form>
+                    </td>
                     @empty
                         <p>The are not any products added yet!</p>
                 </tr>
