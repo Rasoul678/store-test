@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layout.mainlayout')
 @section('title')Product: {{$product->name}}@endsection
 @section('content')
     <div class="container">

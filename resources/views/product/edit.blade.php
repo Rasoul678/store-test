@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layout.mainlayout')
 @section('title','Product')
 @section('content')
     <div class="container">

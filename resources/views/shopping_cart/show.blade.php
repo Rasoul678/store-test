@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layout.mainlayout')
 @section('title','Cart')
 @section('content')
     <div class="container">
@@ -34,7 +34,7 @@
                             <button class="btn btn-danger" type="submit">Remove</button>
                         </form>
                     </td>
-                    @empty
+                @empty
                         <p>The are not any products added yet!</p>
                 </tr>
             @endforelse
