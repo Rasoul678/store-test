@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model implements CategoryInterface
@@ -12,21 +13,33 @@ class Category extends Model implements CategoryInterface
     use SoftDeletes;
     use Sluggable;
 
+    /**
+     * Specify the name of the database table.
+     *
+     * @var string
+     */
     protected $table = 'categories';
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'slug',
         'description',
+    ];
+
+    /**
+     * The attributes that have in date format.
+     *
+     * @var array
+     */
+    protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**
@@ -55,7 +68,9 @@ class Category extends Model implements CategoryInterface
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * Get products as a many to many relationship.
+     *
+     * @return BelongsToMany
      */
     public function getProducts()
     {

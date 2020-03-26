@@ -4,9 +4,10 @@ namespace App\Models;
 
 interface UserInterface
 {
-    public function getRoles();
-
-    public function getOrders();
-
-    public function getAddresses();
+    /**
+     * Get full name of user.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute();
 }

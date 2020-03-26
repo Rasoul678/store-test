@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\CartItem;
-use App\Models\Order;
 use App\Models\Product;
 use App\Models\ShoppingCart;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
-class CartController extends Controller
+class CartController extends Controller implements CartControllerInterface
 {
+    /**
+     * Display shopping cart and its cart items.
+     *
+     * @param ShoppingCart $shopping_cart
+     * @return View
+     */
     public function index(ShoppingCart $shopping_cart)
     {
         $cart = ShoppingCart::where('customer_id', 1)->first();//TODO: Change customer_id
@@ -18,6 +25,13 @@ class CartController extends Controller
         return view('shopping_cart.show', compact('shopping_cart'));
     }
 
+    /**
+     * Add cart item to the specified shopping cart.
+     *
+     * @param Product $product
+     * @param ShoppingCart $shopping_cart
+     * @return RedirectResponse
+     */
     public function add(Product $product, ShoppingCart $shopping_cart)
     {
         ShoppingCart::addItem($product, $shopping_cart);
@@ -25,20 +39,16 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Remove a cart item from shopping cart.
+     *
+     * @param CartItem $cartItem
+     * @return RedirectResponse
+     * @throws \Exception
+     */
     public function remove(CartItem $cartItem)
     {
         $cartItem->delete();
         return redirect()->back();
-    }
-
-    public function checkout()
-    {
-        $order = Order::checkout();
-        return $this->indexOrder($order);
-    }
-
-    public function indexOrder(Order $order)
-    {
-        return view('order.index', compact('order'));
     }
 }

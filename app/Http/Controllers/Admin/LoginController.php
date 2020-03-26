@@ -1,23 +1,23 @@
 <?php
-    
+
     namespace App\Http\Controllers\Admin;
-    
+
     use Auth;
+    use Illuminate\Http\RedirectResponse;
     use Illuminate\Http\Request;
     use App\Http\Controllers\Controller;
-    use Illuminate\Foundation\Auth\AuthenticatesUsers;
-    
-    class LoginController extends Controller
+    use Illuminate\Validation\ValidationException;
+    use Illuminate\View\View;
+
+    class LoginController extends Controller implements LoginControllerInterface
     {
-//    use AuthenticatesUsers;
-        
         /**
          * Where to redirect admins after login.
          *
          * @var string
          */
         protected $redirectTo = '/admin';
-        
+
         /**
          * Create a new controller instance.
          *
@@ -27,19 +27,23 @@
         {
             $this->middleware('guest:admin')->except('logout');
         }
-        
+
         /**
-         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+         * Display a form for login users.
+         *
+         * @return View
          */
         public function showLoginForm()
         {
             return view('admin.auth.login');
         }
-        
+
         /**
+         * Login the user.
+         *
          * @param Request $request
-         * @return \Illuminate\Http\RedirectResponse
-         * @throws \Illuminate\Validation\ValidationException
+         * @return RedirectResponse
+         * @throws ValidationException
          */
         public function login(Request $request)
         {
@@ -47,7 +51,7 @@
                 'email'   => 'required|email',
                 'password' => 'required|min:6'
             ]);
-            
+
             if (Auth::guard('admin')->attempt([
                 'email' => $request->email,
                 'password' => $request->password
@@ -56,10 +60,12 @@
             }
             return back()->withInput($request->only('email', 'remember'));
         }
-        
+
         /**
+         * Logout the user.
+         *
          * @param Request $request
-         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+         * @return RedirectResponse
          */
         public function logout(Request $request)
         {

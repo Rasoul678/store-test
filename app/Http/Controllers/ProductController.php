@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class ProductController extends Controller
+class ProductController extends Controller implements ProductControllerInterface
 {
     /**
      * Display a listing of the products.
@@ -22,10 +19,10 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      *
-     * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return View
      */
     public function show(Product $product)
     {

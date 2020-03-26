@@ -22,7 +22,7 @@ class CategoryController extends Controller implements CategoryInterface
     }
 
     /**
-     * Show the form for creating a new categories.
+     * Show the form for creating a new category.
      *
      * @return View
      */
@@ -32,7 +32,7 @@ class CategoryController extends Controller implements CategoryInterface
     }
 
     /**
-     * Store a newly created categories in storage.
+     * Store a newly created category in storage.
      *
      * @param Request $request
      * @return RedirectResponse
@@ -45,7 +45,7 @@ class CategoryController extends Controller implements CategoryInterface
     }
 
     /**
-     * Display the specified categories.
+     * Display the specified category.
      *
      * @param Category $category
      * @return View
@@ -56,7 +56,7 @@ class CategoryController extends Controller implements CategoryInterface
     }
 
     /**
-     * Show the form for editing the specified categories.
+     * Show the form for editing the specified category.
      *
      * @param Category $category
      * @return View
@@ -67,7 +67,7 @@ class CategoryController extends Controller implements CategoryInterface
     }
 
     /**
-     * Update the specified categories in storage.
+     * Update the specified category in storage.
      *
      * @param Request $request
      * @param Category $category
@@ -82,7 +82,7 @@ class CategoryController extends Controller implements CategoryInterface
     }
 
     /**
-     * Remove the specified categories from storage.
+     * Soft delete (moving to trash) the specified category from storage.
      *
      * @param Category $category
      * @return RedirectResponse
@@ -95,6 +95,22 @@ class CategoryController extends Controller implements CategoryInterface
         flash($name . ' has been deleted successfully.');
         return redirect(route('admin.categories.index'));
     }
+
+    /**
+     * Force delete (permanently delete) the specified category from storage.
+     *
+     * @param Category $category
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function forceDestroy(Category $category)
+    {
+        $name = $category->name;
+        $category->forceDelete();
+        flash($name . ' has been deleted permanently.');
+        return redirect(route('admin.categories.index'));
+    }
+
 
     /**
      * Validate every request to Category.

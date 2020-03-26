@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class ProductController extends Controller
+class ProductController extends Controller implements ProductControllerInterface
 {
     /**
      * Display a listing of the products.
@@ -23,7 +23,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      *
      * @return View
      */
@@ -34,9 +34,9 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return RedirectResponse
      */
     public function store(Request $request)
@@ -56,16 +56,22 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the new specified product.
      *
-     * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return View
      */
     public function show(Product $product)
     {
         return view('admin.products.show', compact('product'));
     }
 
+    /**
+     * Display a form for editing the specified product.
+     *
+     * @param Product $product
+     * @return View
+     */
     public function edit(Product $product)
     {
         $categories = Category::orderBy('name', 'desc')->get();
@@ -74,6 +80,13 @@ class ProductController extends Controller
             ->with(compact('categories'));
     }
 
+    /**
+     * Store the updated information of the specified product.
+     *
+     * @param Request $request
+     * @param Product $product
+     * @return View
+     */
     public function update(Request $request, Product $product)
     {
         $product_name = $product->name;
@@ -90,6 +103,13 @@ class ProductController extends Controller
             ->with(compact('product'));
     }
 
+    /**
+     * Soft delete (move to trash) the specified product.
+     *
+     * @param Product $product
+     * @return RedirectResponse
+     * @throws \Exception
+     */
     public function destroy(Product $product)
     {
         $product_name = $product->name;
@@ -98,6 +118,12 @@ class ProductController extends Controller
         return redirect(route('admin.products.index'));
     }
 
+    /**
+     * Force delete (permanently delete) the specified product.
+     *
+     * @param Product $product
+     * @return RedirectResponse
+     */
     public function forceDestroy(Product $product)
     {
         $product_name = $product->name;
@@ -107,6 +133,12 @@ class ProductController extends Controller
     }
 
 
+    /**
+     * A method for validating the data of request for creating and editing forms.
+     *
+     * @param $request
+     * @return mixed
+     */
     protected function validatedData($request)
     {
         $data = $request->validate([
