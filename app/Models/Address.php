@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Address extends Model implements AddressInterface
 {
@@ -23,11 +24,21 @@ class Address extends Model implements AddressInterface
         'updated_at',
     ];
 
+    /**
+     * Get user as a one to many relationship.
+     *
+     * @return BelongsTo
+     */
     public function getUser()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    /**
+     * Get city as a one to many relationship.
+     *
+     * @return BelongsTo
+     */
     public function getCity()
     {
         return $this->belongsTo(City::class, 'city_id', 'id');

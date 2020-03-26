@@ -25,7 +25,7 @@
                     @endif
                 @else
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('cart.index')}}" class="nav-link">
                             <h4><strong class="text-light"><i class="material-icons">shopping_cart</i></strong></h4>
                         </a>
                     </li>
@@ -33,7 +33,7 @@
                         <a href="#" class="nav-link"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Profile">
+                        <a class="nav-link" href="{{route('profile')}}">
                             <h4 class="text-light">{{ Auth::user()->full_name }}</h4>
                         </a>
                     </li>

@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class CategoryTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeds for category table.
      *
      * @return void
      */
@@ -18,11 +18,11 @@ class CategoryTableSeeder extends Seeder
 
         Category::create([
             'name' => 'Mobile',
-            'description' => 'This category belongs to mobile phone.',
+            'description' => 'This category belongs to mobile phone.This category belongs to mobile phone.',
         ]);
         Category::create([
             'name' => 'Clothes',
-            'description' => 'This category belongs to clothes.',
+            'description' => 'This category belongs to clothes.This category belongs to clothes.',
         ]);
     }
 }

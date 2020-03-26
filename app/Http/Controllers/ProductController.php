@@ -15,7 +15,7 @@ class ProductController extends Controller implements ProductControllerInterface
     public function index()
     {
         $products = Product::orderBy('updated_at', 'asc')->get();
-        return view('product.index', compact('products'));
+        return view('welcome', compact('products'));
     }
 
     /**
