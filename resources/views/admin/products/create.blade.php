@@ -54,7 +54,7 @@
                                        value="{{$category->slug}}"
                                        id="defaultCheck1">
                                 <label class="form-check-label" for="defaultCheck1">
-                                    {{$category->name}}&nbsp&nbsp&nbsp&nbsp;
+                                    {{$category->name}}&nbsp;
                                 </label>
                             </div>
                         @endforeach

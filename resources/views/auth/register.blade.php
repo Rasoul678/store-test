@@ -12,13 +12,13 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="name"
+                                <label for="first_name"
                                        class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text"
-                                           class="form-control @error('name') is-invalid @enderror" name="name"
-                                           value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="first_name" type="text"
+                                           class="form-control @error('name') is-invalid @enderror" name="first_name"
+                                           value="{{ old('name') }}" required autocomplete="first_name" autofocus>
 
                                     @error('first_name')
                                     <span class="invalid-feedback" role="alert">
@@ -29,13 +29,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name"
+                                <label for="last_name"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Last name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text"
-                                           class="form-control @error('name') is-invalid @enderror" name="name"
-                                           value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="last_name" type="text"
+                                           class="form-control @error('name') is-invalid @enderror" name="last_name"
+                                           value="{{ old('name') }}" required autocomplete="last_name" autofocus>
 
                                     @error('last_name')
                                     <span class="invalid-feedback" role="alert">

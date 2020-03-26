@@ -10,15 +10,18 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-require 'admin.php';
+    
+use App\Models\Product;
+    
+    require 'admin.php';
 Auth::routes();
 
 require 'cart.php';
 require 'order.php';
 
 Route::get('/', function () {
-    return view('welcome');
+    $products = Product::orderBy('updated_at', 'asc')->get();
+    return view('welcome', ['products' => $products]);
 })->name('home');
 
 Route::resource('products', 'ProductController')->only(['index', 'show']);

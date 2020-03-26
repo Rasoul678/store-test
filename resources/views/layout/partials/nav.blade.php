@@ -1,59 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{route('home')}}"><h2><strong>Store</strong></h2></a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            @guest
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{{route('home')}}"><h1><strong class="text-light">Store</strong></h1></a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav category">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('products.index')}}"><i
-                            class="material-icons">local_mall</i> Product </a>
+                    <a class="nav-link" href="#category.show">
+                        <h5><strong class="text-light">Category</strong></h5>
+                    </a>
+
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('cart.index')}}"><i
-                            class="material-icons">shopping_cart</i> Cart </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('order.index')}}"><i
-                            class="material-icons">assignment_turned_in</i> Order </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('login')}}"><i
-                            class="material-icons">play_for_work</i> Login </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('register')}}"><i
-                            class="material-icons">touch_app</i> Register </a>
-                </li>
-            @elseguest(Auth::check())
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i
-                            class="material-icons">person</i> Profile </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('logout')}}"><i
-                            class="material-icons">power_settings_new</i> Logout </a>
-                </li>
-            @elseguest
-                <li class="nav-item {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="material-icons">view_quilt</i>
-                        Dashboard <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item {{ Route::currentRouteName() == 'admin.categories.index' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{route('admin.categories.index')}}"><i class="material-icons">style</i>
-                        Categories </a>
-                </li>
-                <li class="nav-item {{ Route::currentRouteName() == 'admin.products.index' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{route('admin.products.index')}}"><i
-                            class="material-icons">local_mall</i> Products </a>
-                </li>
-                <li class="nav-item {{ Route::currentRouteName() == 'admin.orders.index' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{route('admin.orders.index')}}"><i
-                            class="material-icons">shopping_cart</i> Orders </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.logout') }}"><i
-                            class="material-icons">power_settings_new</i> Logout </a>
-                </li>
-            @endguest
-        </ul>
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ml-auto">
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}"><h4><strong class="text-light">{{ __('Login') }}</strong></h4> </a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}"><h4><strong class="text-light">{{ __('Sign Up') }}</strong></h4></a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <h4><strong class="text-light"><i class="material-icons">shopping_cart</i></strong></h4>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Profile">
+                            <h4 class="text-light">{{ Auth::user()->full_name }}</h4>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                            <h4><strong class="text-light">{{ __('Logout') }}</strong></h4>
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @endguest
+            </ul>
+        </div>
     </div>
 </nav>
