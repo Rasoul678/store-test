@@ -19,8 +19,7 @@
                     @forelse($order as $item)
                         <tr>
                             <td><a href="{{route('admin.orders.show',['order'=>$item->id])}}">{{$loop->iteration}}</a></td>
-                            <td>{{$loop->iteration}}</td><?php /*TODO Add customer id here */ ?>
-{{--                            <td>{{$item->getUser->first_name}}.' '.{{$item->getUser->last_name}}</td>--}}
+                            <td>{{$item->getUser->first_name}} {{$item->getUser->last_name}}</td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->order_status}}</td>
                             <td>{{$item->total_price}}</td>

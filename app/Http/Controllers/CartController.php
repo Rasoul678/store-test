@@ -6,6 +6,7 @@ use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\ShoppingCart;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class CartController extends Controller implements CartControllerInterface
@@ -18,7 +19,7 @@ class CartController extends Controller implements CartControllerInterface
      */
     public function index(ShoppingCart $shopping_cart)
     {
-        $cart = ShoppingCart::where('customer_id', 1)->first();//TODO: Change customer_id
+        $cart = ShoppingCart::where('customer_id', Auth::id())->first();
         if ($cart) {
             $shopping_cart = $cart;
         }

@@ -46,8 +46,7 @@ class ShoppingCart extends Model implements ShoppingCartInterface
     static public function addItem(Product $product, ShoppingCart $shopping_cart, $quantity = 1)
     {
         $shopping_cart = ShoppingCart::firstOrCreate([
-//            'customer_id' => Auth::user()->id,
-            'customer_id' => 1,//TODO: Change customer_id
+            'customer_id' => Auth::id(),
         ]);
         $cart = CartItem::where(['shopping_cart_id' => $shopping_cart->id, 'product_id' => $product->id])->first();
         if (!$cart) {

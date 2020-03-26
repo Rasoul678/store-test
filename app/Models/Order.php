@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Order extends Model implements OrderInterface
 {
@@ -103,7 +104,7 @@ class Order extends Model implements OrderInterface
     {
         $shopping_cart = ShoppingCart::where('customer_id', 1)->first();
         $order = Order::create([
-            'customer_id' => 1,//TODO: Add authenticated customer id
+            'customer_id' => Auth::id(),
             'total_price' => 0,
         ]);
         foreach ($shopping_cart->getCartItem as $cartItem) {
