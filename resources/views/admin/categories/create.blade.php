@@ -21,8 +21,8 @@
             </div>
 
             <div class="mt-3">
-                <button type="submit" class="btn btn-primary">Save Category</button>
-                <a class="btn btn-danger" role="button" href="{{ route('admin.categories.index') }}">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                <a class="btn btn-danger btn-lg" role="button" href="{{ route('admin.categories.index') }}">Cancel</a>
             </div>
         </form>
     </div>

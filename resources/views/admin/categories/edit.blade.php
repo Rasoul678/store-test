@@ -4,7 +4,7 @@
 
     <div class="container">
         <div>
-            <h3 class="mt-4">Edit Category</h3>
+            <h2 class="mt-4">Edit Category</h2>
         </div>
 
         <form action="{{route('admin.categories.update',['category'=>$category->slug])}}" method="post">
@@ -25,8 +25,8 @@
             </div>
 
             <div class="mt-3">
-                <button type="submit" class="btn btn-primary">Update Category</button>
-                <a class="btn btn-danger" role="button"
+                <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                <a class="btn btn-danger btn-lg" role="button"
                    href="{{ route('admin.categories.show', ['category'=>$category->slug]) }}">Cancel</a>
             </div>
 

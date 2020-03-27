@@ -70,7 +70,6 @@
         public function logout(Request $request)
         {
             Auth::guard('admin')->logout();
-            $request->session()->invalidate();
-            return redirect()->route('admin.login');
+            return redirect()->route('admin.login')->with('logout-msg', 'You have to log in as admin again to see dashboard, If you want to!');
         }
     }

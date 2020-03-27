@@ -71,8 +71,8 @@
             </div>
 
             <div class="mt-3">
-                <button type="submit" class="btn btn-primary">Update Product</button>
-                <a class="btn btn-danger" role="button"
+                <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                <a class="btn btn-danger btn-lg" role="button"
                    href="{{ route('admin.products.show',['product'=>$product->id]) }}">Cancel</a>
             </div>
 

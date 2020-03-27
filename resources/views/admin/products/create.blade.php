@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="mt-2">
-            <h2>Create Product</h2>
+            <h2>Add New Product</h2>
         </div>
     </div>
     <div class="container mt-3">
@@ -74,8 +74,8 @@
             </div>
 
             <div class="mt-3">
-                <button type="submit" class="btn btn-primary">Save Product</button>
-                <a class="btn btn-danger" role="button" href="{{ route('admin.products.index') }}">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                <a class="btn btn-danger btn-lg" role="button" href="{{ route('admin.products.index') }}">Cancel</a>
             </div>
 
         </form>
