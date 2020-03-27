@@ -18,7 +18,7 @@
                     <td><a href="{{route('categories.show',['categories'=>$category->slug])}}">{{$category->name}}</a></td>
                     <td>{{$category->slug}}</td>
                     @empty
-                        <p>The are not any categories added yet!</p>
+                        <p>There are not any categories added yet!</p>
                 </tr>
             @endforelse
             </tbody>

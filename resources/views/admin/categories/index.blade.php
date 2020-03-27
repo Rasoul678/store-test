@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($categories as $category)
+                    @forelse($categories as $category)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
@@ -48,8 +48,10 @@
                                     </div>
                                 </div>
                             </td>
+                            @empty
+                                <p>There are not any categories added yet!</p>
                         </tr>
-                    @endforeach
+                    @endforelse
                     </tbody>
                 </table>
             </div>

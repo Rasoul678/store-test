@@ -24,7 +24,7 @@
                             <td>{{$item->order_status}}</td>
                             <td>{{$item->total_price}}</td>
                             @empty
-                                <p>The are not any products added yet!</p>
+                                <p>There are not any orders submitted yet!</p>
                         </tr>
                     @endforelse
                     </tbody>

@@ -29,7 +29,7 @@
                         </form>
                     </td>
                     @empty
-                        <p>The are not any products added yet!</p>
+                        <p>There are not any products added yet!</p>
                 </tr>
             @endforelse
             </tbody>

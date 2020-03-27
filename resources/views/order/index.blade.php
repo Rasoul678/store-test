@@ -18,7 +18,7 @@
                     <td>{{$item->created_at}}</td>
                     <td>{{$item->order_status}}</td>
                     @empty
-                        <p>The are not any products added yet!</p>
+                        <p>There are not any orders submitted yet!</p>
                 </tr>
             @endforelse
             </tbody>
