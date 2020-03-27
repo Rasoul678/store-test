@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -35,6 +37,18 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:web')->except('logout');
+    }
+    
+    
+    /**
+     * Logout the user.
+     *
+     * @return RedirectResponse
+     */
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+        return redirect()->route('home');
     }
 }

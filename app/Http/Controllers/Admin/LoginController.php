@@ -47,6 +47,7 @@
          */
         public function login(Request $request)
         {
+            Auth::guard('web')->logout();
             $this->validate($request, [
                 'email'   => 'required|email',
                 'password' => 'required|min:6'
@@ -62,7 +63,7 @@
         }
 
         /**
-         * Logout the user.
+         * Logout the admin.
          *
          * @param Request $request
          * @return RedirectResponse

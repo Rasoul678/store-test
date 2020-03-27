@@ -1,6 +1,6 @@
 @extends('admin.app')
 @section('title') Edit Product @endsection
-=@section('content')
+@section('content')
 
     <div class="container">
         <div class="mt-2">

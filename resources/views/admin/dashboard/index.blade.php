@@ -8,7 +8,7 @@
                 <div class="card bg-dark">
                     <div class="card-body">
                         <h4 class="card-title text-white">Products</h4>
-                        <h4 class="card-subtitle mb-2 text-white"><span class="badge badge-warning">500</span></h4>
+                        <h4 class="card-subtitle mb-2 text-white"><span class="badge badge-warning">{{ $products->count() }}</span></h4>
                         <a href="{{route('admin.products.index')}}" class="btn btn-primary">Products</a>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                 <div class="card bg-dark">
                     <div class="card-body">
                         <h4 class="card-title text-white">Categories</h4>
-                        <h4 class="card-subtitle mb-2 text-white"><span class="badge badge-warning">7</span></h4>
+                        <h4 class="card-subtitle mb-2 text-white"><span class="badge badge-warning">{{ $categories->count() }}</span></h4>
                         <a href="{{route('admin.categories.index')}}" class="btn btn-primary">Categories</a>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="card bg-dark">
                     <div class="card-body">
                         <h4 class="card-title text-white">Orders</h4>
-                        <h4 class="card-subtitle mb-2 text-white"><span class="badge badge-warning">300</span></h4>
+                        <h4 class="card-subtitle mb-2 text-white"><span class="badge badge-warning">{{ $orders->count() }}</span></h4>
                         <a href="{{route('admin.orders.index')}}" class="btn btn-primary">Orders</a>
                     </div>
                 </div>
