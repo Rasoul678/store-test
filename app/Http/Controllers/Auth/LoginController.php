@@ -40,6 +40,16 @@ class LoginController extends Controller
         $this->middleware('guest:web')->except('logout');
     }
     
+    /**
+     * @return \Illuminate\Contracts\View\Factory|RedirectResponse|\Illuminate\View\View
+     */
+    public function showLoginForm()
+    {
+        if(Auth::guard('admin')->check()){
+            return redirect()->route('home')->with('logoutAsAdmin','Please log out from admin first!');
+        }
+        return view('auth.login');
+    }
     
     /**
      * Logout the user.

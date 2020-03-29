@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -40,7 +41,15 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
+    
+    public function showRegistrationForm()
+    {
+        if(Auth::guard('admin')->check()){
+            return redirect()->route('home')->with('logoutAsAdmin','Please log out from admin first!');
+        }
+        return view('auth.register');
+    }
+    
     /**
      * Get a validator for an incoming registration request.
      *

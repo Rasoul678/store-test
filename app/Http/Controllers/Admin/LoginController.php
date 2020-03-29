@@ -1,7 +1,7 @@
 <?php
 
     namespace App\Http\Controllers\Admin;
-
+    
     use Auth;
     use Illuminate\Http\RedirectResponse;
     use Illuminate\Http\Request;
@@ -27,32 +27,32 @@
         {
             $this->middleware('guest:admin')->except('logout');
         }
-
+    
+    
         /**
-         * Display a form for login users.
-         *
-         * @return View
+         * @return \Illuminate\Contracts\View\Factory|RedirectResponse|View
          */
         public function showLoginForm()
         {
+            if(Auth::guard('web')->check()){
+                return redirect()->route('home')->with('logoutAsUser','For accessing admin panel, You have to log out from current user first!');
+            }
             return view('admin.auth.login');
         }
-
+    
+    
         /**
-         * Login the user.
-         *
          * @param Request $request
-         * @return RedirectResponse
+         * @return \Illuminate\Contracts\View\Factory|RedirectResponse|View
          * @throws ValidationException
          */
         public function login(Request $request)
         {
-            Auth::guard('web')->logout();
             $this->validate($request, [
                 'email'   => 'required|email',
                 'password' => 'required|min:6'
             ]);
-
+    
             if (Auth::guard('admin')->attempt([
                 'email' => $request->email,
                 'password' => $request->password

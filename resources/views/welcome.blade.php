@@ -3,6 +3,15 @@
 @section('content')
     <div class="jumbotron text-center">
         <div class="container">
+            @if(session('logoutAsUser'))
+            <div class="alert alert-danger">
+                <h4 class="text-center">{{ session('logoutAsUser') }}</h4>
+            </div>
+            @elseif(session('logoutAsAdmin'))
+                <div class="alert alert-danger">
+                    <h4 class="text-center">{{ session('logoutAsAdmin') }}</h4>
+                </div>
+            @endif
             <h1>Welcome to Store</h1>
             <h1>We serve you anything you wish</h1>
             <div class="row mt-5">

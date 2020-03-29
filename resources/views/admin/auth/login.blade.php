@@ -41,6 +41,7 @@
 
                         <div class="input-field col s12">
                             <button class="waves-effect waves-light btn" type="submit">Sign In</button>
+                            <a class="waves-effect waves-light btn" href="{{ route('home') }}" >Home Page</a>
                         </div>
 
                     </form>
