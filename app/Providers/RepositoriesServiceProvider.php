@@ -28,5 +28,6 @@ class RepositoriesServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(ShoppingCartRepositoryInterface::class, ShoppingCartRepository::class);
+        $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
     }
 }
