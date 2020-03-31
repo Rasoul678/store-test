@@ -25,6 +25,7 @@ class CartItem extends Model implements CartItemInterface
         'quantity',
         'price',
         'total_price',
+        'active',
     ];
 
     /**
@@ -38,15 +39,11 @@ class CartItem extends Model implements CartItemInterface
     ];
 
     /**
-     * Multiply the quantity and the price of a product.
+     * The attributes that be eager loaded on each cart item query.
      *
-     * @param $cart_item
-     * @return float
+     * @var array
      */
-    static public function totalPrice($cart_item)
-    {
-        return (float) $cart_item->quantity * $cart_item->price;
-    }
+    protected $with = ['getProduct'];
 
     /**
      * Get product of an item as a one to many relationship.

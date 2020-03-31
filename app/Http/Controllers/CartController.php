@@ -4,25 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\CartItem;
 use App\Models\Product;
-use App\Models\ShoppingCart;
+use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class CartController extends Controller implements CartControllerInterface
 {
     /**
+     * @var ShoppingCartRepositoryInterface
+     */
+    private $shoppingCartRepository;
+
+    public function __construct(ShoppingCartRepositoryInterface $shoppingCartRepository)
+    {
+        $this->shoppingCartRepository = $shoppingCartRepository;
+    }
+
+    /**
      * Display shopping cart and its cart items.
      *
-     * @param ShoppingCart $shopping_cart
      * @return View
      */
-    public function index(ShoppingCart $shopping_cart)
+    public function index()
     {
-        $cart = ShoppingCart::where('customer_id', Auth::id())->first();
-        if ($cart) {
-            $shopping_cart = $cart;
-        }
+        $shopping_cart = $this->shoppingCartRepository->all();
         return view('shopping_cart.show', compact('shopping_cart'));
     }
 
@@ -30,12 +35,11 @@ class CartController extends Controller implements CartControllerInterface
      * Add cart item to the specified shopping cart.
      *
      * @param Product $product
-     * @param ShoppingCart $shopping_cart
      * @return RedirectResponse
      */
-    public function add(Product $product, ShoppingCart $shopping_cart)
+    public function add(Product $product)
     {
-        ShoppingCart::addItem($product, $shopping_cart);
+        $this->shoppingCartRepository->addCartItem($product);
         flash($product->name . ' has been added to cart.');
         return redirect()->back();
     }
