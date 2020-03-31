@@ -6,7 +6,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
             </tr>
@@ -14,8 +13,7 @@
             <tbody>
             @forelse($order as $item)
                 <tr>
-                    <th scope="row"><a href="{{route('order.show',['order'=>$item->id])}}">{{$loop->iteration}}</a></th>
-                    <td>{{$item->created_at}}</td>
+                    <td scope="row"><a href="{{route('order.show',['order'=>$item->id])}}">{{$item->created_at}}</a></td>
                     <td>{{$item->order_status}}</td>
                     @empty
                         <p>There are not any orders submitted yet!</p>

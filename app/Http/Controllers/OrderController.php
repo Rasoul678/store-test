@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Repositories\Contracts\OrderRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -10,13 +11,23 @@ use Illuminate\View\View;
 class OrderController extends Controller implements OrderControllerInterface
 {
     /**
+     * @var OrderRepositoryInterface
+     */
+    private $orderRepository;
+
+    public function __construct(OrderRepositoryInterface $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
+    /**
      * Display orders of a specific user.
      *
      * @return View
      */
     public function index()
     {
-        $order = Order::where('customer_id', Auth::id())->orderBy('updated_at', 'desc')->get();
+        $order = $this->orderRepository->customerIndex();
         return view('order.index', compact('order'));
     }
 
@@ -28,7 +39,8 @@ class OrderController extends Controller implements OrderControllerInterface
      */
     public function show(Order $order)
     {
-        if ($order->customer_id == Auth::id()) {
+        $order = $this->orderRepository->customerShow($order);
+        if ($order) {
             return view('order.show', compact('order'));
         }
         return redirect()->back();
@@ -41,7 +53,8 @@ class OrderController extends Controller implements OrderControllerInterface
      */
     public function checkout()
     {
-        $order = Order::checkout();
+        $order = $this->orderRepository->checkout();
+//        $order = Order::checkout();
         return redirect()->route('order.show', ['order' => $order->id]);
     }
 }
