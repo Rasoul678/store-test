@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProduct;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductController extends Controller implements ProductControllerInterface
@@ -36,19 +36,13 @@ class ProductController extends Controller implements ProductControllerInterface
     /**
      * Store a newly created product in storage.
      *
-     * @param Request $request
+     * @param StoreProduct $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        $data = $this->validatedData($request);
-        $product = new Product;
-        $product->name = $data['name'];
-        $product->price = $data['price'];
-        $product->type = $data['type'];
-        $product->description = $data['description'];
-        $product->save();
-        foreach ($data['categories'] as $item) {
+        $product=Product::create($request->validated());
+        foreach ($request->validated()['categories'] as $item) {
             $category = Category::where('slug', $item)->first();
             $product->getCategories()->attach($category);
         }
@@ -83,14 +77,14 @@ class ProductController extends Controller implements ProductControllerInterface
     /**
      * Store the updated information of the specified product.
      *
-     * @param Request $request
+     * @param StoreProduct $request
      * @param Product $product
      * @return View
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProduct $request, Product $product)
     {
         $product_name = $product->name;
-        $data = $this->validatedData($request);
+        $data = $request->validated();
         $product->update($data);
         $product->getCategories()->detach();
         foreach ($data['categories'] as $item) {
@@ -130,24 +124,5 @@ class ProductController extends Controller implements ProductControllerInterface
         $product->forceDelete();
         flash($product_name . ' has been deleted permanently.');
         return redirect(route('admin.products.index'));
-    }
-
-
-    /**
-     * A method for validating the data of request for creating and editing forms.
-     *
-     * @param $request
-     * @return mixed
-     */
-    protected function validatedData($request)
-    {
-        $data = $request->validate([
-            'name' => 'required',
-            'categories.*' => 'required',
-            'description' => 'nullable',
-            'type' => 'nullable',
-            'price' => 'nullable|numeric',
-        ]);
-        return $data;
     }
 }

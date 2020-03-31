@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\StoreProduct;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 interface ProductControllerInterface
@@ -26,10 +26,10 @@ interface ProductControllerInterface
     /**
      * Store a newly created product in storage.
      *
-     * @param Request $request
+     * @param StoreProduct $request
      * @return RedirectResponse
      */
-    public function store(Request $request);
+    public function store(StoreProduct $request);
 
     /**
      * Display the new specified product.
@@ -50,11 +50,11 @@ interface ProductControllerInterface
     /**
      * Store the updated information of the specified product.
      *
-     * @param Request $request
+     * @param StoreProduct $request
      * @param Product $product
      * @return View
      */
-    public function update(Request $request, Product $product);
+    public function update(StoreProduct $request, Product $product);
 
     /**
      * Soft delete (move to trash) the specified product.

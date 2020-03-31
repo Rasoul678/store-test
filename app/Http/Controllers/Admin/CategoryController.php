@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategory;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoryController extends Controller implements CategoryInterface
@@ -34,12 +34,12 @@ class CategoryController extends Controller implements CategoryInterface
     /**
      * Store a newly created category in storage.
      *
-     * @param Request $request
+     * @param StoreCategory $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreCategory $request)
     {
-        $category = Category::create($this->validatedData($request));
+        $category = Category::create($request->validated());
         flash($category->name . ' has been created successfully.')->success();
         return redirect(route('admin.categories.index'));
     }
@@ -69,13 +69,13 @@ class CategoryController extends Controller implements CategoryInterface
     /**
      * Update the specified category in storage.
      *
-     * @param Request $request
+     * @param StoreCategory $request
      * @param Category $category
      * @return View
      */
-    public function update(Request $request, Category $category)
+    public function update(StoreCategory $request, Category $category)
     {
-        $category->update($this->validatedData($request));
+        $category->update($request->validated());
         flash($category->name . ' has been updated successfully.');
         return view('admin.categories.show')
             ->with(compact('category'));
@@ -109,21 +109,5 @@ class CategoryController extends Controller implements CategoryInterface
         $category->forceDelete();
         flash($name . ' has been deleted permanently.');
         return redirect(route('admin.categories.index'));
-    }
-
-
-    /**
-     * Validate every request to Category.
-     *
-     * @param $request
-     * @return mixed
-     */
-    private function validatedData($request)
-    {
-        $data = $request->validate([
-            'name' => 'required',
-            'description' => '',
-        ]);
-        return $data;
     }
 }

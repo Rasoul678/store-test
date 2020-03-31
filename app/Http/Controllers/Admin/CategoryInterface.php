@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\StoreCategory;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 interface CategoryInterface
@@ -26,10 +26,10 @@ interface CategoryInterface
     /**
      * Store a newly created category in storage.
      *
-     * @param Request $request
+     * @param StoreCategory $request
      * @return RedirectResponse
      */
-    public function store(Request $request);
+    public function store(StoreCategory $request);
 
     /**
      * Display the specified category.
@@ -50,11 +50,11 @@ interface CategoryInterface
     /**
      * Update the specified category in storage.
      *
-     * @param Request $request
+     * @param StoreCategory $request
      * @param Category $category
      * @return View
      */
-    public function update(Request $request, Category $category);
+    public function update(StoreCategory $request, Category $category);
 
     /**
      * Soft delete (moving to trash) the specified category from storage.
