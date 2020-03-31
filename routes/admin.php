@@ -1,12 +1,7 @@
 <?php
 
 Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
-
-    Route::get('login', 'Admin\LoginController@showLoginForm')->name('login');
-    Route::post('login', 'Admin\LoginController@login')->name('login.post');
-    Route::get('logout', 'Admin\LoginController@logout')->name('logout');
-
-    Route::group(['middleware' => ['auth:admin']], function () {
+    Route::group(['middleware' => [ 'role:SuperAdmin|Admin']], function () {
 
         Route::get('/', function () {
             return view('admin.dashboard.index');

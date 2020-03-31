@@ -1,8 +1,9 @@
 @extends('layout.mainlayout')
 
 @section('content')
-    <h1 class="text-center mt-3">Page Not Found!</h1>
-    <div class="text-center m-5">
-        <img src="img/404.png" alt="404"/>
+    <div class="container" style="width: 700px">
+        <h1 class="text-center mt-5" style="font-size: 100px; font-weight: bold">404</h1>
+        <h1 class="text-center mt-5">Sorry, Page Not Found!</h1>
+        <a class="btn btn-warning btn-lg mt-5 mb-5" style="width:170px; display: block; margin: 0 auto; border: 3px solid #333; font-size: 20px; font-weight: bold" href="/" role="button">Back to Home</a>
     </div>
 @endsection

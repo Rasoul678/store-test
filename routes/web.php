@@ -20,8 +20,6 @@ require 'order.php';
 
 Route::get('/', 'ProductController@index')->name('home');
 
-Route::get('/profile', 'ProfileController@show')->name('profile');
+Route::get('/profile', 'ProfileController@show')->name('profile')->middleware('auth');
 
 Route::resource('products', 'ProductController')->only(['index', 'show']);
-    
-Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');

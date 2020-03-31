@@ -21,9 +21,9 @@ class ProductTableSeeder extends Seeder
             $category = Category::where('slug', $item)->first();
             for ($i = 1; $i <= 5; $i++) {
                 $product = new Product;
-                $product->name = $faker->name;
-                $product->description = $faker->text;
-                $product->type = $faker->name;
+                $product->name = $faker->firstName();
+                $product->description = $faker->sentence;
+                $product->type = $faker->firstNameFemale;
                 $product->price = $faker->randomFloat(2, 0, 500);
                 $product->save();
                 $product->getCategories()->attach($category);

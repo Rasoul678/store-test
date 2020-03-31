@@ -24,7 +24,16 @@
             </li>
             <li class="nav-item">
                 <h4>
-                    <a class="nav-link text-light border border-secondary rounded-lg" href="{{ route('admin.logout') }}"><i class="material-icons">power_settings_new</i> Logout </a>
+                    <a class="nav-link text-light border border-secondary rounded-lg" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                        <i class="material-icons">power_settings_new</i>
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </h4>
             </li>
         </ul>
