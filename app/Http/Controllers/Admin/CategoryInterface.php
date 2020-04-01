@@ -57,6 +57,15 @@ interface CategoryInterface
     public function update(StoreCategory $request, Category $category);
 
     /**
+     * Restore soft deleted category from storage.
+     *
+     * @param $category_slug
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function restore($category_slug);
+
+    /**
      * Soft delete (moving to trash) the specified category from storage.
      *
      * @param Category $category
@@ -68,9 +77,9 @@ interface CategoryInterface
     /**
      * Force delete (permanently delete) the specified category from storage.
      *
-     * @param Category $category
+     * @param $category_slug
      * @return RedirectResponse
      * @throws \Exception
      */
-    public function forceDestroy(Category $category);
+    public function forceDestroy($category_slug);
 }

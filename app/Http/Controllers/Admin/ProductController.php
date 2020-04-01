@@ -18,7 +18,11 @@ class ProductController extends Controller implements ProductControllerInterface
      */
     public function index()
     {
-        $products = Product::orderBy('updated_at', 'asc')->get();
+        if (request()->has('only_trash')) {
+            $products = Product::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        } else {
+            $products = Product::withoutTrashed()->orderBy('updated_at', 'desc')->get();
+        }
         return view('admin.products.index', compact('products'));
     }
 
@@ -41,7 +45,7 @@ class ProductController extends Controller implements ProductControllerInterface
      */
     public function store(StoreProduct $request)
     {
-        $product=Product::create($request->validated());
+        $product = Product::create($request->validated());
         foreach ($request->validated()['categories'] as $item) {
             $category = Category::where('slug', $item)->first();
             $product->getCategories()->attach($category);
@@ -98,6 +102,21 @@ class ProductController extends Controller implements ProductControllerInterface
     }
 
     /**
+     * Restore soft deleted product from storage.
+     *
+     * @param $product_id
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function restore($product_id)
+    {
+        $product = Product::withTrashed()->where('id', $product_id)->firstOrFail();
+        $product->restore();
+        flash($product->name . ' has been restored successfully.');
+        return redirect(route('admin.products.index'));
+    }
+
+    /**
      * Soft delete (move to trash) the specified product.
      *
      * @param Product $product
@@ -115,11 +134,12 @@ class ProductController extends Controller implements ProductControllerInterface
     /**
      * Force delete (permanently delete) the specified product.
      *
-     * @param Product $product
+     * @param $product_id
      * @return RedirectResponse
      */
-    public function forceDestroy(Product $product)
+    public function forceDestroy($product_id)
     {
+        $product = Product::withTrashed()->where('id', $product_id)->firstOrFail();
         $product_name = $product->name;
         $product->forceDelete();
         flash($product_name . ' has been deleted permanently.');

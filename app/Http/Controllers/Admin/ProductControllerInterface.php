@@ -57,6 +57,15 @@ interface ProductControllerInterface
     public function update(StoreProduct $request, Product $product);
 
     /**
+     * Restore soft deleted product from storage.
+     *
+     * @param $product_id
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function restore($product_id);
+
+    /**
      * Soft delete (move to trash) the specified product.
      *
      * @param Product $product

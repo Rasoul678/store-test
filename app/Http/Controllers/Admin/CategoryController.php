@@ -17,7 +17,11 @@ class CategoryController extends Controller implements CategoryInterface
      */
     public function index()
     {
-        $categories = Category::orderBy('name', 'asc')->get();
+        if (request()->has('only_trash')) {
+            $categories = Category::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        } else {
+            $categories = Category::withoutTrashed()->orderBy('updated_at', 'desc')->get();
+        }
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -82,6 +86,21 @@ class CategoryController extends Controller implements CategoryInterface
     }
 
     /**
+     * Restore soft deleted category from storage.
+     *
+     * @param $category_slug
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function restore($category_slug)
+    {
+        $category = Category::withTrashed()->where('slug', $category_slug)->firstOrFail();
+        $category->restore();
+        flash($category->name . ' has been restored successfully.');
+        return redirect(route('admin.categories.index'));
+    }
+
+    /**
      * Soft delete (moving to trash) the specified category from storage.
      *
      * @param Category $category
@@ -99,12 +118,13 @@ class CategoryController extends Controller implements CategoryInterface
     /**
      * Force delete (permanently delete) the specified category from storage.
      *
-     * @param Category $category
+     * @param $category_slug
      * @return RedirectResponse
      * @throws \Exception
      */
-    public function forceDestroy(Category $category)
+    public function forceDestroy($category_slug)
     {
+        $category = Category::withTrashed()->where('slug', $category_slug)->first();
         $name = $category->name;
         $category->forceDelete();
         flash($name . ' has been deleted permanently.');
