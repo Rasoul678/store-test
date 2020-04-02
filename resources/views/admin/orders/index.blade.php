@@ -34,6 +34,7 @@
                     </tbody>
                 </table>
             </div>
+            {{ $order->links()}}
         </div>
     </div>
 @endsection

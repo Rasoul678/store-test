@@ -19,7 +19,7 @@ class ProductTableSeeder extends Seeder
         $categories = ['mobile', 'clothes'];
         foreach ($categories as $item) {
             $category = Category::where('slug', $item)->first();
-            for ($i = 1; $i <= 5; $i++) {
+            for ($i = 1; $i <= 6; $i++) {
                 $product = new Product;
                 $product->name = $faker->firstName();
                 $product->description = $faker->sentence;

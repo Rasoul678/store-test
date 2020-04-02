@@ -72,5 +72,6 @@
                 </table>
             </div>
         </div>
+        {{ $categories->links()}}
     </div>
 @endsection

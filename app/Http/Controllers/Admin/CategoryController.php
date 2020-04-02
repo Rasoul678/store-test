@@ -18,9 +18,9 @@ class CategoryController extends Controller implements CategoryInterface
     public function index()
     {
         if (request()->has('only_trash')) {
-            $categories = Category::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+            $categories = Category::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(5);
         } else {
-            $categories = Category::withoutTrashed()->orderBy('updated_at', 'desc')->get();
+            $categories = Category::withoutTrashed()->orderBy('updated_at', 'desc')->paginate(5);
         }
         return view('admin.categories.index', compact('categories'));
     }

@@ -17,8 +17,8 @@
             <div class="row mt-5">
                 @foreach($products as $product)
                     <div class="col md-4">
-                        <div class="card bg-dark text-center" style="width: 250px">
-                            <img src="https://picsum.photos/500/500" style="width: 250px; height: 250px;"
+                        <div class="card bg-dark text-center" style="width: 250px;  ">
+                            <img src="https://picsum.photos/500/500" style="width: auto; max-height: 250px"
                                  class="card-img-top" alt="{{$product->name}}">
                             <div class="card-body">
                                 <h5 class="card-title text-light">{{$product->name}}</h5>
@@ -34,6 +34,8 @@
                     </div>
                 @endforeach
             </div>
+                <hr>
+                {{ $products->links()}}
         </div>
     </div>
 @endsection
