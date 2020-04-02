@@ -31,6 +31,26 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <h4 class="card-title text-white">Admins</h4>
+                        <h4 class="card-subtitle mb-2 text-white"><span
+                                class="badge badge-warning">{{ $admins_count }}</span></h4>
+                        <a href="{{route('admin.users.index',['admins'])}}" class="btn btn-primary">Admins</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <h4 class="card-title text-white">Customers</h4>
+                        <h4 class="card-subtitle mb-2 text-white"><span
+                                class="badge badge-warning">{{ $customers_count }}</span></h4>
+                        <a href="{{route('admin.users.index',['customers'])}}" class="btn btn-primary">Customer</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
@@ -42,6 +43,8 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'categories_count' => Category::count(),
                 'products_count' => Product::count(),
                 'orders_count' => Order::count(),
+                'admins_count' => User::role('Admin')->count(),
+                'customers_count' => User::role('Customer')->count(),
             ]);
         });
     }
