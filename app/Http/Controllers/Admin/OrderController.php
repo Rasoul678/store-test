@@ -16,7 +16,9 @@ class OrderController extends Controller implements OrderControllerInterface
      */
     public function index()
     {
-        $order = Order::orderBy('updated_at', 'desc')->get();
+        $order = Order::orderBy('updated_at', 'desc')
+            ->with('getUser')
+            ->get();
         return view('admin.orders.index', compact('order'));
     }
 
@@ -28,6 +30,7 @@ class OrderController extends Controller implements OrderControllerInterface
      */
     public function show(Order $order)
     {
+        $order->load(['getUser', 'getOrderItem']);
         return view('admin.orders.show', compact('order'));
     }
 

@@ -29,22 +29,20 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         $this->composeDashboard();
     }
-    
+
     /**
      *  Compose the admin dashboard
+     *
+     * @return void
      */
     private function composeDashboard()
     {
         View::composer('admin.dashboard.index', function ($view) {
-            $view->with('categories', Category::all());
-        });
-    
-        View::composer('admin.dashboard.index', function ($view) {
-            $view->with('products', Product::all());
-        });
-    
-        View::composer('admin.dashboard.index', function ($view) {
-            $view->with('orders', Order::all());
+            $view->with([
+                'categories_count' => Category::count(),
+                'products_count' => Product::count(),
+                'orders_count' => Order::count(),
+            ]);
         });
     }
 }

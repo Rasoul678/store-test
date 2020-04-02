@@ -23,6 +23,7 @@ class ProductController extends Controller implements ProductControllerInterface
         } else {
             $products = Product::withoutTrashed()->orderBy('updated_at', 'desc')->get();
         }
+        $products->load('getCategories');
         return view('admin.products.index', compact('products'));
     }
 
@@ -61,6 +62,7 @@ class ProductController extends Controller implements ProductControllerInterface
      */
     public function show(Product $product)
     {
+        $product->load('getCategories');
         return view('admin.products.show', compact('product'));
     }
 
@@ -73,6 +75,7 @@ class ProductController extends Controller implements ProductControllerInterface
     public function edit(Product $product)
     {
         $categories = Category::orderBy('name', 'desc')->get();
+        $product->load('getCategories');
         return view('admin.products.edit')
             ->with(compact('product'))
             ->with(compact('categories'));

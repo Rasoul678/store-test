@@ -26,6 +26,7 @@ class ProductController extends Controller implements ProductControllerInterface
      */
     public function show(Product $product)
     {
+        $product->load('getCategories');
         return view('product.show', compact('product'));
     }
 }

@@ -37,6 +37,13 @@ class OrderItem extends Model implements OrderItemInterface
     ];
 
     /**
+     * The attributes that be eager loaded on each order item query.
+     *
+     * @var array
+     */
+    protected $with = ['getProduct'];
+
+    /**
      * Get product as a one to many relationship.
      *
      * @return BelongsTo
