@@ -2,12 +2,12 @@
 @section('title') Edit Product @endsection
 @section('content')
 
-    <div class="container">
+    <div class="container w-75 mt-5">
         <div class="mt-2">
             <h2>Edit Product</h2>
         </div>
     </div>
-    <div class="container mt-3">
+    <div class="container mt-3 w-75">
         <form action="{{ route('admin.products.update',['product'=>$product->id]) }}" method="POST">
             @method('PATCH')
             @csrf

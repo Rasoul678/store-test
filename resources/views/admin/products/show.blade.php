@@ -2,13 +2,12 @@
 @section('title') Edit Product @endsection
 @section('content')
 
-    <div class="container">
+    <div class="container w-75 mt-5">
         <div class="mt-2">
             <h2>Product: {{$product->name}}</h2>
         </div>
     </div>
-    <div class="container mt-3">
-        <h4>Product Information</h4>
+    <div class="container mt-3 w-75">
         <hr>
         <div class="row">
             <div class="col md-6">

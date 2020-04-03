@@ -1,8 +1,8 @@
 @extends('admin.app')
 @section('title') Dashboard @endsection
 @section('content')
-    <div class="container">
-        <h1 class="mt-5 rounded-pill bg-dark text-center p-3 text-light"> Dashboard</h1>
+    <div class="container-fluid mt-4">
+        <h1 class="mt-2 text-center"> Dashboard</h1>
         <div class="row mt-5">
             <div class="col-md-2">
                 <div class="card bg-dark">

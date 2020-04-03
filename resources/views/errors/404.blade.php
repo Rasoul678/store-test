@@ -1,5 +1,5 @@
 @extends('layout.mainlayout')
-
+@section('title') 404 @endsection
 @section('content')
     <div class="container" style="width: 700px">
         <h1 class="text-center mt-5" style="font-size: 100px; font-weight: bold">404</h1>

@@ -2,7 +2,7 @@
 @section('title') Edit Category @endsection
 @section('content')
 
-    <div class="container">
+    <div class="container w-75">
         <div>
             <h3 class="mt-4">Edit Category</h3>
         </div>

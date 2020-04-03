@@ -1,16 +1,17 @@
 @extends('admin.app')
-@section('title') Products List @endsection
+@section('title') Products @endsection
 @section('content')
-
-    <div class="container mt-5">
-        <h1 class="mt-5 rounded-pill bg-dark text-center p-3 text-light"> Products</h1>
-        <div class="mt-5">
-            <a href="{{route('admin.products.create')}}" class="btn btn-primary btn-lg" role="button">Add product</a>
-            <a href="{{route('admin.products.index',['only_trash'])}}" class="btn btn-warning btn-lg" role="button">Trash</a>
+    <div class="container-fluid mt-4">
+        <h1 class="mt-2 text-center"> Products</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{{route('admin.products.create')}}" class="btn btn-primary btn-lg" role="button">Add product</a>
+                <a href="{{route('admin.products.index',['only_trash'])}}" class="btn btn-warning btn-lg" role="button">Trash</a>
+            </div>
         </div>
-        <div class="mt-3">
+        <div class="mt-4">
             <div>
-                <table class="table table-striped">
+                <table class="table table-hover table-sm">
                     <thead class="thead-dark">
                     <tr>
                         <th><h4> #</h4></th>
@@ -38,7 +39,7 @@
                                 @endforeach
                             </td>
                             <td>
-                                <div class="form-inline">
+                                <div class="form-inline float-right">
                                     @if(!$product->deleted_at)
                                         <form action="{{ route('admin.products.edit', ['product'=>$product->id]) }}"
                                               method="get">@csrf

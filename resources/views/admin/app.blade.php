@@ -8,8 +8,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"/>
 </head>
 <body>
-@include('admin.partials.header')
-@include('flash::message')
-@yield('content')
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 px-4 bg-dark position-fixed min-vh-100">
+            @include('admin.partials.sidebar')
+        </div>
+        <div class="col offset-2">
+            @include('flash::message')
+            @yield('content')
+        </div>
+    </div>
+</div>
 </body>
 </html>

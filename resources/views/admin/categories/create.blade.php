@@ -2,7 +2,7 @@
 @section('title') Create Category @endsection
 @section('content')
 
-    <div class="container">
+    <div class="container w-75">
         <div class="mt-4">
             <h2>Add New Category</h2>
         </div>

@@ -1,27 +1,25 @@
 @extends('admin.app')
 @section('title')
     @if(request()->has('admins'))
-        Admin
+        Admins
     @elseif(request()->has('customers'))
-        Customer
+        Customers
     @else
-        User
+        Users
     @endif
-    List
 @endsection
 @section('content')
-    <div class="container mt-2">
+    <div class="container-fluid mt-4">
         <div class="mt-3">
-            <h2 class="mt-3 rounded-pill bg-dark text-center p-3 text-light">
+            <h1 class="mt-2 text-center">
                 @if(request()->has('admins'))
-                    Admin
+                    Admins
                 @elseif(request()->has('customers'))
-                    Customer
+                    Customers
                 @else
-                    User
+                    Users
                 @endif
-                List
-            </h2>
+            </h1>
             <div class="mt-3">
                 <table class="table table-striped">
                     <thead class="thead-dark">

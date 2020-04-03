@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
@@ -29,6 +30,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->composeDashboard();
+        $this->composeSidebar();
     }
 
     /**
@@ -45,6 +47,15 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'orders_count' => Order::count(),
                 'admins_count' => User::role('Admin')->count(),
                 'customers_count' => User::role('Customer')->count(),
+            ]);
+        });
+    }
+    
+    private function composeSidebar()
+    {
+        View::composer('admin.partials.sidebar', function ($view) {
+            $view->with([
+                'admin_name' => Auth::user()->full_name,
             ]);
         });
     }
