@@ -19,7 +19,8 @@ require 'cart.php';
 require 'order.php';
 
 Route::get('/', 'ProductController@index')->name('home');
+Route::get('/{product}', 'ProductController@show')->name('product')->where('product', '[0-9]+');
 
-Route::get('/profile', 'ProfileController@show')->name('profile')->middleware('auth');
-
-Route::resource('products', 'ProductController')->only(['index', 'show']);
+Route::get('/profile', 'ProfileController@show')->name('profile.show')->middleware('auth');
+Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit')->middleware('auth');
+Route::patch('/profile/update', 'ProfileController@update')->name('profile.update')->middleware('auth');

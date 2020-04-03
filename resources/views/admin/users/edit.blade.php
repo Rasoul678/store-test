@@ -36,15 +36,21 @@
                     <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name"
-                               value="{{ old('price', $user->first_name) }}">
+                               value="{{ old('first_name', $user->first_name) }}">
                     </div>
+                    @error('first_name')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="col md-6">
                     <div class="form-group">
                         <label for="last_name">Last Name</label>
                         <input type="text" class="form-control" id="last_name" name="last_name"
-                               value="{{ old('price', $user->last_name) }}">
+                               value="{{ old('last_name', $user->last_name) }}">
                     </div>
+                    @error('last_name')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 </div>
             </div>
 
@@ -69,6 +75,9 @@
                                 @endif
                         @endforeach
                     </div>
+                    @error('role')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 </div>
             </div>
 

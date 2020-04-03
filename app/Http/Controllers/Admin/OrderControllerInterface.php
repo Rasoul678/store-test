@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 interface OrderControllerInterface
@@ -22,11 +21,4 @@ interface OrderControllerInterface
      * @return View
      */
     public function show(Order $order);
-
-    /**
-     * Create order object from shopping cart.
-     *
-     * @return RedirectResponse
-     */
-    public function checkout();
 }

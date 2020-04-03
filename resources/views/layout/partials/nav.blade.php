@@ -33,7 +33,7 @@
                                 <h4 class="text-warning"><i class="material-icons">person</i> {{ Auth::user()->full_name }}</h4>
                             </a>
                         @else
-                            <a class="nav-link" href="{{route('profile')}}">
+                            <a class="nav-link" href="{{route('profile.show')}}">
                                 <h4 class="text-light"><i class="material-icons">people_alt</i> {{ Auth::user()->full_name }}</h4>
                             </a>
                         @endcan

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class OrderController extends Controller implements OrderControllerInterface
@@ -32,16 +31,5 @@ class OrderController extends Controller implements OrderControllerInterface
     {
         $order->load(['getUser', 'getOrderItem']);
         return view('admin.orders.show', compact('order'));
-    }
-
-    /**
-     * Create order object from shopping cart.
-     *
-     * @return RedirectResponse
-     */
-    public function checkout()
-    {
-        $order = Order::checkout();
-        return redirect()->route('order.show', ['order' => $order->id]);
     }
 }

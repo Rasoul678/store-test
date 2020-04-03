@@ -46,15 +46,26 @@
                       name="description">{{ old('description', $product->description) }}</textarea>
         </div>
 
-        <div class="mt-3">
-            <a class="btn btn-primary" role="button"
-               href="{{ route('admin.products.edit',['product'=>$product->id]) }}"><i
-                    class="material-icons">edit</i></a>
-            <a href="{{ route('admin.products.delete', ['product'=>$product->id]) }}"
-               class="btn btn-danger"
-               role="button"><i class="material-icons">delete_forever</i></a>
+        <div class="mt-3 form-inline">
+            <form action="{{ route('admin.products.edit', ['product'=>$product->id]) }}"
+                  method="get">@csrf
+                <button class="btn btn-success btn-sm" type="submit"><i
+                        class="material-icons">edit</i>
+                </button>
+            </form>
+            <form action="{{ route('admin.products.delete', ['product'=>$product->id]) }}"
+                  method="post">@method('DELETE')@csrf
+                <button class="btn btn-warning btn-sm m-2" type="submit"><i
+                        class="material-icons">delete</i>
+                </button>
+            </form>
+            <form
+                action="{{ route('admin.products.forceDelete', ['product_id'=>$product->id]) }}"
+                method="post">@method('DELETE')@csrf
+                <button class="btn btn-danger btn-sm" type="submit"><i
+                        class="material-icons">delete_forever</i>
+                </button>
+            </form>
         </div>
-
-        </form>
     </div>
 @endsection

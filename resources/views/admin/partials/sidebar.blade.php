@@ -1,5 +1,6 @@
 <aside>
     <ul  class="list-unstyled">
+        <li><a href="{{route('home')}}"><h1 class="text-light text-center"><strong>Store</strong></h1></a></li>
         <li>
             <div class="text-center mt-5">
                 <i class="material-icons text-light" style="font-size: 80px;">account_circle</i>
