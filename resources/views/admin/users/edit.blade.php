@@ -2,16 +2,17 @@
 @section('title'){{$user->getFullNameAttribute()}}@endsection
 @section('content')
 
-    <div class="container">
+    <div class="container w-50 mt-5">
         <div class="mt-2">
-            <h2>{{$user->getFullNameAttribute()}}</h2>
+            <h2>
+                User: {{$user->getFullNameAttribute()}}
+            </h2>
         </div>
     </div>
-    <div class="container mt-3">
+    <div class="container mt-3 w-50">
         <form action="{{ route('admin.users.update',['user'=>$user->id]) }}" method="POST">
             @method('PATCH')
             @csrf
-            <h4>User Information</h4>
             <hr>
             <div class="row">
                 <div class="col md-6">
@@ -49,18 +50,23 @@
 
             <div class="row">
                 <div class="col md-6">
-                    <label class="form-check-label">Role: </label>
+                    <label class="form-check-label"><h4>Role: </h4></label>
                     <div class="form-group custom-control-inline">
                         @foreach($role as $item)
-                            <div class="form-check">
-                                @php $check = in_array($item->name, $user->getRoleNames()->toArray()) ? 'checked' : ''@endphp
-                                <input {{$check}} name="roles[]" class="form-check-input" type="checkbox"
-                                       value="{{$item->name}}"
-                                       id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    {{$item->name}}&nbsp&nbsp&nbsp&nbsp;
-                                </label>
-                            </div>
+                            @if($item->name == 'SuperAdmin')
+                                @continue
+                                @else
+                                    <div class="form-check">
+                                        @php $check = in_array($item->name, $user->getRoleNames()->toArray()) ? 'checked' : ''@endphp
+                                        <input {{$check}} name="role" class="form-check-input" type="radio"
+                                               value="{{$item->name}}"
+                                               id="roles">
+                                        <label class="form-check-label" for="roles">
+                                            {{$item->name}}&nbsp&nbsp&nbsp&nbsp;
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="ex-role" value="{{ $user->roles->pluck('name')->toArray()[0] }}">
+                                @endif
                         @endforeach
                     </div>
                 </div>

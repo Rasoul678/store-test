@@ -2,13 +2,14 @@
 @section('title'){{$user->getFullNameAttribute()}}@endsection
 @section('content')
 
-    <div class="container">
+    <div class="container w-50 mt-5">
         <div class="mt-2">
-            <h2>{{$user->getFullNameAttribute()}}</h2>
+            <h2>
+                User: {{$user->getFullNameAttribute()}}
+            </h2>
         </div>
     </div>
-    <div class="container mt-3">
-        <h4>User Information</h4>
+    <div class="container mt-3 w-50">
         <hr>
         <div class="row">
             <div class="col md-6">

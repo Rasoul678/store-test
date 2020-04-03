@@ -63,10 +63,14 @@ class UserController extends Controller implements UserControllerInterface
      */
     public function update(User $user)
     {
-        $role_data = request()->validate([
-            'roles.*' => 'required'
+        $ex_role = request('ex-role');
+        $user->removeRole($ex_role);
+        
+        $role = request()->validate([
+            'role' => 'required'
         ]);
-        $user->syncRoles($role_data['roles']);
+        $user->assignRole($role['role']);
+        
         $user_data = request()->validate([
             'first_name' => 'required',
             'last_name' => 'required',
