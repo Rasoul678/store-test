@@ -14,6 +14,7 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
         Category::create([
             'name' => 'Mobile',
             'description' => 'This category belongs to mobile phone.This category belongs to mobile phone.',
@@ -22,6 +23,5 @@ class CategoryTableSeeder extends Seeder
             'name' => 'Clothes',
             'description' => 'This category belongs to clothes.This category belongs to clothes.',
         ]);
-        factory(Category::class, 3)->create();
     }
 }
