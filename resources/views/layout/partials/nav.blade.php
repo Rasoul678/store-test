@@ -27,16 +27,20 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link"></a>
                     </li>
+                    @can('admin')
                     <li class="nav-item">
-                        @can('add product')
-                            <a class="nav-link" href="{{route('admin.dashboard')}}">
-                                <h4 class="text-warning"><i class="material-icons">person</i> {{ Auth::user()->full_name }}</h4>
-                            </a>
-                        @else
-                            <a class="nav-link" href="{{route('profile.show')}}">
-                                <h4 class="text-light"><i class="material-icons">people_alt</i> {{ Auth::user()->full_name }}</h4>
-                            </a>
-                        @endcan
+                        <a class="nav-link" href="{{route('admin.dashboard')}}">
+                            <h4 class="text-warning"><i
+                                    class="material-icons">dashboard</i> Dashboard
+                            </h4>
+                        </a>
+                    </li>
+                    @endrole
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('profile.show')}}">
+                            <h4 class="text-light"><i
+                                    class="material-icons">person</i> {{ Auth::user()->full_name }}</h4>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"

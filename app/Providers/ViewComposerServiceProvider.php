@@ -50,12 +50,13 @@ class ViewComposerServiceProvider extends ServiceProvider
             ]);
         });
     }
-    
+
     private function composeSidebar()
     {
         View::composer('admin.partials.sidebar', function ($view) {
             $view->with([
-                'admin_name' => Auth::user()->full_name,
+                'user_name' => Auth::user()->full_name,
+                'role_names'=>Auth::user()->getRoleNames(),
             ]);
         });
     }

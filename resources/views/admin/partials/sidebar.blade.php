@@ -8,17 +8,19 @@
         </li>
         <li>
             <h3 class="text-center text-warning mt-3">
-                {{ $admin_name }}
+                {{ $user_name }}
             </h3>
-            @can('add admin')
+            @role('SuperAdmin')
             <h3 class="text-center text-warning mt-3">
                 <span class="badge badge-warning">Super Admin</span>
             </h3>
                 @else
                 <h5 class="text-center text-warning mt-3">
-                    <span class="badge badge-warning">Admin</span>
+                    @foreach($role_names as $role_name)
+                        <span class="badge badge-warning">{{$role_name}}</span>
+                    @endforeach
                 </h5>
-            @endcan
+            @endrole
         </li>
         <li class="mt-5 {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}">
             <h4>

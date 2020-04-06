@@ -71,7 +71,6 @@
                                             {{$item->name}}&nbsp&nbsp&nbsp&nbsp;
                                         </label>
                                     </div>
-                                    <input type="hidden" name="ex-role" value="{{ $user->roles->pluck('name')->toArray()[0] }}">
                                 @endif
                         @endforeach
                     </div>
