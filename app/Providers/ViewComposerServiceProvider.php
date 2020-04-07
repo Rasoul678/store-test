@@ -30,13 +30,14 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->composeDashboard();
-        $this->composeSidebar();
+        $this->composeAdminSidebar();
+        $this->composeAdminHeader();
+        $this->composeSiteNav();
     }
-
+    
+    
     /**
-     *  Compose the admin dashboard
      *
-     * @return void
      */
     private function composeDashboard()
     {
@@ -45,17 +46,45 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'categories_count' => Category::count(),
                 'products_count' => Product::count(),
                 'orders_count' => Order::count(),
-                'admins_count' => User::role('Admin')->count(),
-                'customers_count' => User::role('Customer')->count(),
+                'users_all' => User::all()->count(),
             ]);
         });
     }
     
-    private function composeSidebar()
+    /**
+     *
+     */
+    private function composeAdminSidebar()
     {
         View::composer('admin.partials.sidebar', function ($view) {
             $view->with([
                 'admin_name' => Auth::user()->full_name,
+                'admins_count' => User::role('Admin')->count(),
+                'customers_count' => User::role('Customer')->count(),
+                'superAdmin_count' => User::role('SuperAdmin')->count(),
+                'users_all' => User::all()->count(),
+            ]);
+        });
+    }
+    
+    /**
+     *
+     */
+    private function composeAdminHeader()
+    {
+        View::composer('admin.partials.header', function ($view) {
+            $view->with([
+                'admin_name' => Auth::user()->full_name,
+            ]);
+        });
+    }
+    
+    
+    private function composeSiteNav()
+    {
+        View::composer('site.partials.nav', function ($view) {
+            $view->with([
+                'categories' => Category::orderBy('name', 'asc')->get(),
             ]);
         });
     }
