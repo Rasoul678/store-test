@@ -20,9 +20,9 @@
                         <td>
                             <a href="{{route('admin.orders.show',['order'=>$item->id])}}">{{$loop->iteration}}</a>
                         </td>
-                        <td>{{$item->getUser->first_name}} {{$item->getUser->last_name}}</td>
+                        <td>{{$item->getUser->getFullNameAttribute()}}</td>
                         <td>{{$item->created_at}}</td>
-                        <td>{{$item->order_status}}</td>
+                        <td>{{$item->status->description}}</td>
                         <td>{{$item->total_price}}</td>
                         @empty
                             <div class="alert alert-info">

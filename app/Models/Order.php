@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Enums\OrderStatus;
+use BenSampo\Enum\Traits\CastsEnums;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class Order extends Model implements OrderInterface
 {
     use SoftDeletes;
+    use CastsEnums;
 
     /**
      * Specify the name of the database table.
@@ -27,7 +30,7 @@ class Order extends Model implements OrderInterface
     protected $fillable = [
         'customer_id',
         'total_price',
-        'order_status',
+        'status',
     ];
 
     /**
@@ -39,6 +42,14 @@ class Order extends Model implements OrderInterface
         'created_at',
         'updated_at',
         'deleted_at',
+    ];
+
+    protected $enumCasts = [
+        'status' => OrderStatus::class,
+    ];
+
+    protected $casts = [
+        'status' => 'int',
     ];
 
     /**

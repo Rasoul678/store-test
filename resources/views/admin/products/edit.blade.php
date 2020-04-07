@@ -14,7 +14,7 @@
             <h4>Product Information</h4>
             <hr>
             <div class="row">
-                <div class="col md-6">
+                <div class="col md-4">
                     <div class="form-group">
                         <label for="name">Name</label>
                         @error('name')
@@ -23,6 +23,28 @@
                         <input type="text" class="form-control" id="name" name="name"
                                value="{{ old('name', $product->name) }}">
                     </div>
+                </div>
+                <div class="col md-4">
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        @error('type')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                        <input type="text" class="form-control" id="type" name="type"
+                               value="{{ old('name', $product->type) }}">
+                    </div>
+                </div>
+                <div class="col md-4">
+                    <label for="status">Status</label>
+                    <select class="custom-select" id="status" name="status">
+                        @foreach($status as $key=>$value)
+                            @php $selected = $product->status->value==$key ? 'selected' : ''@endphp
+                            <option {{$selected}} value="{{$key}}">{{$value}}</option>
+                        @endforeach
+                    </select>
+                    @error('status')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 </div>
             </div>
 

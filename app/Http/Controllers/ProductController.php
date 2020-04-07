@@ -14,7 +14,9 @@ class ProductController extends Controller implements ProductControllerInterface
      */
     public function index()
     {
-        $products = Product::orderBy('updated_at', 'asc')->paginate(8);
+        $products = Product::where('status', 1)
+            ->orderBy('updated_at', 'asc')
+            ->paginate(8);
         return view('welcome', compact('products'));
     }
 

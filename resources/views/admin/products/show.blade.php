@@ -10,11 +10,25 @@
     <div class="container mt-3 w-75">
         <hr>
         <div class="row">
-            <div class="col md-6">
+            <div class="col md-4">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input disabled type="text" class="form-control" id="name" name="name"
                            value="{{ old('name', $product->name) }}">
+                </div>
+            </div>
+            <div class="col md-4">
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <input disabled type="text" class="form-control" id="type" name="type"
+                           value="{{ old('name', $product->type) }}">
+                </div>
+            </div>
+            <div class="col md-4">
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input disabled type="text" class="form-control" id="status" name="status"
+                           value="{{ old('name', $product->status->description) }}">
                 </div>
             </div>
         </div>

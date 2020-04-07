@@ -13,7 +13,7 @@
             <h4>Product Information</h4>
             <hr>
             <div class="row">
-                <div class="col md-6">
+                <div class="col md-4">
                     <div class="form-group">
                         <label for="name">Name</label>
                         @error('name')
@@ -22,7 +22,7 @@
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                     </div>
                 </div>
-                <div class="col md-6">
+                <div class="col md-4">
                     <div class="form-group">
                         <label for="type">Type</label>
                         @error('type')
@@ -30,6 +30,17 @@
                         @enderror
                         <input type="text" class="form-control" id="name" name="type" value="{{ old('type') }}">
                     </div>
+                </div>
+                <div class="col md-4">
+                    <label for="status">Status</label>
+                        <select class="custom-select" id="status" name="status">
+                            @foreach($status as $key=>$value)
+                                <option value="{{$key}}">{{$value}}</option>
+                            @endforeach
+                        </select>
+                    @error('status')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 </div>
             </div>
             <div class="row">

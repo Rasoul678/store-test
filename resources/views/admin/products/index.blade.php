@@ -7,6 +7,7 @@
             <div class="col-md-4">
                 <a href="{{route('admin.products.create')}}" class="btn btn-primary btn-lg" role="button">Add product</a>
                 <a href="{{route('admin.products.index',['only_trash'])}}" class="btn btn-warning btn-lg" role="button">Trash</a>
+                <a href="{{route('admin.products.index',['status'=>0])}}" class="btn btn-link btn-lg" role="button">Inactive</a>
             </div>
         </div>
         <div class="mt-4">

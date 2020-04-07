@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
             Route::get('/{order}/show', 'Admin\OrderController@show')->name('show');
+            Route::patch('/{order}', 'Admin\OrderController@update')->name('update');
             Route::get('/', 'Admin\OrderController@index')->name('index');
         });
 
