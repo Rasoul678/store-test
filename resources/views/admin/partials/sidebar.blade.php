@@ -2,16 +2,19 @@
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
         <div>
-            <h4><p class="app-sidebar__user-name">{{ $admin_name }}</p></h4>
-            @can('add admin')
+            <h4><p class="app-sidebar__user-name">{{ $user_name }}</p></h4>
+            @role('SuperAdmin')
                 <h4>
                     <p class="app-sidebar__user-designation badge badge-warning">Super Admin</p>
                 </h4>
             @else
                 <h4>
                     <p class="app-sidebar__user-designation badge badge-primary">Admin</p>
+                    @foreach($role_names as $role_name)
+                        <span class="badge badge-warning">{{$role_name}}</span>
+                    @endforeach
                 </h4>
-            @endcan
+            @endrole
         </div>
     </div>
     <ul class="app-menu">

@@ -14,6 +14,7 @@
         <form action="{{ route('admin.users.update',['user'=>$user->id]) }}" method="POST">
             @method('PATCH')
             @csrf
+            <hr>
             <div class="row">
                 <div class="col md-6">
                     <div class="form-group">
@@ -72,7 +73,6 @@
                                         <h5 class="d-inline mr-3">{{$item->name}}</h5>
                                     </label>
                                 </div>
-                                <input type="hidden" name="ex-role" value="{{ $user->roles->pluck('name')->toArray()[0] }}">
                             @endif
                         @endforeach
                     </div>

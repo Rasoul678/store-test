@@ -46,11 +46,7 @@
                                     @else
                                           <ul class="navbar-nav ml-auto">
                                                 <li class="nav-item dropdown">
-                                                      @php
-                                                            $SuperAdmin = in_array('SuperAdmin', Auth::user() ->roles ->pluck('name') ->toArray());
-                                                            $Admin = in_array('Admin', Auth::user() ->roles ->pluck('name') ->toArray());
-                                                      @endphp
-                                                      @if( $SuperAdmin || $Admin )
+                                                      @can('admin')
                                                             <a style="font-size: 20px; width: 200px" id="navbarDropdown" class="nav-link dropdown-toggle text-warning text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                                   {{ Auth::user()->full_name }}<span class="caret"></span>
                                                             </a>
@@ -82,7 +78,7 @@
                                                                         @csrf
                                                                   </form>
                                                             </div>
-                                                      @endif
+                                                      @endcan
                                                 </li>
                                           </ul>
                                     @endguest

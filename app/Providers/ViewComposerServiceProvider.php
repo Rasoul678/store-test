@@ -34,10 +34,11 @@ class ViewComposerServiceProvider extends ServiceProvider
         $this->composeAdminHeader();
         $this->composeSiteNav();
     }
-    
-    
+
     /**
+     *  Compose the admin dashboard
      *
+     * @return void
      */
     private function composeDashboard()
     {
@@ -58,11 +59,12 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         View::composer('admin.partials.sidebar', function ($view) {
             $view->with([
-                'admin_name' => Auth::user()->full_name,
+                'user_name' => Auth::user()->full_name,
                 'admins_count' => User::role('Admin')->count(),
                 'customers_count' => User::role('Customer')->count(),
                 'superAdmin_count' => User::role('SuperAdmin')->count(),
                 'users_all' => User::all()->count(),
+                'role_names'=>Auth::user()->getRoleNames(),
             ]);
         });
     }
@@ -74,7 +76,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         View::composer('admin.partials.header', function ($view) {
             $view->with([
-                'admin_name' => Auth::user()->full_name,
+                'user_name' => Auth::user()->full_name,
             ]);
         });
     }
