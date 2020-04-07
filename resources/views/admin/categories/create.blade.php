@@ -25,6 +25,17 @@
                 <textarea class="form-control" id="description" name="description" rows="5" style="font-size: 18px">{{ old('description') }}</textarea>
             </div>
 
+            <div class="form-group">
+                <label for="parent">Parent Category <span class="m-l-5 text-danger"> *</span></label>
+                <select id=parent class="form-control custom-select mt-15 @error('parent_id') is-invalid @enderror" name="parent_id">
+                    <option value="0">Select a parent category</option>
+                    @foreach($categories as $key => $category)
+                        <option value="{{ $key }}"> {{ $category }} </option>
+                    @endforeach
+                </select>
+                @error('parent_id') {{ $message }} @enderror
+            </div>
+
             <div class="mt-3">
                 <button type="submit" class="btn btn-primary btn-lg">Save</button>
                 <a class="btn btn-danger btn-lg" role="button" href="{{ route('admin.categories.index') }}">Cancel</a>

@@ -2,7 +2,7 @@
       <section class="header-main bg-dark p-0">
             <div class="container">
                   <div class="row align-items-start">
-                        <div class="col-sm-5 col-md-4 offset-md-2 pt-2">
+                        <div class="col-sm-7 col-md-6 offset-md-2 pt-2 m-0 ml-lg-5">
                               <form action="{{ route('search') }}" class="search-wrap">
                                     <div class="input-group">
                                           <input type="search" name="search" class="form-control" placeholder="Search">
@@ -14,7 +14,7 @@
                                     </div>
                               </form>
                         </div>
-                        <div class="col-sm-3 col-md-3 offset-sm-3">
+                        <div class="col-sm-3 col-md-3 offset-sm-2">
                               <div class="widgets-wrap d-flex justify-content-center">
                                     <div class="widget-header mt-md-1 mt-lg-0">
                                           <a href="{{route('cart.index')}}" class="icontext">

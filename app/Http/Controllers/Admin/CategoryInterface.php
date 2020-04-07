@@ -38,12 +38,12 @@ interface CategoryInterface
      * @return View
      */
     public function show(Category $category);
-
+    
     /**
      * Show the form for editing the specified category.
      *
      * @param Category $category
-     * @return View
+     * @return \Illuminate\Contracts\View\Factory|View
      */
     public function edit(Category $category);
 
@@ -82,4 +82,10 @@ interface CategoryInterface
      * @throws \Exception
      */
     public function forceDestroy($category_slug);
+    
+    /**
+     * @return mixed
+     */
+    public function treeList();
+    
 }

@@ -21,6 +21,7 @@
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col"></th>
+                    <th scope="col"><h4 class="text-center">Parent</h4></th>
                     <th scope="col"><h4 class="text-center">Name</h4></th>
                     <th scope="col"><h4 class="text-center">Slug</h4></th>
                     <th scope="col"><h4 class="text-center">Description</h4></th>
@@ -29,61 +30,65 @@
                 </thead>
                 <tbody>
                 @forelse($categories as $category)
-                    <tr>
-                        <th scope="row"><h5 class="text-center">{{ $loop->iteration }}</h5></th>
-                        <td><h4 class="text-center">{{ $category->name }}</h4></td>
-                        <td><h4 class="text-center">{{ $category->slug }}</h4></td>
-                        <td><h5 class="pr-2 pl-2 text-truncate" style="max-width: 550px;">{{ $category->description }}</h5></td>
-                        <td>
-                            <div class="row justify-content-center">
-                                @if(!$category->deleted_at)
-                                    <div class="col-xs-3 mr-1 mb-1">
-                                        <form
-                                                action="{{route('admin.categories.show',['category'=>$category->slug])}}"
-                                                method="get">@csrf
-                                            <button class="btn btn-info btn-sm" type="submit">
-                                                <i class="material-icons">visibility</i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="col-xs-3 mr-1 mb-1">
-                                        <form
-                                                action="{{route('admin.categories.edit', ['category'=>$category->slug])}}"
-                                                method="get">@csrf
-                                            <button class="btn btn-success btn-sm"  type="submit">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                        </form>
-                                    </div>
+                    @if ($category->id != 1)
+                        <tr>
+                            <th scope="row"><h5 class="text-center">{{ $loop->iteration }}</h5></th>
+                            <td><h4 class="text-center">{{ $category->parent->name }}</h4></td>
+                            <td><h4 class="text-center">{{ $category->name }}</h4></td>
+                            <td><h4 class="text-center">{{ $category->slug }}</h4></td>
+                            <td><h5 class="pr-2 pl-2 text-truncate" style="max-width: 550px;">{{ $category->description }}</h5></td>
+                            <td>
+                                <div class="row justify-content-center">
+                                    @if(!$category->deleted_at)
+                                        <div class="col-xs-3 mr-1 mb-1">
+                                            <form
+                                                    action="{{route('admin.categories.show',['category'=>$category->slug])}}"
+                                                    method="get">@csrf
+                                                <button class="btn btn-info btn-sm" type="submit">
+                                                    <i class="material-icons">visibility</i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-xs-3 mr-1 mb-1">
+                                            <form
+                                                    action="{{route('admin.categories.edit', ['category'=>$category->slug])}}"
+                                                    method="get">@csrf
+                                                <input type="hidden" name="id" value="{{ $category->id  }}">
+                                                <button class="btn btn-success btn-sm"  type="submit">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-xs-3 mr-1">
+                                            <form
+                                                    action="{{ route('admin.categories.delete', ['category'=>$category->slug]) }}"
+                                                    method="post">@method('DELETE')@csrf
+                                                <button class="btn btn-warning btn-sm" type="submit">
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="col-xs-3 mr-1">
+                                            <form
+                                                    action="{{ route('admin.categories.restore', ['category_slug'=>$category->slug]) }}"
+                                                    method="post">@csrf
+                                                <button class="btn btn-primary btn-sm" type="submit"><i
+                                                            class="material-icons">restore</i></button>
+                                            </form>
+                                        </div>
+                                    @endif
                                     <div class="col-xs-3 mr-1">
                                         <form
-                                                action="{{ route('admin.categories.delete', ['category'=>$category->slug]) }}"
+                                                action="{{ route('admin.categories.forceDelete', ['category_slug'=>$category->slug]) }}"
                                                 method="post">@method('DELETE')@csrf
-                                            <button class="btn btn-warning btn-sm" type="submit">
-                                                <i class="material-icons">delete</i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                @else
-                                    <div class="col-xs-3 mr-1">
-                                        <form
-                                                action="{{ route('admin.categories.restore', ['category_slug'=>$category->slug]) }}"
-                                                method="post">@csrf
-                                            <button class="btn btn-primary btn-sm" type="submit"><i
-                                                        class="material-icons">restore</i></button>
-                                        </form>
-                                    </div>
-                                @endif
-                                    <div class="col-xs-3 mr-1">
-                                        <form
-                                              action="{{ route('admin.categories.forceDelete', ['category_slug'=>$category->slug]) }}"
-                                              method="post">@method('DELETE')@csrf
                                             <button class="btn btn-danger btn-sm" type="submit"><i
                                                         class="material-icons">delete_forever</i></button>
                                         </form>
                                     </div>
-                            </div>
-                        </td>
+                                </div>
+                            </td>
+                    @endif
                         @empty
                             <div class="alert alert-info text-center" role="alert">
                                 <h4>Empty!</h4>

@@ -27,4 +27,18 @@ interface CategoryInterface
      * @return BelongsToMany
      */
     public function getProducts();
+    
+    /**
+     * Get the parent category of a category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent();
+    
+    /**
+     * Return the children for our given category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children();
 }

@@ -32,7 +32,11 @@ class CategoryController extends Controller implements CategoryInterface
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $categories = Category::orderByRaw('-name ASC')
+            ->get()
+            ->nest()
+            ->listsFlattened('name');
+        return view('admin.categories.create', compact('categories'));
     }
 
     /**
@@ -58,16 +62,23 @@ class CategoryController extends Controller implements CategoryInterface
     {
         return view('admin.categories.show', compact('category'));
     }
-
+    
+    
     /**
      * Show the form for editing the specified category.
      *
      * @param Category $category
-     * @return View
+     * @return \Illuminate\Contracts\View\Factory|View
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', compact('category'));
+        $targetCategory = Category::findOrFail(request('id'));
+        $categories = Category::orderByRaw('-name ASC')
+            ->get()
+            ->nest()
+            ->listsFlattened('name');
+        
+        return view('admin.categories.edit', compact('categories','category', 'targetCategory'));
     }
 
     /**
@@ -129,5 +140,16 @@ class CategoryController extends Controller implements CategoryInterface
         $category->forceDelete();
         flash($name . ' has been deleted permanently.');
         return redirect(route('admin.categories.index'));
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function treeList()
+    {
+        return Category::orderByRaw('-name ASC')
+            ->get()
+            ->nest()
+            ->listsFlattened('name');
     }
 }
