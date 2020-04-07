@@ -46,9 +46,12 @@
                     </div>
                 </div>
                 <div class="mt-5">
+                    @can('edit user')
                     <a class="btn btn-primary" role="button"
-                       href="{{route('admin.users.edit',['user'=>$user->id])}}"><i
-                                class="material-icons">edit</i></a>
+                       href="{{route('admin.users.edit',['user'=>$user->id])}}">
+                        <i class="material-icons">edit</i>
+                    </a>
+                    @endcan
                     <a class="btn btn-danger" role="button"
                        href="{{ route('admin.users.index') }}"><i class="material-icons">arrow_back</i></a>
                 </div>

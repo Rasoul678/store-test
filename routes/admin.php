@@ -1,7 +1,7 @@
 <?php
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::group(['middleware' => ['permission:admin']], function () {
+    Route::group(['middleware' => ['permission:add product']], function () {
 
         Route::get('/', function () {
             return view('admin.dashboard.index');

@@ -2,13 +2,6 @@
       <section class="header-main bg-dark p-0">
             <div class="container">
                   <div class="row align-items-start">
-{{--                        <div class="col-sm-2 col-lg-2 text-center mt-md-3 mt-lg-3 mb-md-3">--}}
-{{--                              <div class="brand-wrap m-0 mb-sm-2">--}}
-{{--                                    <a href="{{ url('/') }}">--}}
-{{--                                          <img class="logo" src="{{ asset('frontend/images/shop-icon.png') }}" alt="logo">--}}
-{{--                                    </a>--}}
-{{--                              </div>--}}
-{{--                        </div>--}}
                         <div class="col-sm-5 col-md-4 offset-md-2 pt-2">
                               <form action="{{ route('search') }}" class="search-wrap">
                                     <div class="input-group">
@@ -46,7 +39,7 @@
                                     @else
                                           <ul class="navbar-nav ml-auto">
                                                 <li class="nav-item dropdown">
-                                                      @can('admin')
+                                                      @can('add product')
                                                             <a style="font-size: 20px; width: 200px" id="navbarDropdown" class="nav-link dropdown-toggle text-warning text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                                   {{ Auth::user()->full_name }}<span class="caret"></span>
                                                             </a>
