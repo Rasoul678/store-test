@@ -56,6 +56,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::get('/{user}/edit', 'Admin\UserController@edit')->name('edit')->middleware('permission:edit user');
             Route::patch('/{user}/update',
                 'Admin\UserController@update')->name('update')->middleware('permission:edit user');
+            Route::get('/{user}/carts','Admin\UserController@showCartItems')->name('carts');
         });
 
         Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {

@@ -53,12 +53,19 @@
                                 <h5 class="text-center">The user has not any role.</h5>
                             @endforelse
                         </td>
-                        <td class="text-center">
+                        <td class="row justify-content-center">
                             <form
                                     action="{{route('admin.users.show',['user'=>$item->id])}}"
                                     method="get">@csrf
                                 <button class="btn btn-info btn-sm" type="submit">
                                     <i class="material-icons">visibility</i>
+                                </button>
+                            </form>
+                            <form
+                                    action="{{route('admin.users.carts',['user'=>$item->id])}}"
+                                    method="get">@csrf
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    <i class="material-icons">shopping_cart</i>
                                 </button>
                             </form>
                         </td>

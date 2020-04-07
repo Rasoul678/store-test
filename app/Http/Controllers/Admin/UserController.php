@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ShoppingCart;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -76,5 +77,16 @@ class UserController extends Controller implements UserControllerInterface
         $user->save();
         flash($user->getFullNameAttribute() . ' has been updated successfully.');
         return redirect()->route('admin.users.show', compact('user'));
+    }
+
+    public function showCartItems(User $user)
+    {
+        $cart_items = ShoppingCart::where('customer_id', $user->id)
+            ->firstOrFail()
+            ->getCartItem()
+            ->paginate(10);
+        return view('admin.users.cartIndex')
+            ->with(compact('user'))
+            ->with(compact('cart_items'));
     }
 }
