@@ -14,7 +14,7 @@
         <form action="{{ route('admin.products.store') }}" method="POST">
             @csrf
             <div class="row">
-                <div class="col md-6">
+                <div class="col md-4">
                     <div class="form-group">
                         <label for="name"><h5>Name</h5></label>
                         @error('name')
@@ -23,7 +23,7 @@
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" style="font-size: 18px">
                     </div>
                 </div>
-                <div class="col md-6">
+                <div class="col md-4">
                     <div class="form-group">
                         <label for="type"><h5>Type</h5></label>
                         @error('type')
@@ -31,6 +31,17 @@
                         @enderror
                         <input type="text" class="form-control" id="name" name="type" value="{{ old('type') }}" style="font-size: 18px">
                     </div>
+                </div>
+                <div class="col md-4">
+                    <label for="status">Status</label>
+                        <select class="custom-select" id="status" name="status">
+                            @foreach($status as $key=>$value)
+                                <option value="{{$key}}">{{$value}}</option>
+                            @endforeach
+                        </select>
+                    @error('status')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 </div>
             </div>
             <div class="row">

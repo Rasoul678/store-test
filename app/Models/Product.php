@@ -3,6 +3,8 @@
 namespace App\Models;
 
 
+use App\Models\Enums\ProductStatus;
+use BenSampo\Enum\Traits\CastsEnums;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model implements ProductInterface
 {
     use SoftDeletes;
+    use CastsEnums;
 
     /**
      * Specify the name of the database table.
@@ -29,6 +32,7 @@ class Product extends Model implements ProductInterface
         'description',
         'price',
         'type',
+        'status',
     ];
 
     /**
@@ -42,6 +46,13 @@ class Product extends Model implements ProductInterface
         'deleted_at',
     ];
 
+    protected $enumCasts = [
+        'status' => ProductStatus::class,
+    ];
+
+    protected $casts = [
+        'status' => 'int',
+    ];
 
     /**
      * Get order items as a many to one relationship.

@@ -2,6 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Enums\ProductStatus;
+use BenSampo\Enum\Rules\Enum;
+use BenSampo\Enum\Rules\EnumKey;
+use BenSampo\Enum\Rules\EnumValue;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProduct extends FormRequest
@@ -29,6 +33,8 @@ class StoreProduct extends FormRequest
             'description' => 'nullable',
             'type' => 'nullable',
             'price' => 'nullable|numeric',
+            'status'=>'nullable',
+//            'status' => 'required|enum_value:' . ProductStatus::class,
         ];
     }
 }

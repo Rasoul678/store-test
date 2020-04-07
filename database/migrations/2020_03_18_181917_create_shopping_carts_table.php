@@ -17,7 +17,7 @@ class CreateShoppingCartsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id');
             $table->enum('cart_status', ['active', 'checkout', 'completed', 'abandoned'])
-                ->default('active'); //TODO:check enum definition in laravel
+                ->default('active');
             $table->timestamps();
         });
     }
