@@ -8,6 +8,7 @@ use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\ShoppingCart;
 use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 
 class ShoppingCartRepository implements ShoppingCartRepositoryInterface
@@ -28,15 +29,34 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
+     * Get cart items of a guest from session.
+     *
+     * @return view
+     */
+    public function sessionIndex()
+    {
+        if (!session()->exists('cartItem')) {
+            session(['cartItem' => null]);
+        }
+        return session()->get('cartItem');
+    }
+
+    /**
      * Add cart items to shopping cart.
      *
      * @param Product $product
      * @param int $quantity
+     * @param ShoppingCart|null $shopping_cart
      */
-    public function addCartItem(Product $product, $quantity = 1)
+    public function addCartItem(Product $product, $quantity = null, $shopping_cart = null)
     {
-        $shopping_cart = $this->findOrCreate()
-            ->load('getCartItem');
+        if (is_null($quantity)) {
+            $quantity = 1;
+        }
+        if (!$shopping_cart) {
+            $shopping_cart = $this->findOrCreate()
+                ->load('getCartItem');
+        }
         $cart = CartItem::where([
             'shopping_cart_id' => $shopping_cart->id,
             'product_id' => $product->id,

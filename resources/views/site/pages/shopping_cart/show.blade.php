@@ -30,7 +30,7 @@
                     <td>{{money_format($item->total_price,2)}}</td>
                     <td>
                         <form action="{{route('cart.remove',$item->id)}}" method="POST">
-                            @csrf
+                            @csrf @method('DELETE')
                             <button class="btn btn-danger" type="submit">Remove</button>
                         </form>
                     </td>

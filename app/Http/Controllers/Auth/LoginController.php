@@ -39,5 +39,5 @@ class LoginController extends Controller
     {
         $this->middleware('guest:web')->except('logout');
     }
-    
+
 }

@@ -7,6 +7,9 @@ use App\Models\CartItem;
 use App\Models\Product;
 use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class CartController extends Controller implements CartControllerInterface
@@ -28,8 +31,17 @@ class CartController extends Controller implements CartControllerInterface
      */
     public function index()
     {
+        if (!Auth::check()) {
+            $carts = $this->sessionIndex();
+            return view('site.pages.shopping_cart.session', compact('carts'));
+        }
         $shopping_cart = $this->shoppingCartRepository->all();
         return view('site.pages.shopping_cart.show', compact('shopping_cart'));
+    }
+
+    public function sessionIndex()
+    {
+        return $this->shoppingCartRepository->sessionIndex();
     }
 
     /**
@@ -40,7 +52,11 @@ class CartController extends Controller implements CartControllerInterface
      */
     public function add(Product $product)
     {
-        $this->shoppingCartRepository->addCartItem($product);
+        if (Auth::check()) {
+            $this->shoppingCartRepository->addCartItem($product);
+        } else {
+            session()->push('cartItem.' . $product->name, $product->id);
+        }
         flash($product->name . ' has been added to cart.');
         return redirect()->back();
     }
@@ -55,6 +71,14 @@ class CartController extends Controller implements CartControllerInterface
     public function remove(CartItem $cartItem)
     {
         $cartItem->delete();
+        return redirect()->back();
+    }
+
+    public function removeSessionCart($cart)
+    {
+        if (!Auth::check()) {
+            session()->forget('cartItem.' . $cart);
+        }
         return redirect()->back();
     }
 }
