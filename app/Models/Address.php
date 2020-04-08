@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Address extends Model implements AddressInterface
 {
@@ -20,8 +21,7 @@ class Address extends Model implements AddressInterface
         'floor',
         'postal_code',
         'number',
-        'created_at',
-        'updated_at',
+        'city_id',
     ];
 
     /**
@@ -42,5 +42,15 @@ class Address extends Model implements AddressInterface
     public function getCity()
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+    /**
+     * Get orders that refers to this address.
+     *
+     * @return HasMany
+     */
+    public function getOrders()
+    {
+        return $this->hasMany(Order::class, 'address_id');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOrder;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\Order;
@@ -11,7 +12,6 @@ use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use function Sodium\add;
 
 class OrderController extends Controller implements OrderControllerInterface
 {
@@ -61,6 +61,7 @@ class OrderController extends Controller implements OrderControllerInterface
     public function checkoutForm()
     {
         $address = Address::where('user_id', Auth::id())
+            ->orderBy('updated_at')
             ->with('getCity')
             ->first();
         $shopping_cart = $this->shoppingCartRepository->findByAuthId();
@@ -79,11 +80,24 @@ class OrderController extends Controller implements OrderControllerInterface
     /**
      * Create order object from shopping cart.
      *
+     * @param StoreOrder $request
      * @return RedirectResponse
      */
-    public function checkout()
+    public function checkout(StoreOrder $request)
     {
-        $order = $this->orderRepository->checkout();
+//        $data = $request->validate([
+//            'street' => 'required',
+//            'distinct' => 'required',
+//            'floor' => 'required',
+//            'number' => 'required',
+//            'city_id' => 'required',
+//            'description' => 'nullable',
+//            'postal_code' => 'required',
+//        ]);
+        $address = Address::firstOrNew($request->validated());
+        $address->user_id = Auth::id();
+        $address->save();
+        $order = $this->orderRepository->checkout($address);
         return redirect()->route('order.show', ['order' => $order->id]);
     }
 }

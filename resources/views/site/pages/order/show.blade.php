@@ -9,7 +9,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Total Price</th>
+                <th scope="col">SubTotal Price</th>
             </tr>
             </thead>
             <tbody>
@@ -24,6 +24,11 @@
                 </tr>
             @endforelse
             </tbody>
+            <tfoot>
+            <tr>
+                <td>Total price: ${{$order->total_price}}</td>
+            </tr>
+            </tfoot>
         </table>
     </div>
 @endsection

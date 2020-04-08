@@ -31,6 +31,7 @@ class Order extends Model implements OrderInterface
         'customer_id',
         'total_price',
         'status',
+        'address_id',
     ];
 
     /**
@@ -73,58 +74,12 @@ class Order extends Model implements OrderInterface
     }
 
     /**
-     * Calculate total price of a order by aggregating total prices of every order item.
+     * Get address of the specified order.
      *
-     * @param Order $order
-     * @return float
+     * @return BelongsTo
      */
-    static private function totalPrice(Order $order)
+    public function getAddress()
     {
-        $aggregate = (float)0;
-        foreach ($order->getOrderItem as $orderItem) {
-            $aggregate += $orderItem->total_price;
-        }
-        return $aggregate;
+        return $this->belongsTo(Address::class, 'address_id');
     }
-
-    /**
-     * Add order items to a order.
-     *
-     * @param CartItem $cartItem
-     * @param Order $order
-     * @return OrderItem
-     */
-    static private function addItem(CartItem $cartItem, Order $order)
-    {
-        $order_item = new OrderItem([
-            'product_id' => $cartItem->getProduct->id,
-            'quantity' => $cartItem->quantity,
-            'price' => $cartItem->price,
-            'total_price' => $cartItem->total_price,
-        ]);
-        $order->getOrderItem()->save($order_item);
-        return $order_item;
-    }
-//TODO:Delete these lines
-
-//    /**
-//     * Create order object from a shopping cart item.
-//     *
-//     * @return mixed
-//     */
-//    static public function checkout()
-//    {
-//        $shopping_cart = ShoppingCart::where('customer_id', 1)->first();
-//        $order = Order::create([
-//            'customer_id' => Auth::id(),
-//            'total_price' => 0,
-//        ]);
-//        foreach ($shopping_cart->getCartItem as $cartItem) {
-//            self::addItem($cartItem, $order);
-//        }
-//        $order->total_price = self::totalPrice($order);
-//        $order->save();
-//        $shopping_cart->delete();
-//        return $order;
-//    }
 }
