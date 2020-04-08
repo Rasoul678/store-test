@@ -36,7 +36,13 @@ class CartController extends Controller implements CartControllerInterface
             return view('site.pages.shopping_cart.session', compact('carts'));
         }
         $shopping_cart = $this->shoppingCartRepository->all();
-        return view('site.pages.shopping_cart.show', compact('shopping_cart'));
+        $total_price = (float)0;
+        foreach ($shopping_cart->getCartItem as $cart_item) {
+            $total_price += $cart_item->total_price;
+        }
+        return view('site.pages.shopping_cart.show')
+            ->with(compact('shopping_cart'))
+            ->with(compact('total_price'));
     }
 
     public function sessionIndex()

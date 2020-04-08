@@ -20,12 +20,7 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
      */
     public function all(): ShoppingCart
     {
-        return $this->findOrCreate()
-            ->load([
-                'getCartItem' => function ($query) {
-                    $query->where('active', true);
-                }
-            ]);
+        return $this->findByAuthId();
     }
 
     /**
