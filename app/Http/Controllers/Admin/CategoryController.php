@@ -32,7 +32,7 @@ class CategoryController extends Controller implements CategoryInterface
      */
     public function create()
     {
-        $categories = Category::orderByRaw('-name ASC')
+        $categories = Category::orderBy('name', 'ASC')
             ->get()
             ->nest()
             ->listsFlattened('name');
@@ -73,7 +73,7 @@ class CategoryController extends Controller implements CategoryInterface
     public function edit(Category $category)
     {
         $targetCategory = Category::findOrFail(request('id'));
-        $categories = Category::orderByRaw('-name ASC')
+        $categories = Category::orderBy('name', 'ASC')
             ->get()
             ->nest()
             ->listsFlattened('name');
@@ -142,14 +142,4 @@ class CategoryController extends Controller implements CategoryInterface
         return redirect(route('admin.categories.index'));
     }
     
-    /**
-     * @return mixed
-     */
-    public function treeList()
-    {
-        return Category::orderByRaw('-name ASC')
-            ->get()
-            ->nest()
-            ->listsFlattened('name');
-    }
 }

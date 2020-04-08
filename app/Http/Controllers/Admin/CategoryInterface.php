@@ -83,9 +83,4 @@ interface CategoryInterface
      */
     public function forceDestroy($category_slug);
     
-    /**
-     * @return mixed
-     */
-    public function treeList();
-    
 }
