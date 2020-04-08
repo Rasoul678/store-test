@@ -99,8 +99,8 @@
                                 <label for="city">City</label>
                                 <select class="custom-select d-block w-100" name="city_id" id="city" required="true">
                                     @foreach($cities as $city)
-                                        @php $selected=($address->city_id == $city->id) ? 'selected' : '' @endphp
-                                        <option {{$selected}} value="{{$city->id}}">{{$city->city}}</option>
+{{--                                        @php $selected=($address->city_id == $city->id) ? 'selected' : '' @endphp--}}
+                                        <option value="{{$city->id}}">{{$city->city}}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
