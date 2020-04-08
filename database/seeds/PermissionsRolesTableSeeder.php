@@ -56,7 +56,10 @@ class PermissionsRolesTableSeeder extends Seeder
          * Defining roles.
          */
         Role::create(['name' => 'SuperAdmin']);
+        $adminRole = Role::create(['name' => 'Admin']);
         $customerRole = Role::create(['name' => 'Customer']);
+
+        $adminRole->givePermissionTo('admin');
 
         /**
          * Assigning permissions to customer role.
