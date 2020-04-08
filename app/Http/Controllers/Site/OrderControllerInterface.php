@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Http\Requests\StoreOrder;
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -26,7 +27,8 @@ interface OrderControllerInterface
     /**
      * Create order object from shopping cart.
      *
+     * @param StoreOrder $request
      * @return RedirectResponse
      */
-    public function checkout();
+    public function checkout(StoreOrder $request);
 }

@@ -20,4 +20,11 @@ interface OrderInterface
      * @return HasMany
      */
     public function getOrderItem();
+
+    /**
+     * Get address of the specified order.
+     *
+     * @return BelongsTo
+     */
+    public function getAddress();
 }

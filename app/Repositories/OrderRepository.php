@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Repositories\Contracts\OrderRepositoryInterface;
@@ -58,15 +59,18 @@ class OrderRepository implements OrderRepositoryInterface
     /**
      * Generate order and all of order items from shopping cart and return the order.
      *
+     * @param Address $address
      * @return Order
      */
-    public function checkout(): Order
+    public function checkout(Address $address): Order
     {
         $shopping_cart = $this->shoppingCartRepository->findByAuthId();
-        $order = Order::create([
+        $order = new Order([
             'customer_id' => Auth::id(),
             'total_price' => 0,
         ]);
+        $address->getOrders()->save($order);
+        $order->save();
         foreach ($shopping_cart->getCartItem as $cartItem) {
             $order_item = new OrderItem([
                 'product_id' => $cartItem->getProduct->id,

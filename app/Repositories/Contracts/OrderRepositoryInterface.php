@@ -3,6 +3,7 @@
 namespace App\Repositories\Contracts;
 
 
+use App\Models\Address;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -26,7 +27,8 @@ interface OrderRepositoryInterface
     /**
      * Generate order and all of order items from shopping cart and return the order.
      *
+     * @param Address $address
      * @return Order
      */
-    public function checkout(): Order;
+    public function checkout(Address $address): Order;
 }

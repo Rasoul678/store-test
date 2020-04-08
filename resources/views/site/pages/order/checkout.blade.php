@@ -36,11 +36,12 @@
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Checkout Form</h4>
                     <form class="needs-validation" novalidate="" action="{{route('order.checkout')}}"
-                          method="POST">@csrf
+                          method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="street">Street</label>
-                                <input type="text" class="form-control" id="street" placeholder=""
+                                <input type="text" class="form-control" name="street" id="street" placeholder=""
                                        value="{{old('street') ?? $address->street ?? ''}}">
                                 @error('street')
                                 <div class="invalid-feedback">{{message}}</div>
@@ -48,7 +49,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="postal_code">Postal Code</label>
-                                <input type="text" class="form-control" name=postal_code id="postal_code-code"
+                                <input type="text" class="form-control" name="postal_code" id="postal_code-code"
                                        placeholder="**********"
                                        value="{{old('postal_code') ?? $address->postal_code ?? ''}}">
                                 @error('postal_code')
@@ -67,7 +68,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="floor">Floor</label>
-                                <input type="text" class="form-control" name`="floor" id="floor" placeholder=""
+                                <input type="text" class="form-control" name="floor" id="floor" placeholder=""
                                        value="{{old('floor') ?? $address->floor ?? ''}}" required="">
                                 @error('floor')
                                 <div class="invalid-feedback">{{message}}</div>
@@ -86,7 +87,8 @@
                         <div class="mb-3">
                             <label for="description">Description</label>
                             <input type="text" class="form-control" name="description" id="description"
-                                   placeholder="Tehran, Valiasr st, ..." required="">
+                                   placeholder="Tehran, Valiasr st, ..." required=""
+                                   value="{{old('description') ?? $address->description ?? ''}}">
                             @error('description')
                             <div class="invalid-feedback">{{message}}</div>
                             @enderror
@@ -95,9 +97,9 @@
                         <div class="row">
                             <div class="col-md-5 mb-3">
                                 <label for="city">City</label>
-                                <select class="custom-select d-block w-100" name="city" id="city" required="true">
+                                <select class="custom-select d-block w-100" name="city_id" id="city" required="true">
                                     @foreach($cities as $city)
-                                        <option value="">Choose...</option>
+{{--                                        @php $selected=($address->city_id == $city->id) ? 'selected' : '' @endphp--}}
                                         <option value="{{$city->id}}">{{$city->city}}</option>
                                     @endforeach
                                 </select>
