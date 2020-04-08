@@ -51,7 +51,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             ]);
         });
     }
-    
+
     /**
      *
      */
@@ -68,7 +68,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             ]);
         });
     }
-    
+
     /**
      *
      */
@@ -80,13 +80,13 @@ class ViewComposerServiceProvider extends ServiceProvider
             ]);
         });
     }
-    
-    
+
+
     private function composeSiteNav()
     {
-    
+
         View::composer('site.partials.nav', function ($view) {
-            $view->with('categories', Category::orderByRaw('-name ASC')->get()->nest());
+            $view->with(['categories'=> Category::orderByRaw('-name ASC')->get()->nest()]);
         });
     }
 }

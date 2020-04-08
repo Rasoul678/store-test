@@ -40,10 +40,18 @@ class Category extends Model implements CategoryInterface
      * @var array
      */
     protected $dates = [
-        'parent_id' =>  'integer',
         'created_at',
         'updated_at',
         'deleted_at',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts=[
+        'parent_id' =>  'integer',
     ];
 
     /**
@@ -81,7 +89,7 @@ class Category extends Model implements CategoryInterface
         return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id')
             ->withTimestamps();
     }
-    
+
     /**
      * Get the parent category of a category.
      *
@@ -91,7 +99,7 @@ class Category extends Model implements CategoryInterface
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
-    
+
     /**
      * Return the children for our given category.
      *

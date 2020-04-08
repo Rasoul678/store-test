@@ -26,8 +26,8 @@
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$item->getProduct->name}}</td>
                     <td>{{$item->quantity}}</td>
-                    <td>{{money_format($item->price,2)}}</td>
-                    <td>{{money_format($item->total_price,2)}}</td>
+                    <td>{{$item->price}}</td>
+                    <td>{{$item->total_price}}</td>
                     <td>
                         <form action="{{route('cart.remove',$item->id)}}" method="POST">
                             @csrf @method('DELETE')

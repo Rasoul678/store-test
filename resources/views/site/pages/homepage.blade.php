@@ -18,7 +18,7 @@
                                     <h5 class="title bg-warning rounded m-0 mb-1 p-1">Name: {{ $product->name }}</h5>
                                     <div class="row">
                                         <div class="col-8">
-                                            <h6 class="price bg-primary text-light rounded mt-1 p-2">${{ money_format($product->price,2) }} </h6>
+                                            <h6 class="price bg-primary text-light rounded mt-1 p-2">${{ $product->price }} </h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <form action="{{route('cart.add',['product'=>$product->id])}}" method="POST" role="form" id="addToCart">

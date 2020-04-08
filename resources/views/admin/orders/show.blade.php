@@ -39,8 +39,8 @@
                             @php $product = $item->getProduct()->withTrashed()->pluck('name')->first() @endphp
                             <td>{{$product}}</td>
                             <td>{{$item->quantity}}</td>
-                            <td>{{money_format($item->price,2)}}</td>
-                            <td>{{money_format($item->total_price,2)}}</td>
+                            <td>{{$item->price}}</td>
+                            <td>{{$item->total_price}}</td>
                             @empty
                                 <p>The are not any products added yet!</p>
                         </tr>

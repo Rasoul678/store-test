@@ -18,7 +18,7 @@
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$item->getProduct->name}}</td>
                     <td>{{$item->quantity}}</td>
-                    <td>{{money_format($item->total_price,2)}}</td>
+                    <td>{{$item->total_price}}</td>
                     @empty
                         <p>The are not any products added yet!</p>
                 </tr>

@@ -32,7 +32,7 @@
                                     <h3 class="title mb-3">{{ $product->name }}</h3>
                                     <div class="mb-3">
                                         <var class="price h3 text-success">
-                                            <span class="num" id="productPrice">{{money_format($product->price,2)}}</span>
+                                            <span class="num" id="productPrice">{{$product->price}}</span>
                                         </var>
                                     </div>
                                     <hr>
@@ -88,7 +88,7 @@
 {{--            <tr>--}}
 {{--                <td>{{$product->name}}</td>--}}
 {{--                <td>{{$product->type}}</td>--}}
-{{--                <td>{{money_format($product->price,2)}}</td>--}}
+{{--                <td>{{$product->price}}</td>--}}
 {{--                <td>--}}
 {{--                    <form action="{{route('cart.add',['product'=>$product->id])}}" method="POST">--}}
 {{--                        @csrf--}}
