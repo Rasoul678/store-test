@@ -4,8 +4,7 @@
     <div class="container">
         <h1>Shopping Cart Detail</h1>
         @if($shopping_cart->getCartItem->first())
-            <form action="{{route('order.checkout')}}" method="POST">
-                @csrf
+            <form action="{{route('order.checkoutForm')}}" method="GET">
                 <button class="btn btn-primary" type="submit">Checkout</button>
             </form>
         @endif

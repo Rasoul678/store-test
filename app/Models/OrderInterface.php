@@ -20,11 +20,4 @@ interface OrderInterface
      * @return HasMany
      */
     public function getOrderItem();
-
-    /**
-     * Create order object from a shopping cart item.
-     *
-     * @return mixed
-     */
-    static public function checkout();
 }

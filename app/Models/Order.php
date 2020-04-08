@@ -105,25 +105,26 @@ class Order extends Model implements OrderInterface
         $order->getOrderItem()->save($order_item);
         return $order_item;
     }
+//TODO:Delete these lines
 
-    /**
-     * Create order object from a shopping cart item.
-     *
-     * @return mixed
-     */
-    static public function checkout()
-    {
-        $shopping_cart = ShoppingCart::where('customer_id', 1)->first();
-        $order = Order::create([
-            'customer_id' => Auth::id(),
-            'total_price' => 0,
-        ]);
-        foreach ($shopping_cart->getCartItem as $cartItem) {
-            self::addItem($cartItem, $order);
-        }
-        $order->total_price = self::totalPrice($order);
-        $order->save();
-        $shopping_cart->delete();
-        return $order;
-    }
+//    /**
+//     * Create order object from a shopping cart item.
+//     *
+//     * @return mixed
+//     */
+//    static public function checkout()
+//    {
+//        $shopping_cart = ShoppingCart::where('customer_id', 1)->first();
+//        $order = Order::create([
+//            'customer_id' => Auth::id(),
+//            'total_price' => 0,
+//        ]);
+//        foreach ($shopping_cart->getCartItem as $cartItem) {
+//            self::addItem($cartItem, $order);
+//        }
+//        $order->total_price = self::totalPrice($order);
+//        $order->save();
+//        $shopping_cart->delete();
+//        return $order;
+//    }
 }
