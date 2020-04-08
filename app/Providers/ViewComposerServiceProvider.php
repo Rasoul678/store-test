@@ -32,7 +32,6 @@ class ViewComposerServiceProvider extends ServiceProvider
         $this->composeDashboard();
         $this->composeAdminSidebar();
         $this->composeAdminHeader();
-        $this->composeSiteNav();
     }
 
     /**
@@ -79,13 +78,8 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'user_name' => Auth::user()->full_name,
             ]);
         });
-    }
-
-
-    private function composeSiteNav()
-    {
-
-        View::composer('site.partials.nav', function ($view) {
+        
+        View::composer('site.partials.header', function ($view) {
             $view->with('categories', Category::orderBy('name', 'ASC')->get()->nest());
         });
     }
