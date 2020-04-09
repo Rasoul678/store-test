@@ -6,6 +6,7 @@
             <h1><i class="fa fa-group"></i> Users</h1>
         </div>
     </div>
+    @include('flash::message')
     <div class="container w-75">
             <h2>
                 User: {{$user->getFullNameAttribute()}}
@@ -14,7 +15,6 @@
         <form action="{{ route('admin.users.update',['user'=>$user->id]) }}" method="POST">
             @method('PATCH')
             @csrf
-            <hr>
             <div class="row">
                 <div class="col md-6">
                     <div class="form-group">

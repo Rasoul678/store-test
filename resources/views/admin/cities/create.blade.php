@@ -1,16 +1,16 @@
 @extends('admin.app')
 @section('title') Add City @endsection
 @section('content')
-
-    <div class="container w-75 mt-5">
-        <div class="mt-2">
-            <h2>Add New City</h2>
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-map-marker"></i> Cities</h1>
         </div>
     </div>
+    @include('flash::message')
     <div class="container mt-3 w-75">
         <form action="{{ route('admin.cities.store') }}" method="POST">
             @csrf
-            <h4>City</h4>
+            <h4>Add New City</h4>
             <hr>
             <div class="row">
                 <div class="col md-6">

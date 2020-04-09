@@ -19,7 +19,7 @@ class RolePermissionController extends Controller implements RolePermissionContr
         $roles = Role::where('name', '!=', 'SuperAdmin')
             ->orderBy('id')
             ->with('permissions')
-            ->get();
+            ->paginate(5);
         return view('admin.roles.index', compact('roles'));
     }
 
@@ -27,7 +27,7 @@ class RolePermissionController extends Controller implements RolePermissionContr
     {
         $permissions = Permission::orderBy('id')
             ->with('roles')
-            ->get();
+            ->paginate(10);
         return view('admin.roles.permissionsIndex', compact('permissions'));
     }
 

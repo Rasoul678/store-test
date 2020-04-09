@@ -6,35 +6,42 @@
             <h1><i class="fa fa-truck"></i> Orders</h1>
         </div>
     </div>
-    <div class="container">
-        <div class="table-responsive-xl mt-3">
+    @include('flash::message')
+    <div class="d-flex justify-content-center">
+        <table class="table table-hover table-sm mt-3" style="max-width: 120px">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col"><h6 class="text-center m-0 p-1">Customer</h6></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($order as $item)
+                <tr>
+                    <th scope="row" style="height: 53px"><h6 class="text-center text-truncate m-0" style="max-width: 120px">{{$item->getUser->first_name}} {{$item->getUser->last_name}}</h6></th>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <div class="table-responsive mt-3">
             <table class="table table-hover table-sm">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col"></th>
-                    <th scope="col"><h4 class="text-center">Customer</h4></th>
-                    <th scope="col"><h4 class="text-center">Date</h4></th>
-                    <th scope="col"><h4 class="text-center">Status</h4></th>
-                    <th scope="col"><h4 class="text-center">Total Price</h4></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Date</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Status</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Total Price</h6></th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($order as $item)
+                @foreach($order as $item)
                     <tr>
-                        <th scope="row"><h5 class="text-center">{{ $loop->iteration }}</h5></th>
-                        <td><h4 class="text-center">{{$item->getUser->first_name}} {{$item->getUser->last_name}}</h4></td>
-                        <td><h4 class="text-center">{{$item->created_at}}</h4></td>
-                        <td><h4 class="text-center">{{$item->order_status}}</h4></td>
-                        <td><h4 class="text-center">{{$item->total_price}}</h4></td>
-                        @empty
-                            <div class="alert alert-info">
-                                <h4 class="text-center">Order list is empty, for now!</h4>
-                            </div>
+                        <td><h6 class="text-center">{{$item->created_at->format('Y M d, h:i:s')}}</h6></td>
+                        <td ><h6 class="text-center">{{$item->order_status}}</h6></td>
+                        <td ><h6 class="text-center">{{$item->total_price}}</h6></td>
                     </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
+            {{ $order->links()}}
         </div>
-        {{ $order->links()}}
     </div>
 @endsection

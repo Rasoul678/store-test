@@ -6,6 +6,7 @@
             <h1><i class="fa fa-tags"></i> Categories</h1>
         </div>
     </div>
+    @include('flash::message')
     <div class="container w-75">
         <div class="card">
             <div class="card-body">

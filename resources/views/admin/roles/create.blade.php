@@ -1,16 +1,16 @@
 @extends('admin.app')
 @section('title') Create Role @endsection
 @section('content')
-
-    <div class="container w-75 mt-5">
-        <div class="mt-2">
-            <h2>Add New Role</h2>
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-user-plus"></i> Roles</h1>
         </div>
     </div>
-    <div class="container mt-3 w-75">
+    @include('flash::message')
+    <div class="container mt-2">
         <form action="{{ route('admin.roles.store') }}" method="POST">
             @csrf
-            <h4>Role</h4>
+            <h4>Add New Role</h4>
             <hr>
             <div class="row">
                 <div class="col md-6">
@@ -23,29 +23,30 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
-                <div class="col md-6">
-                    <label class="form-check-label">Select Permissions: </label>
-                    <div class="form-group custom-control">
+                <label class="form-check-label">Select Permissions: </label>
+                <div class="form-group custom-control">
+                    <div class="row">
                         @foreach($permissions as $permission)
-                            <div class="form-check">
-                                <input name="permissions[]" class="form-check-input" type="checkbox"
-                                       value="{{$permission->name}}"
-                                       id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    {{$permission->name}}&nbsp;
-                                </label>
+                            <div class="col-6 col-md-4 col-lg-3 p-0">
+                                <div class="form-check">
+                                    <input name="permissions[]" class="form-check-input" type="checkbox"
+                                           value="{{$permission->name}}"
+                                           id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$permission->name}}&nbsp;
+                                    </label>
+                                </div>
                             </div>
                         @endforeach
                     </div>
-                    @error('permissions')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
                 </div>
+                @error('permissions')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
             </div>
 
-            <div class="mt-3">
+            <div class="mt-1">
                 <button type="submit" class="btn btn-primary btn-lg">Save</button>
                 <a class="btn btn-danger btn-lg" role="button" href="{{ route('admin.roles.index') }}">Cancel</a>
             </div>

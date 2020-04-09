@@ -1,34 +1,35 @@
 @extends('admin.app')
-@section('title') Roles @endsection
+@section('title') Permissions @endsection
 @section('content')
-    <div class="container-fluid mt-4">
-        <h1 class="mt-2 text-center"> Permissions</h1>
-        <div class="mt-4">
-            <div>
-                <table class="table table-hover table-sm">
-                    <thead class="thead-dark">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-key"></i> Permissions</h1>
+        </div>
+    </div>
+    @include('flash::message')
+    <div class="container-fluid">
+        <div class="mt-4 m-auto" style="max-width: 700px">
+            <table class="table table-hover table-sm" style="min-height: 417px">
+                <thead class="thead-dark">
+                <tr>
+                    <th ><h6 class="text-center m-0 p-1">Name</h6></th>
+                    <th ><h6 class="text-center m-0 p-1">Roles</h6></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($permissions as $permission)
                     <tr>
-                        <th><h4> #</h4></th>
-                        <th><h4>Name</h4></th>
-                        <th class="text-center"><h4>Roles</h4></th>
-                        <th></th>
+                        <td class="text-center text-truncate"><h5 class="text-left">{{ $permission->name }}</h5></td>
+                        <td class="text-center">
+                            @foreach($permission->roles as $role)
+                                <h5><span class="badge badge-dark">{{ $role->name }}</span></h5>
+                            @endforeach
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($permissions as $permission)
-                        <tr>
-                            <td><h5>{{ $loop->iteration }}</h5></td>
-                            <td><h5>{{ $permission->name }}</h5></td>
-                            <td>
-                                @foreach($permission->roles as $role)
-                                    <h5><span class="badge badge-dark">{{ $role->name }}</span></h5>
-                                @endforeach
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
+                @endforeach
+                </tbody>
+            </table>
+            {{ $permissions->links()}}
         </div>
     </div>
 @endsection

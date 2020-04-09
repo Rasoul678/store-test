@@ -33,7 +33,7 @@
                     <a class="treeview-item" href="{{ route('admin.users.index') }}" rel="noopener noreferrer"><span class="badge badge-primary mr-2">{{ $users_all}}</span><i class="icon fa fa-chevron-right"></i> All Users</a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{route('admin.users.index',['admins'])}}"><span class="badge badge-primary mr-2">{{ $admins_count + $superAdmin_count }}</span><i class="icon fa fa-chevron-right"></i> Admins</a>
+                    <a class="treeview-item" href="{{route('admin.users.index',['admins'])}}"><span class="badge badge-primary mr-2">{{ $admins_count}}</span><i class="icon fa fa-chevron-right"></i> Admins</a>
                 </li>
                 <li>
                     <a class="treeview-item" href="{{route('admin.users.index',['customers'])}}"><span class="badge badge-primary mr-2">{{ $customers_count }}</span><i class="icon fa fa-chevron-right"></i> Customers</a>

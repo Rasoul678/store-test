@@ -22,24 +22,37 @@
             </h1>
         </div>
     </div>
-    <div class="table-responsive-xl mt-3">
+    <div class="d-flex justify-content-center">
+        <table class="table table-hover table-sm mt-3" style="max-width: 120px">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col"><h6 class="text-center m-0 p-1">Name</h6></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($users as $item)
+            <tr>
+                <th scope="row" style="height: 53px"><h6 class="text-center text-truncate m-0" style="max-width: 120px">{{$item->first_name}} {{$item->last_name}}</h6></th>
+            </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <div class="table-responsive mt-3">
             <table class="table table-hover table-sm">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col"><h4 class="text-left">Name</h4></th>
-                    <th scope="col"><h4 class="text-left">E-mail</h4></th>
-                    <th scope="col"><h4 class="text-center">Joined at</h4></th>
-                    <th scope="col"><h4 class="text-center">Role</h4></th>
-                    <th scope="col"><h4 class="text-center">Actions</h4></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Email</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Joined</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Role</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Actions</h6></th>
 
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($users as $item)
+                @foreach($users as $item)
                     <tr>
-                        <th scope="row"><h5 class="text-left">{{$item->first_name}} {{$item->last_name}}</h5></th>
-                        <td><h5 class="text-left">{{$item->email}}</h5></td>
-                        <td><h6 class="text-center">{{$item->created_at->format('Y M d, h:i:s')}}</h6></td>
+                        <td><h6 class="text-center">{{$item->email}}</h6></td>
+                        <td ><h6 class="text-center" style="min-width: 150px">{{$item->created_at->format('Y M d, h:i:s')}}</h6></td>
                         <td>
                             @forelse($item->getRoleNames() as $role)
                                 @if($role == 'Admin')
@@ -53,10 +66,10 @@
                                 <h5 class="text-center">The user has not any role.</h5>
                             @endforelse
                         </td>
-                        <td class="row justify-content-center">
-                            <form
-                                    action="{{route('admin.users.show',['user'=>$item->id])}}"
-                                    method="get">@csrf
+                        <td class="row justify-content-center ml-1" style="min-width: 120px">
+                            <form class="mr-1"
+                                  action="{{route('admin.users.show',['user'=>$item->id])}}"
+                                  method="get">@csrf
                                 <button class="btn btn-info btn-sm" type="submit">
                                     <i class="material-icons">visibility</i>
                                 </button>
@@ -65,27 +78,16 @@
                                     action="{{route('admin.users.carts',['user'=>$item->id])}}"
                                     method="get">@csrf
                                 <button class="btn btn-primary btn-sm" type="submit">
-                                    <i class="material-icons">shopping_cart</i>
+                                    <i class="material-icons">shopping_basket</i>
                                 </button>
                             </form>
                         </td>
-                        @empty
-                            <div class="alert alert-info">
-                                <h4 class="text-center">
-                                    @if(request()->has('admins'))
-                                        Admin
-                                    @elseif(request()->has('customers'))
-                                        Customer
-                                    @else
-                                        User
-                                    @endif
-                                    list is empty, for now!
-                                </h4>
-                            </div>
                     </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
-        {{ $users->links()}}
+            {{ $users->links()}}
+        </div>
     </div>
+
 @endsection

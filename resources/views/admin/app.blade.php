@@ -15,7 +15,6 @@
     @include('admin.partials.header')
     @include('admin.partials.sidebar')
     <main class="app-content">
-{{--        @include('flash::message')--}}
         @yield('content')
     </main>
     <script src="{{ asset('backend/js/jquery-3.2.1.min.js') }}"></script>

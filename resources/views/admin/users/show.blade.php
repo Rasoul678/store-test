@@ -14,8 +14,8 @@
             </h1>
         </div>
     </div>
-
-    <div class="container w-75">
+    @include('flash::message')
+    <div class="container" style="max-width: 800px">
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">User: {{$user->getFullNameAttribute()}}</h2>
@@ -33,11 +33,11 @@
                         <h4 class="mt-5 text-info mt-5 d-inline">Role: </h4>
                         @forelse($user->getRoleNames() as $role)
                             @if($role == 'Admin')
-                                <h5 class="mt-5 d-inline bg-warning rounded p-1">{{ $role }}</h5>&nbsp;
+                                <h5 class="mt-5 d-inline bg-warning rounded p-1 text-light">{{ $role }}</h5>&nbsp;
                             @elseif($role == 'SuperAdmin')
                                 <h5 class="d-inline bg-warning rounded p-1">{{ $role }}</h5>
                             @else
-                                <h5 class="d-inline bg-info rounded p-1">{{ $role }}</h5>&nbsp;
+                                <h5 class="d-inline bg-secondary rounded p-1 text-light">{{ $role }}</h5>&nbsp;
                             @endif
 
                         @empty

@@ -1,8 +1,13 @@
 @extends('admin.app')
 @section('title') Roles @endsection
 @section('content')
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-map-marker"></i> Cities</h1>
+        </div>
+    </div>
+    @include('flash::message')
     <div class="container-fluid mt-4">
-        <h1 class="mt-2 text-center"> Cities</h1>
         <div class="row">
             <div class="col-md-4">
                 <a href="{{route('admin.cities.create')}}" class="btn btn-primary btn-lg" role="button">Add City</a>

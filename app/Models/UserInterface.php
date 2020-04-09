@@ -10,4 +10,9 @@ interface UserInterface
      * @return string
      */
     public function getFullNameAttribute();
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function getShoppingCart();
 }

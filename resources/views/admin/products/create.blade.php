@@ -6,6 +6,7 @@
             <h1><i class="fa fa-shopping-bag"></i> Products</h1>
         </div>
     </div>
+    @include('flash::message')
     <div class="container w-75">
         <div class="mb-3">
             <h2>Add New Product</h2>

@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <section class="section-content bg padding-y">
+    <section class="section-content padding-y">
         <div class="container mb-4">
             <div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
                 <h1 class="mt-3 mb-4 text-center">Login</h1>
