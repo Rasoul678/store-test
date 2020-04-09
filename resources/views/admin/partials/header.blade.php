@@ -1,6 +1,7 @@
 <header class="app-header">
-    <a class="app-header__logo" href="{{route('home')}}">{{ config('app.name') }}</a>
-    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar" style="width: 50px"></a>
+    <a class="app-header__logo" href="{{route('home')}}" style="width: 180px">{{ config('app.name') }}</a>
     <ul class="app-nav">
         <li class="app-search">
             <h4 class="text-light pt-2">{{ $user_name }}</h4>

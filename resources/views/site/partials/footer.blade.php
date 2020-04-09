@@ -1,20 +1,74 @@
-<footer class="page-footer font-small bg-dark text-light pt-4 pb-4">
+<!-- ========================= FOOTER ========================= -->
+<footer class="section-footer bg-dark white" id="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4 col-md-4 border-top mb-sm-3 pt-3">
-                <h5 class="text-warning text-center">Customer Service</h5>
+        <section class="footer-top padding-top">
+            <div class="row">
+                <aside class="col-sm-3 col-md-3 white">
+                    <h5 class="title text-warning">Customer Services</h5>
+                    <ul class="list-unstyled">
+                        <li> <a href="#">Help center</a></li>
+                        <li> <a href="#">Money refund</a></li>
+                        <li> <a href="#">Terms and Policy</a></li>
+                        <li> <a href="#">Open dispute</a></li>
+                    </ul>
+                </aside>
+                <aside class="col-sm-3  col-md-3 white">
+                    <h5 class="title text-warning">My Account</h5>
+                    <ul class="list-unstyled">
+                        <li> <a href="#"> User Login </a></li>
+                        <li> <a href="#"> User register </a></li>
+                        <li> <a href="#"> Account Setting </a></li>
+                        <li> <a href="#"> My Orders </a></li>
+                        <li> <a href="#"> My Wishlist </a></li>
+                    </ul>
+                </aside>
+                <aside class="col-sm-3  col-md-3 white">
+                    <h5 class="title text-warning">About</h5>
+                    <ul class="list-unstyled">
+                        <li> <a href="#"> Our history </a></li>
+                        <li> <a href="#"> How to buy </a></li>
+                        <li> <a href="#"> Delivery and payment </a></li>
+                        <li> <a href="#"> Advertise </a></li>
+                        <li> <a href="#"> Partnership </a></li>
+                    </ul>
+                </aside>
+                <aside class="col-sm-3">
+                    <article class="white">
+                        <h5 class="title text-warning">Contacts</h5>
+                        <p>
+                            <strong>Phone: </strong> +123456789
+                            <br>
+                            <strong>Fax:</strong> +123456789
+                            <br>
+                            <strong>Address:</strong> No.123 Somewhere in Tehran, IRAN
+                            <br>
+                            <strong>E-Mail:</strong> store_online@gmail.com
+                        </p>
+
+                        <div class="btn-group white">
+                            <a class="btn btn-facebook" title="Facebook" target="_blank" href="#"><i
+                                        class="fab fa-facebook-f  fa-fw"></i></a>
+                            <a class="btn btn-instagram" title="Instagram" target="_blank" href="#"><i
+                                        class="fab fa-instagram  fa-fw"></i></a>
+                            <a class="btn btn-twitter" title="Twitter" target="_blank" href="#"><i
+                                        class="fab fa-twitter  fa-fw"></i></a>
+                        </div>
+                    </article>
+                </aside>
             </div>
-            <div class="col-sm-4 col-md-4 border-top mb-sm-3 pt-3">
-                <h5 class="text-warning text-center">About Us</h5>
-                <h6 class="text-justify"> This is an online store, you can find us here in case you missed us!</h6>
+            <!-- row.// -->
+            <br>
+        </section>
+        <section class="footer-bottom row border-top-white">
+            <div class="col-sm-6">
+                <p class="text-white-50"> Powered by Laravel</p>
             </div>
-            <div class="col-sm-4 col-md-4 border-top mb-sm-3 pt-3">
-                <h5 class="text-warning text-center">Contacts</h5>
-                <h6>Address : No.123 Somewhere in Tehran, IRAN</h6>
-                <h6>Postal Code : 0123456789</h6>
-                <h6>Tel : +98 21 88888888</h6>
-                <h6>E-Mail : store_online@gmail.com</h6>
+            <div class="col-sm-6">
+                <p class="text-md-right text-white-50">
+                    Copyright &copy 2020
+                </p>
             </div>
-        </div>
+        </section>
     </div>
 </footer>
+<!-- ========================= FOOTER END // ========================= -->

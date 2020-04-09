@@ -2,13 +2,13 @@
 @section('title', $category->name)
 @section('content')
     <section class="section-pagetop bg-dark p-1">
-        <div class="container clearfix">
+        <div class="container clearfix m-0">
             <h5 class="text-warning m-0">
                 <i class="material-icons">chevron_right</i>{{ $category->name }}
             </h5>
         </div>
     </section>
-    <section class="section-content bg padding-y">
+    <section class="section-content padding-y">
         <div class="container">
             <div id="code_prod_complex">
                 <div class="row">
@@ -18,28 +18,28 @@
                                 @if ($product->id <=18)
                                     <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}"></a></div>
                                 @else
-                                    <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt=""></a></div>
+                                    <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
                                 @endif
-                                    <figcaption class="info-wrap text-center bg-secondary">
-                                        <h5 class="title bg-warning rounded m-0 mb-1 p-1">Name: {{ $product->name }}</h5>
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <h6 class="price bg-primary text-light rounded mt-1 p-2">${{ $product->price }} </h6>
-                                            </div>
-                                            <div class="col-4 text-right">
-                                                <form action="{{route('cart.add',['product'=>$product->id])}}" method="POST" role="form" id="addToCart">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-sm-12">
-                                                            <input type="hidden" name="productId" value="{{ $product->id }}">
-                                                            <input type="hidden" name="price" id="finalPrice" value="{{ $product->price }}">
-                                                        </div>
+                                <div class="card-body border-top">
+                                    <p class="card-text m-0"><strong>Product: </strong>{{ $product->name }}</p>
+                                    <p class="card-text text-justify" style="height: 60px; overflow: hidden"><strong>Description:</strong><br> {{ $product->description }}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-md btn-outline-primary rounded mr-1" href="{{route('product.show',['product'=>$product->id])}}" role="button">Details</a>
+                                            <form action="{{route('cart.add',['product'=>$product->id])}}" method="POST" role="form" id="addToCart">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="hidden" name="productId" value="{{ $product->id }}">
+                                                        <input type="hidden" name="price" id="finalPrice" value="{{ $product->price }}">
                                                     </div>
-                                                    <button type="submit" class="btn btn-success"><i class="fas fa-shopping-cart"></i></button>
-                                                </form>
-                                            </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-md btn-outline-success"><i class="fas fa-shopping-cart"></i></button>
+                                            </form>
                                         </div>
-                                    </figcaption>
+                                        <small class="text-dark">${{ $product->price }}</small>
+                                    </div>
+                                </div>
                             </figure>
                         </div>
                     @empty

@@ -7,9 +7,13 @@
     @include('site.partials.styles')
 </head>
 <body>
-@include('site.partials.header')
-@yield('content')
-@include('site.partials.footer')
-@include('site.partials.scripts')
+    <div id="container">
+        <div id="main">
+            @include('site.partials.header')
+            @yield('content')
+        </div>
+    </div>
+    @include('site.partials.footer')
+    @include('site.partials.scripts')
 </body>
 </html>
