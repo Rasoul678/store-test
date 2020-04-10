@@ -100,9 +100,9 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     {
         $shopping_cart = $this->findOrCreate($event->user->id);
         if (session()->has('cartItem')) {
-            foreach (session()->get('cartItem') as $key => $cart) {
-                $quantity = (int)count($cart);
-                $product = Product::where('id', array_pop($cart))->first();
+            foreach (session('cartItem') as $key => $value) {
+                $product = Product::where('id',$value['id'])->first();
+                $quantity = $value['quantity'];
                 $this->addCartItem($product, $quantity, $shopping_cart);
             }
         }
@@ -114,7 +114,7 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
      * @param $id
      * @return ShoppingCart
      */
-    private function findOrCreate($id): ShoppingCart
+    public function findOrCreate($id): ShoppingCart
     {
         return ShoppingCart::firstOrCreate(['customer_id' => $id]);
     }

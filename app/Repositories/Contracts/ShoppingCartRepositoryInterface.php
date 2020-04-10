@@ -39,6 +39,14 @@ interface ShoppingCartRepositoryInterface
     public function findByAuthId(): ShoppingCart;
 
     /**
+     * Find shopping cart object of the authenticated user or create an object.
+     *
+     * @param $id
+     * @return ShoppingCart
+     */
+    public function findOrCreate($id): ShoppingCart;
+
+    /**
      * Handle creating/finding shopping cart for the logged in or
      * registered user and add cart items to it from session.
      *

@@ -30,6 +30,6 @@ class LogRegisteredUser
      */
     public function handle(Registered $event)
     {
-        $this->shoppingCartRepository->handleShoppingCart($event);
+        $this->shoppingCartRepository->findOrCreate($event->user->id);
     }
 }

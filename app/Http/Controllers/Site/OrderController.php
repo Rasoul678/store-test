@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrder;
 use App\Models\Address;
-use App\Models\City;
 use App\Models\Order;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
@@ -58,24 +57,6 @@ class OrderController extends Controller implements OrderControllerInterface
         return redirect()->back();
     }
 
-    public function checkoutForm()
-    {
-        $address = Address::where('user_id', Auth::id())
-            ->orderBy('updated_at')
-            ->with('getCity')
-            ->first();
-        $shopping_cart = $this->shoppingCartRepository->findByAuthId();
-        $total_price = (float)0;
-        foreach ($shopping_cart->getCartItem as $cart_item) {
-            $total_price += $cart_item->total_price;
-        }
-        $cities = City::orderBy('id')->get();
-        return view('site.pages.order.checkout')
-            ->with(compact('address'))
-            ->with(compact('shopping_cart'))
-            ->with(compact('total_price'))
-            ->with(compact('cities'));
-    }
 
     /**
      * Create order object from shopping cart.
@@ -85,15 +66,6 @@ class OrderController extends Controller implements OrderControllerInterface
      */
     public function checkout(StoreOrder $request)
     {
-//        $data = $request->validate([
-//            'street' => 'required',
-//            'distinct' => 'required',
-//            'floor' => 'required',
-//            'number' => 'required',
-//            'city_id' => 'required',
-//            'description' => 'nullable',
-//            'postal_code' => 'required',
-//        ]);
         $address = Address::firstOrNew($request->validated());
         $address->user_id = Auth::id();
         $address->save();
