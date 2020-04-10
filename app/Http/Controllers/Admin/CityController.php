@@ -18,7 +18,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::orderBy('id')->get();
+        $cities = City::orderBy('id')->paginate(5);
         return view('admin.cities.index', compact('cities'));
     }
 
@@ -40,7 +40,8 @@ class CityController extends Controller
      */
     public function store(StoreCity $request)
     {
-        City::create($request->validated());
+        $city = City::create($request->validated());
+        flash('City: ' . $city->city . ' has been successfully created.');
         return $this->index();
     }
 
@@ -76,6 +77,7 @@ class CityController extends Controller
     public function update(StoreCity $request, City $city)
     {
         $city->update($request->validated());
+        flash('City: ' . $city->city . ' has been successfully updated.');
         return $this->index();
     }
 
@@ -88,7 +90,9 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
+        $city_name = $city->city;
         $city->delete();
+        flash('City: ' . $city_name . ' has been successfully deleted.');
         return $this->index();
     }
 }
