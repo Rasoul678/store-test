@@ -35,7 +35,7 @@
                 </form>
             </li>
             <li class="nav-item">
-                <a class="nav-link waves-effect waves-light" href="{{route('cart.index')}}" >
+                <a class="nav-link waves-effect waves-light" href="{{route('order.checkout')}}" >
                     <i class="fa fa-shopping-cart"></i>
                 </a>
             </li>

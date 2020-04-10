@@ -1,58 +1,66 @@
 @extends('site.app')
 @section('title','Cart')
 @section('content')
-    <div class="container">
-        <table id="cart" class="table table-hover table-condensed">
-            <thead>
-            <tr>
-                <th style="width:50%">Product</th>
-                <th style="width:10%">Price</th>
-                <th style="width:8%">Quantity</th>
-                <th style="width:22%" class="text-center">Subtotal</th>
-                <th style="width:10%"></th>
-            </tr>
-            </thead>
-            <tbody>
-            @forelse($shopping_cart->getCartItem as $item)
-                <tr>
-                    <td data-th="Product">
-                        <div class="row">
-                            <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."
-                                                                 class="img-responsive"></div>
-                            <div class="col-sm-10">
-                                <h4 class="nomargin">{{$item->getProduct->name}}</h4>
-                                <p>{{$item->getProduct->description}}</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td data-th="Price">${{$item->getProduct->price}}</td>
-                    <td data-th="Quantity">{{$item->quantity}}</td>
-                    <td data-th="Subtotal" class="text-center">${{$item->total_price}}</td>
-                    <td class="actions" data-th="">
-                        <form action="{{route('cart.remove',$item->id)}}" method="POST">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Remove</button>
-                        </form>
-                    </td>
+    <div class="app-title">
+        <div>
+            <h1></h1>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between">
+            <div class="col-4 col-lg-8">
+                <h3><i class="fa fa-shopping-cart"></i></h3>
+            </div>
+            @if($shopping_cart->getCartItem->first())
+                <div class="col-xl-auto col-lg-4 col-md-2">
+                    <a class="btn btn-success" href="{{route('order.checkoutForm')}}">Checkout <i
+                            class="fa fa-angle-right"></i></a>
+                </div>
+            @endif
+        </div>
+        <div class="row justify-content-center">
+            <div class="table-responsive mt-3">
+                <table class="table table-hover table-sm">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">
+                            <div class="col-md-6"><h6 class="text-left m-0 p-1">Product</h6></div>
+                        </th>
+                        <th scope="col"><h6 class="text-center m-0 p-1">Price</h6></th>
+                        <th scope="col"><h6 class="text-center m-0 p-1">Quantity</h6></th>
+                        <th scope="col"><h6 class="text-center m-0 p-1">Subtotal</h6></th>
+                        <th scope="col"><h6 class="text-center m-0 p-1">&nbsp;</h6></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @forelse($shopping_cart->getCartItem as $item)
+                        <tr>
+                            <td class="text-left">
+                                {{--                                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."--}}
+                                {{--                                                                     class="img-responsive"></div>--}}
+                                {{--                                <div class="col-sm-10">--}}
+                                <h4>{{$item->getProduct->name}}</h4>
+                                {{--                                </div>--}}
+                            </td>
+                            <td class="text-center">${{$item->getProduct->price}}</td>
+                            <td class="text-center">{{$item->quantity}}</td>
+                            <td class="text-center">${{$item->total_price}}</td>
+                            <td>
+                                <form action="{{route('cart.remove',$item->id)}}" method="POST">
+                                    @csrf @method('DELETE')
+                                    <button class="btn btn-danger" type="submit"><i class="material-icons">delete_forever</i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
                     @empty
-                        <td>The are not any products added yet!</td>
-                </tr>
-            @endforelse
-            </tbody>
-            <tfoot>
-            <tr>
-                <td><a href="{{route('home')}}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue
-                        Shopping</a></td>
-                @if($shopping_cart->getCartItem->first())
-                    <td colspan="2" class="hidden-xs"></td>
-                    <td class="hidden-xs text-center"><strong>Total ${{$total_price}}</strong></td>
-                    <td><a href="{{route('order.checkoutForm')}}" class="btn btn-success btn-block">Checkout <i
-                                class="fa fa-angle-right"></i></a></td>
-                @else
-                    <td colspan="4" class="hidden-xs"></td>
-                @endif
-            </tr>
-            </tfoot>
-        </table>
+                        <tr>
+                            <td>The are not any products added yet!</td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 @endsection

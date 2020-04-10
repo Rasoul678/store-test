@@ -16,6 +16,12 @@
                                 <small class="text-muted">Quantity: {{$cartItem->quantity}}</small>
                             </div>
                             <span class="text-muted">${{$cartItem->total_price}}</span>
+                            <div>
+                                <form action="{{route('cart.remove',$cartItem->id)}}" method="POST">
+                                    @csrf @method('DELETE')
+                                    <button class="btn" type="submit"><i class="fa fa-minus"></i></button>
+                                </form>
+                            </div>
                         </li>
                     @empty
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -44,7 +50,7 @@
                                 <input type="text" class="form-control" name="street" id="street" placeholder=""
                                        value="{{old('street') ?? $address->street ?? ''}}">
                                 @error('street')
-                                <div class="invalid-feedback">{{message}}</div>
+                                <div class="alert alert-danger">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
@@ -53,7 +59,7 @@
                                        placeholder="**********"
                                        value="{{old('postal_code') ?? $address->postal_code ?? ''}}">
                                 @error('postal_code')
-                                <div class="invalid-feedback">{{message}}</div>
+                                <div class="alert alert-danger">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
@@ -63,7 +69,7 @@
                                 <input type="text" class="form-control" name="distinct" id="distinct" placeholder=""
                                        value="{{old('distinct') ?? $address->distinct ?? ''}}" required="">
                                 @error('distinct')
-                                <div class="invalid-feedback">{{message}}</div>
+                                <div class="alert alert-danger">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
@@ -71,7 +77,7 @@
                                 <input type="text" class="form-control" name="floor" id="floor" placeholder=""
                                        value="{{old('floor') ?? $address->floor ?? ''}}" required="">
                                 @error('floor')
-                                <div class="invalid-feedback">{{message}}</div>
+                                <div class="alert alert-danger">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
@@ -79,7 +85,7 @@
                                 <input type="text" class="form-control" name="number" id="number" placeholder=""
                                        value="{{old('number') ?? $address->number ?? ''}}" required="">
                                 @error('number')
-                                <div class="invalid-feedback">{{message}}</div>
+                                <div class="alert alert-danger">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
@@ -90,7 +96,7 @@
                                    placeholder="Tehran, Valiasr st, ..." required=""
                                    value="{{old('description') ?? $address->description ?? ''}}">
                             @error('description')
-                            <div class="invalid-feedback">{{message}}</div>
+                            <div class="alert alert-danger">{{$message}}</div>
                             @enderror
                         </div>
 
@@ -99,13 +105,13 @@
                                 <label for="city">City</label>
                                 <select class="custom-select d-block w-100" name="city_id" id="city" required="true">
                                     @foreach($cities as $city)
-{{--                                        @php $selected=($address->city_id == $city->id) ? 'selected' : '' @endphp--}}
+                                        @php if ($address) {$selected=($address->city_id == $city->id) ? 'selected' : '';} else{$selected='';} @endphp
                                         <option value="{{$city->id}}">{{$city->city}}</option>
                                     @endforeach
                                 </select>
-                                <div class="invalid-feedback">
-                                    Please select a valid city.
-                                </div>
+                                @error('city_id')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </div>
                         </div>
                         <hr class="mb-4">
