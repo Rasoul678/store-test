@@ -3,9 +3,9 @@
 namespace App\Listeners;
 
 use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
-use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Registered;
 
-class LogSuccessfulLogin
+class LogRegisteredUser
 {
     /**
      * @var ShoppingCartRepositoryInterface
@@ -25,10 +25,10 @@ class LogSuccessfulLogin
     /**
      * Handle the event.
      *
-     * @param Login $event
+     * @param Registered $event
      * @return void
      */
-    public function handle(Login $event)
+    public function handle(Registered $event)
     {
         $this->shoppingCartRepository->handleShoppingCart($event);
     }

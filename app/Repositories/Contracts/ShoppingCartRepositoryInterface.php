@@ -4,6 +4,7 @@ namespace App\Repositories\Contracts;
 
 use App\Models\Product;
 use App\Models\ShoppingCart;
+use Illuminate\Support\Facades\View;
 
 interface ShoppingCartRepositoryInterface
 {
@@ -36,4 +37,12 @@ interface ShoppingCartRepositoryInterface
      * @return ShoppingCart
      */
     public function findByAuthId(): ShoppingCart;
+
+    /**
+     * Handle creating/finding shopping cart for the logged in or
+     * registered user and add cart items to it from session.
+     *
+     * @param $event
+     */
+    public function handleShoppingCart($event);
 }

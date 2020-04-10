@@ -49,7 +49,7 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
             $quantity = 1;
         }
         if (!$shopping_cart) {
-            $shopping_cart = $this->findOrCreate()
+            $shopping_cart = $this->findOrCreate(Auth::id())
                 ->load('getCartItem');
         }
         $cart = CartItem::where([
@@ -91,13 +91,32 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
+     * Handle creating/finding shopping cart for the logged in or
+     * registered user and add cart items to it from session.
+     *
+     * @param $event
+     */
+    public function handleShoppingCart($event)
+    {
+        $shopping_cart = $this->findOrCreate($event->user->id);
+        if (session()->has('cartItem')) {
+            foreach (session()->get('cartItem') as $key => $cart) {
+                $quantity = (int)count($cart);
+                $product = Product::where('id', array_pop($cart))->first();
+                $this->addCartItem($product, $quantity, $shopping_cart);
+            }
+        }
+    }
+
+    /**
      * Find shopping cart object of the authenticated user or create an object.
      *
+     * @param $id
      * @return ShoppingCart
      */
-    private function findOrCreate(): ShoppingCart
+    private function findOrCreate($id): ShoppingCart
     {
-        return ShoppingCart::firstOrCreate(['customer_id' => Auth::id()]);
+        return ShoppingCart::firstOrCreate(['customer_id' => $id]);
     }
 
     /**
