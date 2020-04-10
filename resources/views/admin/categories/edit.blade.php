@@ -7,7 +7,7 @@
         </div>
     </div>
     @include('flash::message')
-    <div class="container w-75">
+    <div class="container">
         <h2 class="mt-2 mb-3">Edit Category</h2>
         <hr>
         <form action="{{route('admin.categories.update',['category'=>$category->slug])}}" method="post">
@@ -18,13 +18,13 @@
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
                 <input type="text" class="form-control" id="name" name="name"
-                       value="{{ old('name', $category->name) }}" style="font-size: 20px">
+                       value="{{ old('name', $category->name) }}">
             </div>
 
             <div class="form-group">
                 <label for="description"><h6>Description</h6></label>
                 <textarea class="form-control" id="description"
-                          name="description" rows="4" style="font-size: 18px">{{ old('description', $category->description) }}</textarea>
+                          name="description" rows="4">{{ old('description', $category->description) }}</textarea>
             </div>
 
             <div class="form-group">
@@ -43,8 +43,8 @@
             </div>
 
             <div class="mt-3">
-                <button type="submit" class="btn btn-primary btn-lg">Update</button>
-                <a class="btn btn-danger btn-lg" role="button"
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a class="btn btn-danger" role="button"
                    href="{{ route('admin.categories.index') }}">Cancel</a>
             </div>
         </form>

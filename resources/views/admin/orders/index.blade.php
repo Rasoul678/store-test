@@ -17,7 +17,7 @@
             <tbody>
             @foreach($order as $item)
                 <tr>
-                    <th scope="row" style="height: 53px"><h6 class="text-center text-truncate m-0" style="max-width: 120px">{{$item->getUser->first_name}} {{$item->getUser->last_name}}</h6></th>
+                    <th scope="row" style="height: 53px"><h6 class="text-center text-truncate m-0" style="max-width: 120px">{{$item->getUser->getFullNameAttribute()}}</h6></th>
                 </tr>
             @endforeach
             </tbody>
@@ -26,17 +26,21 @@
             <table class="table table-hover table-sm">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col"><h6 class="text-center m-0 p-1">Date</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1" style="min-width: 220px">Date</h6></th>
                     <th scope="col"><h6 class="text-center m-0 p-1">Status</h6></th>
-                    <th scope="col"><h6 class="text-center m-0 p-1">Total Price</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1" style="min-width: 80px">Total Price</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Actions</h6></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($order as $item)
                     <tr>
                         <td><h6 class="text-center">{{$item->created_at->format('Y M d, h:i:s')}}</h6></td>
-                        <td ><h6 class="text-center">{{$item->order_status}}</h6></td>
+                        <td ><h6 class="text-center">{{$item->status->description}}</h6></td>
                         <td ><h6 class="text-center">{{$item->total_price}}</h6></td>
+                        <td class="text-center">
+                            <a href="{{route('admin.orders.show',['order'=>$item->id])}}"><i class="material-icons">visibility</i></a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

@@ -7,40 +7,47 @@
         </div>
     </div>
     @include('flash::message')
-    <div class="container w-75">
+    <div class="container">
         <h4 class="mt-2 mb-3">Edit: {{$city->city}}</h4>
         <hr>
         <form action="{{ route('admin.cities.update',['city'=>$city->id]) }}" method="POST">
             @method('PATCH')
             @csrf
-                <div class="form-group">
-                    <label for="name"><h5>Name</h5></label>
-                    @error('city')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
-                    <input type="text" class="form-control" id="name" name="city"
-                           value="{{ old('name', $city->city) }}">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        @error('city')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                        <input type="text" class="form-control" id="name" name="city"
+                               value="{{ old('name', $city->city) }}">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="state">State</label>
-                    @error('state')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
-                    <input type="text" class="form-control" id="name" name="state"
-                           value="{{ old('name', $city->state) }}">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        @error('state')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                        <input type="text" class="form-control" id="name" name="state"
+                               value="{{ old('name', $city->state) }}">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="name">Country</label>
-                    @error('country')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
-                    <input type="text" class="form-control" id="name" name="country"
-                           value="{{ old('name', $city->country) }}">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="name">Country</label>
+                        @error('country')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                        <input type="text" class="form-control" id="name" name="country"
+                               value="{{ old('name', $city->country) }}">
+                    </div>
                 </div>
-
+            </div>
                 <div class="mt-3">
-                    <button type="submit" class="btn btn-primary btn-lg">Update</button>
-                    <a class="btn btn-danger btn-lg" role="button"
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a class="btn btn-danger" role="button"
                        href="{{ route('admin.cities.index') }}">Cancel</a>
                 </div>
         </form>
