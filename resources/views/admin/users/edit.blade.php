@@ -7,7 +7,7 @@
         </div>
     </div>
     @include('flash::message')
-    <div class="container w-75">
+    <div class="container">
             <h2>
                 User: {{$user->getFullNameAttribute()}}
             </h2>

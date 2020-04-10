@@ -99,6 +99,6 @@
                 </tbody>
             </table>
         </div>
-        {{ $categories->links()}}
+        {{ $categories->links('pagination.default')}}
     </div>
 @endsection

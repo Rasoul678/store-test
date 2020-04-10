@@ -6,7 +6,7 @@ $link_limit = 7; // maximum number of links (a little bit inaccurate, but will b
 @if ($paginator->lastPage() > 1)
     <ul class="pagination pagination justify-content-center">
         <li class="page-item {{ ($paginator->currentPage() == 1) ? ' disabled' : '' }}">
-            <a class="page-link bg-secondary" href="{{ $paginator->url(1) }}" aria-label="First" style="text-decoration: none">
+            <a class="page-link bg-dark" href="{{ $paginator->url(1) }}" aria-label="First" style="text-decoration: none">
                 <span aria-hidden="true" class="text-light">First</span>
             </a>
         </li>
@@ -29,7 +29,7 @@ $link_limit = 7; // maximum number of links (a little bit inaccurate, but will b
             @endif
         @endfor
         <li class="page-item {{ ($paginator->currentPage() == $paginator->lastPage()) ? ' disabled' : '' }}">
-            <a class="page-link bg-secondary" href="{{ $paginator->url($paginator->lastPage()) }}" aria-label="Last" style="text-decoration: none">
+            <a class="page-link bg-dark" href="{{ $paginator->url($paginator->lastPage()) }}" aria-label="Last" style="text-decoration: none">
                 <span aria-hidden="true" class="text-light">Last</span>
             </a>
         </li>

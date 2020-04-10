@@ -64,7 +64,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {{ $roles->links()}}
+                {{ $roles->links('pagination.default')}}
             </div>
         </div>
     </div>

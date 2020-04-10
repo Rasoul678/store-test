@@ -41,7 +41,7 @@
                 @endforeach
                 </tbody>
             </table>
-            {{ $order->links()}}
+            {{ $order->links('pagination.default')}}
         </div>
     </div>
 @endsection

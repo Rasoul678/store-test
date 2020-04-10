@@ -47,7 +47,6 @@
                 <a class="btn btn-danger btn-lg" role="button"
                    href="{{ route('admin.categories.index') }}">Cancel</a>
             </div>
-
         </form>
     </div>
 @endsection

@@ -29,7 +29,7 @@
                 @endforeach
                 </tbody>
             </table>
-            {{ $permissions->links()}}
+            {{ $permissions->links('pagination.default')}}
         </div>
     </div>
 @endsection

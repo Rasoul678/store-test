@@ -37,5 +37,5 @@
             </table>
         </div>
     </div>
-    {{$cart_items->links()}}
+    {{$cart_items->links('pagination.default')}}
 @endsection
