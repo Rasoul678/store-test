@@ -1,29 +1,33 @@
 @extends('admin.app')
 @section('title') Edit Category @endsection
 @section('content')
-
-    <div class="container w-75">
+    <div class="app-title">
         <div>
-            <h3 class="mt-4">Edit Category</h3>
+            <h1><i class="fa fa-tags"></i> Categories</h1>
         </div>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" disabled class="form-control" id="name" name="name"
-                   value="{{ old('name', $category->name) }}">
-        </div>
+    </div>
+    @include('flash::message')
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Category Details</h2>
+                <h5 class="card-subtitle mb-4 text-muted">Created at: {{$category->created_at->format('Y M d, h:i:s')}}</h5>
+                <h5 class="mt-5 d-inline">Name:</h5>
+                <h5 class="mt-5 d-inline">{{$category->name}}</h5>
+                <h5 class="mt-3">Description:</h5>
+                <h5 class="text-justify p-3 border border-dark rounded">
+                    {{ old('description', $category->description) }}
+                </h5>
 
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" disabled id="description"
-                      name="description">{{ old('description', $category->description) }}</textarea>
-        </div>
-
-        <div class="mt-3">
-            <a class="btn btn-primary" role="button"
-               href="{{ route('admin.categories.edit', ['category'=>$category->slug]) }}"><i
-                    class="material-icons">edit</i></a>
-            <a class="btn btn-danger" role="button"
-               href="{{ route('admin.categories.delete', ['category'=>$category->slug]) }}"><i class="material-icons">delete_forever</i></a>
+                <a class="btn btn-primary btn-block d-md-inline mr-md-1" role="button"
+                   href="{{ route('admin.categories.edit', ['category'=>$category->slug]) }}">
+                    Edit
+                </a>
+                <a class="btn btn-danger btn-block d-md-inline" role="button"
+                   href="{{ route('admin.categories.index') }}">
+                    Back
+                </a>
+            </div>
         </div>
     </div>
 @endsection

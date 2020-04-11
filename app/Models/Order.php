@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Enums\OrderStatus;
+use BenSampo\Enum\Traits\CastsEnums;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class Order extends Model implements OrderInterface
 {
     use SoftDeletes;
+    use CastsEnums;
 
     /**
      * Specify the name of the database table.
@@ -27,7 +30,8 @@ class Order extends Model implements OrderInterface
     protected $fillable = [
         'customer_id',
         'total_price',
-        'order_status',
+        'status',
+        'address_id',
     ];
 
     /**
@@ -39,6 +43,14 @@ class Order extends Model implements OrderInterface
         'created_at',
         'updated_at',
         'deleted_at',
+    ];
+
+    protected $enumCasts = [
+        'status' => OrderStatus::class,
+    ];
+
+    protected $casts = [
+        'status' => 'int',
     ];
 
     /**
@@ -62,57 +74,12 @@ class Order extends Model implements OrderInterface
     }
 
     /**
-     * Calculate total price of a order by aggregating total prices of every order item.
+     * Get address of the specified order.
      *
-     * @param Order $order
-     * @return float
+     * @return BelongsTo
      */
-    static private function totalPrice(Order $order)
+    public function getAddress()
     {
-        $aggregate = (float)0;
-        foreach ($order->getOrderItem as $orderItem) {
-            $aggregate += $orderItem->total_price;
-        }
-        return $aggregate;
-    }
-
-    /**
-     * Add order items to a order.
-     *
-     * @param CartItem $cartItem
-     * @param Order $order
-     * @return OrderItem
-     */
-    static private function addItem(CartItem $cartItem, Order $order)
-    {
-        $order_item = new OrderItem([
-            'product_id' => $cartItem->getProduct->id,
-            'quantity' => $cartItem->quantity,
-            'price' => $cartItem->price,
-            'total_price' => $cartItem->total_price,
-        ]);
-        $order->getOrderItem()->save($order_item);
-        return $order_item;
-    }
-
-    /**
-     * Create order object from a shopping cart item.
-     *
-     * @return mixed
-     */
-    static public function checkout()
-    {
-        $shopping_cart = ShoppingCart::where('customer_id', 1)->first();
-        $order = Order::create([
-            'customer_id' => Auth::id(),
-            'total_price' => 0,
-        ]);
-        foreach ($shopping_cart->getCartItem as $cartItem) {
-            self::addItem($cartItem, $order);
-        }
-        $order->total_price = self::totalPrice($order);
-        $order->save();
-        $shopping_cart->delete();
-        return $order;
+        return $this->belongsTo(Address::class, 'address_id');
     }
 }

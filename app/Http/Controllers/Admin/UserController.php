@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ShoppingCart;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -18,7 +19,7 @@ class UserController extends Controller implements UserControllerInterface
     public function index()
     {
         if (request()->has('admins')) {
-            $users = User::role('Admin')->orderBy('updated_at', 'desc')
+            $users = User::permission('admin')->orderBy('updated_at', 'desc')
                 ->paginate(5);
         } elseif (request()->has('customers')) {
             $users = User::role('Customer')->orderBy('updated_at', 'desc')
@@ -63,14 +64,11 @@ class UserController extends Controller implements UserControllerInterface
      */
     public function update(User $user)
     {
-        $ex_role = request('ex-role');
-        $user->removeRole($ex_role);
-        
         $role = request()->validate([
             'role' => 'required'
         ]);
-        $user->assignRole($role['role']);
-        
+        $user->syncRoles($role);
+
         $user_data = request()->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -79,5 +77,16 @@ class UserController extends Controller implements UserControllerInterface
         $user->save();
         flash($user->getFullNameAttribute() . ' has been updated successfully.');
         return redirect()->route('admin.users.show', compact('user'));
+    }
+
+    public function showCartItems(User $user)
+    {
+        $cart_items = ShoppingCart::where('customer_id', $user->id)
+            ->firstOrFail()
+            ->getCartItem()
+            ->paginate(10);
+        return view('admin.users.cartIndex')
+            ->with(compact('user'))
+            ->with(compact('cart_items'));
     }
 }

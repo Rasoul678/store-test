@@ -52,5 +52,8 @@ class User extends Authenticatable implements UserInterface
         return $this->first_name . ' ' . $this->last_name;
     }
 
-
+    public function getShoppingCart()
+    {
+        return $this->hasOne(ShoppingCart::class, 'customer_id');
+    }
 }

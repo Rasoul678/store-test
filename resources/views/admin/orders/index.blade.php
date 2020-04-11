@@ -1,38 +1,51 @@
 @extends('admin.app')
 @section('title') Orders @endsection
 @section('content')
-    <div class="container-fluid mt-4">
-        <h1 class="mt-2 text-center"> Orders</h1>
-        <div class="mt-3">
-            <table class="table table-striped">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-truck"></i> Orders</h1>
+        </div>
+    </div>
+    @include('flash::message')
+    <div class="d-flex justify-content-center">
+        <table class="table table-hover table-sm mt-3" style="max-width: 120px">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col"><h6 class="text-center m-0 p-1">Customer</h6></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($order as $item)
+                <tr>
+                    <th scope="row" style="height: 53px"><h6 class="text-center text-truncate m-0" style="max-width: 120px">{{$item->getUser->getFullNameAttribute()}}</h6></th>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <div class="table-responsive mt-3">
+            <table class="table table-hover table-sm">
                 <thead class="thead-dark">
                 <tr>
-                    <th><h4>#</h4></th>
-                    <th><h4>Customer</h4></th>
-                    <th><h4>Date</h4></th>
-                    <th><h4>Status</h4></th>
-                    <th><h4>Total Price</h4></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1" style="min-width: 220px">Date</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Status</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1" style="min-width: 80px">Total Price</h6></th>
+                    <th scope="col"><h6 class="text-center m-0 p-1">Actions</h6></th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($order as $item)
+                @foreach($order as $item)
                     <tr>
-                        <td>
-                            <a href="{{route('admin.orders.show',['order'=>$item->id])}}">{{$loop->iteration}}</a>
+                        <td><h6 class="text-center">{{$item->created_at->format('Y M d, h:i:s')}}</h6></td>
+                        <td ><h6 class="text-center">{{$item->status->description}}</h6></td>
+                        <td ><h6 class="text-center">{{$item->total_price}}</h6></td>
+                        <td class="text-center">
+                            <a href="{{route('admin.orders.show',['order'=>$item->id])}}"><i class="material-icons">visibility</i></a>
                         </td>
-                        <td>{{$item->getUser->first_name}} {{$item->getUser->last_name}}</td>
-                        <td>{{$item->created_at}}</td>
-                        <td>{{$item->order_status}}</td>
-                        <td>{{$item->total_price}}</td>
-                        @empty
-                            <div class="alert alert-info">
-                                <h4 class="text-center">Order list is empty, for now!</h4>
-                            </div>
                     </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
+            {{ $order->links('pagination.default')}}
         </div>
-        {{ $order->links()}}
     </div>
 @endsection

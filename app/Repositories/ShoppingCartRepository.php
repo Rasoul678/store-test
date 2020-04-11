@@ -8,6 +8,7 @@ use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\ShoppingCart;
 use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 
 class ShoppingCartRepository implements ShoppingCartRepositoryInterface
@@ -19,12 +20,20 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
      */
     public function all(): ShoppingCart
     {
-        return $this->findOrCreate()
-            ->load([
-                'getCartItem' => function ($query) {
-                    $query->where('active', true);
-                }
-            ]);
+        return $this->findByAuthId();
+    }
+
+    /**
+     * Get cart items of a guest from session.
+     *
+     * @return view
+     */
+    public function sessionIndex()
+    {
+        if (!session()->exists('cartItem')) {
+            session(['cartItem' => null]);
+        }
+        return session()->get('cartItem');
     }
 
     /**
@@ -32,11 +41,17 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
      *
      * @param Product $product
      * @param int $quantity
+     * @param ShoppingCart|null $shopping_cart
      */
-    public function addCartItem(Product $product, $quantity = 1)
+    public function addCartItem(Product $product, $quantity = null, $shopping_cart = null)
     {
-        $shopping_cart = $this->findOrCreate()
-            ->load('getCartItem');
+        if (is_null($quantity)) {
+            $quantity = 1;
+        }
+        if (!$shopping_cart) {
+            $shopping_cart = $this->findOrCreate(Auth::id())
+                ->load('getCartItem');
+        }
         $cart = CartItem::where([
             'shopping_cart_id' => $shopping_cart->id,
             'product_id' => $product->id,
@@ -76,13 +91,32 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
+     * Handle creating/finding shopping cart for the logged in or
+     * registered user and add cart items to it from session.
+     *
+     * @param $event
+     */
+    public function handleShoppingCart($event)
+    {
+        $shopping_cart = $this->findOrCreate($event->user->id);
+        if (session()->has('cartItem')) {
+            foreach (session('cartItem') as $key => $value) {
+                $product = Product::where('id',$value['id'])->first();
+                $quantity = $value['quantity'];
+                $this->addCartItem($product, $quantity, $shopping_cart);
+            }
+        }
+    }
+
+    /**
      * Find shopping cart object of the authenticated user or create an object.
      *
+     * @param $id
      * @return ShoppingCart
      */
-    private function findOrCreate(): ShoppingCart
+    public function findOrCreate($id): ShoppingCart
     {
-        return ShoppingCart::firstOrCreate(['customer_id' => Auth::id()]);
+        return ShoppingCart::firstOrCreate(['customer_id' => $id]);
     }
 
     /**

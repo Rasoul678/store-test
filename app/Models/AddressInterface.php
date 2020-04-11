@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 interface AddressInterface
 {
@@ -19,4 +20,11 @@ interface AddressInterface
      * @return BelongsTo
      */
     public function getCity();
+
+    /**
+     * Get orders that refers to this address.
+     *
+     * @return HasMany
+     */
+    public function getOrders();
 }

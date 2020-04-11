@@ -22,9 +22,9 @@ interface OrderInterface
     public function getOrderItem();
 
     /**
-     * Create order object from a shopping cart item.
+     * Get address of the specified order.
      *
-     * @return mixed
+     * @return BelongsTo
      */
-    static public function checkout();
+    public function getAddress();
 }

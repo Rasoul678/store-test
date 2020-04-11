@@ -3,14 +3,20 @@
 namespace App\Models;
 
 
+use App\Models\Enums\ProductStatus;
+use BenSampo\Enum\Traits\CastsEnums;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Product extends Model implements ProductInterface
+class Product extends Model implements ProductInterface, HasMedia
 {
     use SoftDeletes;
+    use CastsEnums;
+    use HasMediaTrait;
 
     /**
      * Specify the name of the database table.
@@ -29,6 +35,7 @@ class Product extends Model implements ProductInterface
         'description',
         'price',
         'type',
+        'status',
     ];
 
     /**
@@ -42,6 +49,13 @@ class Product extends Model implements ProductInterface
         'deleted_at',
     ];
 
+    protected $enumCasts = [
+        'status' => ProductStatus::class,
+    ];
+
+    protected $casts = [
+        'status' => 'int',
+    ];
 
     /**
      * Get order items as a many to one relationship.

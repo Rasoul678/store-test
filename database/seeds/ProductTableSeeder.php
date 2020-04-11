@@ -16,7 +16,7 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $categories = ['mobile', 'clothes'];
+        $categories = ['mobiles', 'clothes'];
         foreach ($categories as $item) {
             $category = Category::where('slug', $item)->first();
             for ($i = 1; $i <= 6; $i++) {

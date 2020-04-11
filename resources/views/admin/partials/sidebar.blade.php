@@ -1,58 +1,81 @@
-<aside>
-    <ul  class="list-unstyled">
-        <li><a href="{{route('home')}}"><h1 class="text-light text-center"><strong>Store</strong></h1></a></li>
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar">
+    <div class="app-sidebar__user">
+        <div>
+            <h4><p class="app-sidebar__user-name">{{ $user_name }}</p></h4>
+            @role('SuperAdmin')
+                <h4>
+                    <p class="app-sidebar__user-designation badge badge-warning">Super Admin</p>
+                </h4>
+            @else
+                <h4>
+                    <p class="app-sidebar__user-designation badge badge-primary">Admin</p>
+{{--                    @foreach($role_names as $role_name)--}}
+{{--                        <span class="badge badge-warning">{{$role_name}}</span>--}}
+{{--                    @endforeach--}}
+                </h4>
+            @endrole
+        </div>
+    </div>
+    <ul class="app-menu">
         <li>
-            <div class="text-center mt-5">
-                <i class="material-icons text-light" style="font-size: 80px;">account_circle</i>
-            </div>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"><i class="app-menu__icon fa fa-dashboard"></i>
+                <span class="app-menu__label">Dashboard</span>
+            </a>
+        </li>
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i>
+                <span class="app-menu__label">Users</span>
+                <i class="treeview-indicator fa fa-chevron-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a class="treeview-item" href="{{ route('admin.users.index') }}" rel="noopener noreferrer"><span class="badge badge-primary mr-2">{{ $users_all}}</span><i class="icon fa fa-chevron-right"></i> All Users</a>
+                </li>
+                <li>
+                    <a class="treeview-item" href="{{route('admin.users.index',['admins'])}}"><span class="badge badge-primary mr-2">{{ $admins_count}}</span><i class="icon fa fa-chevron-right"></i> Admins</a>
+                </li>
+                <li>
+                    <a class="treeview-item" href="{{route('admin.users.index',['customers'])}}"><span class="badge badge-primary mr-2">{{ $customers_count }}</span><i class="icon fa fa-chevron-right"></i> Customers</a>
+                </li>
+            </ul>
         </li>
         <li>
-            <h3 class="text-center text-warning mt-3">
-                {{ $admin_name }}
-            </h3>
-            @can('add admin')
-            <h3 class="text-center text-warning mt-3">
-                <span class="badge badge-warning">Super Admin</span>
-            </h3>
-                @else
-                <h5 class="text-center text-warning mt-3">
-                    <span class="badge badge-warning">Admin</span>
-                </h5>
-            @endcan
+            <a class="app-menu__item {{ Route::currentRouteName() == 'admin.categories.index' ? 'active' : '' }}" href="{{route('admin.categories.index')}}"><i class="app-menu__icon fa fa-tags"></i>
+                <span class="app-menu__label">Categories</span>
+            </a>
         </li>
-        <li class="mt-5 {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}">
-            <h4>
-                <a class="nav-link text-light" href="{{ route('admin.dashboard') }}"><i class="material-icons">view_quilt</i> Dashboard <span class="sr-only">(current)</span></a>
-            </h4>
+        <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'admin.products.index' ? 'active' : '' }}" href="{{route('admin.products.index')}}"><i class="app-menu__icon fa fa-shopping-bag"></i>
+                <span class="app-menu__label">Products</span>
+            </a>
         </li>
-        <li class=" {{ Route::currentRouteName() == 'admin.categories.index' ? 'active' : '' }}">
-            <h4>
-                <a class="nav-link text-light" href="{{route('admin.categories.index')}}"><i class="material-icons">style</i> Categories </a>
-            </h4>
+        <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'admin.orders.index' ? 'active' : '' }}" href="{{route('admin.orders.index')}}"><i class="app-menu__icon fa fa-truck"></i>
+                <span class="app-menu__label">Orders</span>
+            </a>
         </li>
-        <li class=" {{ Route::currentRouteName() == 'admin.products.index' ? 'active' : '' }}">
-            <h4>
-                <a class="nav-link text-light" href="{{route('admin.products.index')}}"><i class="material-icons">local_mall</i> Products </a>
-            </h4>
-        </li>
-        <li class=" {{ Route::currentRouteName() == 'admin.orders.index' ? 'active' : '' }}">
-            <h4>
-                <a class="nav-link text-light" href="{{route('admin.orders.index')}}"><i class="material-icons">shopping_cart</i> Orders </a>
-            </h4>
-        </li>
-        <li class="nav-item">
-            <h4>
-                <a class="nav-link text-light" href="{{ route('logout') }}"
-                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                    <i class="material-icons">power_settings_new</i>
-                    {{ __('Logout') }}
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </h4>
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i>
+                <span class="app-menu__label">Settings</span>
+                <i class="treeview-indicator fa fa-chevron-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                @role('SuperAdmin')
+                <li>
+                    <a class="treeview-item" href="{{route('admin.roles.index')}}" rel="noopener noreferrer"><i class="icon fa fa-chevron-right"></i> Roles</a>
+                </li>
+                <li>
+                    <a class="treeview-item" href="{{route('admin.permissions.index')}}"><i class="icon fa fa-chevron-right"></i> Permissions</a>
+                </li>
+                <li>
+                    <a class="treeview-item" href="{{route('admin.cities.index')}}"><i class="icon fa fa-chevron-right"></i> Cities</a>
+                </li>
+                @endrole
+                <li>
+                    <a class="treeview-item" href="#"><i class="icon fa fa-chevron-right"></i> Other</a>
+                </li>
+            </ul>
         </li>
     </ul>
 </aside>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Enums\OrderStatus;
 use App\Models\Order;
 use Illuminate\View\View;
 
@@ -30,6 +31,19 @@ class OrderController extends Controller implements OrderControllerInterface
     public function show(Order $order)
     {
         $order->load(['getUser', 'getOrderItem']);
-        return view('admin.orders.show', compact('order'));
+        $status = OrderStatus::toSelectArray();
+        return view('admin.orders.show')
+            ->with(compact('order'))
+            ->with(compact('status'));
+    }
+
+    public function update(Order $order)
+    {
+        $data = request()->validate([
+            'status' => 'required',
+        ]);
+        $order->status = $data['status'];
+        $order->save();
+        return redirect()->back();
     }
 }

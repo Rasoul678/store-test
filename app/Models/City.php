@@ -28,6 +28,7 @@ class City extends Model implements CityInterface
      */
     protected $fillable = [
         'city',
+        'state',
         'country',
     ];
 

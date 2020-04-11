@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProduct;
 use App\Models\Category;
+use App\Models\Enums\ProductStatus;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileDoesNotExist;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig;
 
 class ProductController extends Controller implements ProductControllerInterface
 {
@@ -18,10 +23,11 @@ class ProductController extends Controller implements ProductControllerInterface
      */
     public function index()
     {
+        $status = request()->has('status') ? request()->query('status') : 1;
         if (request()->has('only_trash')) {
-            $products = Product::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(5);
+            $products = Product::onlyTrashed()->where('status', $status)->orderBy('deleted_at', 'desc')->paginate(6);
         } else {
-            $products = Product::withoutTrashed()->orderBy('updated_at', 'desc')->paginate(5);
+            $products = Product::withoutTrashed()->where('status', $status)->orderBy('updated_at', 'desc')->paginate(6);
         }
         $products->load('getCategories');
         return view('admin.products.index', compact('products'));
@@ -35,7 +41,10 @@ class ProductController extends Controller implements ProductControllerInterface
     public function create()
     {
         $categories = Category::orderBy('name', 'desc')->get();
-        return view('admin.products.create', compact('categories'));
+        $status = ProductStatus::toSelectArray();
+        return view('admin.products.create')
+            ->with(compact('categories'))
+            ->with(compact('status'));
     }
 
     /**
@@ -51,6 +60,7 @@ class ProductController extends Controller implements ProductControllerInterface
             $category = Category::where('slug', $item)->first();
             $product->getCategories()->attach($category);
         }
+        $product->addMediaFromUrl($request->validated()['image_url'])->toMediaCollection('image');
         return redirect(route('admin.products.index'));
     }
 
@@ -76,9 +86,11 @@ class ProductController extends Controller implements ProductControllerInterface
     {
         $categories = Category::orderBy('name', 'desc')->get();
         $product->load('getCategories');
+        $status = ProductStatus::toSelectArray();
         return view('admin.products.edit')
             ->with(compact('product'))
-            ->with(compact('categories'));
+            ->with(compact('categories'))
+            ->with(compact('status'));
     }
 
     /**
@@ -87,6 +99,10 @@ class ProductController extends Controller implements ProductControllerInterface
      * @param StoreProduct $request
      * @param Product $product
      * @return View
+     * @throws FileCannotBeAdded
+     * @throws DiskDoesNotExist
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function update(StoreProduct $request, Product $product)
     {
@@ -99,6 +115,8 @@ class ProductController extends Controller implements ProductControllerInterface
             $product->getCategories()->attach($category);
         }
         $product->save();
+        $product->clearMediaCollection('image');
+        $product->addMediaFromUrl($request->validated()['image_url'])->toMediaCollection('image');
         flash($product_name . ' has been updated successfully.');
         return view('admin.products.show')
             ->with(compact('product'));
