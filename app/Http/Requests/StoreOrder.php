@@ -26,11 +26,11 @@ class StoreOrder extends FormRequest
         return [
             'street'=>'required',
             'distinct'=>'required',
-            'floor'=>'required|numeric|min:1',
-            'number'=>'required|numeric|min:1',
+            'floor'=>'required|numeric|min:1|max:7',
+            'number'=>'required|numeric|min:1|max:7',
             'city_id'=>'required|numeric|min:1',
             'description'=>'required',
-            'postal_code'=>'required|numeric|min:5',
+            'postal_code'=>'required|numeric|min:5|max:7',
         ];
     }
 }
