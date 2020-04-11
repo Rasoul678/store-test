@@ -27,14 +27,14 @@
             @endforeach
         </ul>
         <ul class="navbar-nav ml-auto nav-flex-icons">
-            <li class="nav-item">
+            <li class="nav-item mr-md-5">
                 <form action="{{ route('search') }}" class="search-wrap my-2 my-md-0">
                     <div class="input-group">
                         <input type="search" name="search" class="form-control" placeholder="Search">
                     </div>
                 </form>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-md-2">
                 <a class="nav-link waves-effect waves-light" href="{{route('cart.checkoutForm')}}" >
                     <i class="fa fa-shopping-cart"></i>
                 </a>

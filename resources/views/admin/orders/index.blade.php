@@ -7,7 +7,7 @@
         </div>
     </div>
     @include('flash::message')
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="min-height: 407px">
         <table class="table table-hover table-sm mt-3" style="max-width: 120px">
             <thead class="thead-dark">
             <tr>
@@ -17,7 +17,7 @@
             <tbody>
             @foreach($order as $item)
                 <tr>
-                    <th scope="row" style="height: 53px"><h6 class="text-center text-truncate m-0" style="max-width: 120px">{{$item->getUser->getFullNameAttribute()}}</h6></th>
+                    <th scope="row" style="height: 38px"><h6 class="text-center text-truncate m-0" style="max-width: 120px">{{$item->getUser->getFullNameAttribute()}}</h6></th>
                 </tr>
             @endforeach
             </tbody>
@@ -45,7 +45,7 @@
                 @endforeach
                 </tbody>
             </table>
-            {{ $order->links('pagination.default')}}
         </div>
     </div>
+    {{ $order->links('pagination.default')}}
 @endsection

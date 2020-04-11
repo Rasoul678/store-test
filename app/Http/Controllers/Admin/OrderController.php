@@ -18,7 +18,7 @@ class OrderController extends Controller implements OrderControllerInterface
     {
         $order = Order::orderBy('updated_at', 'desc')
             ->with('getUser')
-            ->paginate(5);
+            ->paginate(9);
         return view('admin.orders.index', compact('order'));
     }
 

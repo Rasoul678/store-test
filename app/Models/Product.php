@@ -12,11 +12,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Product extends Model implements ProductInterface, HasMedia
+class Product extends Model implements ProductInterface
 {
     use SoftDeletes;
     use CastsEnums;
-    use HasMediaTrait;
+//    use HasMediaTrait;
 
     /**
      * Specify the name of the database table.

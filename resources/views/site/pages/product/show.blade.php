@@ -1,13 +1,13 @@
 @extends('site.app')
 @section('title', $product->name)
 @section('content')
-    <section class="section-pagetop bg-dark p-1">
-        <div class="container clearfix">
-            <h5 class="text-light">
-                Product: <span class="text-warning">{{ $product->name }}</span> ({{ $product->getCategories->first()->name }})
-            </h5>
-        </div>
-    </section>
+{{--    <section class="section-pagetop bg-dark p-1">--}}
+{{--        <div class="container clearfix">--}}
+{{--            <h5 class="text-light">--}}
+{{--                Product: <span class="text-warning">{{ $product->name }}</span> ({{ $product->getCategories->first()->name }})--}}
+{{--            </h5>--}}
+{{--        </div>--}}
+{{--    </section>--}}
     <section class="section-content bg padding-y border-top" id="site">
         <div class="container">
             <div class="row">

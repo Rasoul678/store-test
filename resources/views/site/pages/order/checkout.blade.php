@@ -38,7 +38,7 @@
                     </li>
                 </ul>
             </div>
-            @if($shopping_cart->getCartItem->first())
+{{--            @if($shopping_cart->getCartItem->first())--}}
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Checkout Form</h4>
                     <form class="needs-validation" novalidate="" action="{{route('order.checkout')}}"
@@ -115,11 +115,14 @@
                             </div>
                         </div>
                         <hr class="mb-4">
-
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                        @php
+                        $dis_check = $shopping_cart->getCartItem->first() ? '' : 'disabled';
+                        $empty_check = $shopping_cart->getCartItem->first() ? 'Continue to checkout' : 'Your cart is empty!';
+                        @endphp
+                        <button class="btn btn-primary btn-lg btn-block mb-3" {{ $dis_check }} type="submit">{{ $empty_check }}</button>
                     </form>
                 </div>
-            @endif
+{{--            @endif--}}
         </div>
     </div>
 @endsection

@@ -1,13 +1,13 @@
 @extends('site.app')
 @section('title', $category->name)
 @section('content')
-    <section class="section-pagetop bg-dark p-1">
-        <div class="container clearfix m-0">
-            <h5 class="text-warning m-0">
-                <i class="material-icons">chevron_right</i>{{ $category->name }}
-            </h5>
-        </div>
-    </section>
+{{--    <section class="section-pagetop bg-dark p-1">--}}
+{{--        <div class="container clearfix m-0">--}}
+{{--            <h5 class="text-warning m-0">--}}
+{{--                <i class="material-icons">chevron_right</i>{{ $category->name }}--}}
+{{--            </h5>--}}
+{{--        </div>--}}
+{{--    </section>--}}
     <section class="section-content padding-y">
         <div class="container">
             <div id="code_prod_complex">
