@@ -82,15 +82,15 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="image_url" class="form-check-label"><h6>Image URL</h6></label>
-                    @error('image_url')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
-                    <input type="text" class="form-control" id="image_url" name="image_url" value="{{ old('image_url') }}" style="font-size: 18px">
-                </div>
-            </div>
+{{--            <div class="row">--}}
+{{--                <div class="col-md-12">--}}
+{{--                    <label for="image_url" class="form-check-label"><h6>Image URL</h6></label>--}}
+{{--                    @error('image_url')--}}
+{{--                    <div class="alert alert-danger">{{$message}}</div>--}}
+{{--                    @enderror--}}
+{{--                    <input type="text" class="form-control" id="image_url" name="image_url" value="{{ old('image_url') }}" style="font-size: 18px">--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <div class="form-group">
                 <label for="description"><h6>Description</h6></label>

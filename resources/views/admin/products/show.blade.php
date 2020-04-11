@@ -11,12 +11,12 @@
         <div class="card">
             <div class="row no-gutters">
                 <div class="col-md-4 text-center mt-2 mt-md-5 mt-lg-2">
-{{--                    @if ($product->id <=18)--}}
-{{--                        <a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }} " style="max-width: 200px" alt="{{ $product->name }}" title="{{ $product->name }}"></a>--}}
-{{--                    @else--}}
-{{--                        <a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a>--}}
-{{--                    @endif--}}
-                    <a href="{{$product->getFirstMediaUrl('image')}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl('image')}}" style="max-width: 250px" alt="{{ $product->name }}" title="{{ $product->name }}" ></a>
+                    @if ($product->id <=18)
+                        <a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }} " style="max-width: 200px" alt="{{ $product->name }}" title="{{ $product->name }}"></a>
+                    @else
+                        <a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" style="max-width: 200px" alt="product name"></a>
+                    @endif
+{{--                    <a href="{{$product->getFirstMediaUrl('image')}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl('image')}}" style="max-width: 250px" alt="{{ $product->name }}" title="{{ $product->name }}" ></a>--}}
                 </div>
                 <div class="col-md-8">
                     <div class="card-body pl-md-5 pl-lg-0">

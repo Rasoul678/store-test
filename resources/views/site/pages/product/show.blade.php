@@ -18,14 +18,12 @@
                                 <article class="gallery-wrap">
                                     <div class="img-big-wrap">
                                         <div class="">
-{{--                                            @if ($product->id <= 18)--}}
-{{--                                                <a href="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" data-fancybox=""><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt=""></a>--}}
-{{--                                            @else--}}
-{{--                                                <a href="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" data-fancybox=""><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt=""></a>--}}
-{{--                                            @endif--}}
-{{--                                            <a href="{{$product->getFirstMediaUrl()}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl()}}" alt=""></a>--}}
-{{--                                            <a href="{{ $product->getFirstMediaUrl() }}" data-fancybox=""><img src="{{ $product->getFirstMediaUrl() }}" alt=""></a>--}}
-                                            <a href="{{$product->getFirstMediaUrl('image')}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl('image')}}" alt="{{ $product->name }}" title="{{ $product->name }}"></a>
+                                            @if ($product->id <= 18)
+                                                <a href="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" data-fancybox=""><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt=""></a>
+                                            @else
+                                                <a href="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" data-fancybox=""><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt=""></a>
+                                            @endif
+{{--                                            <a href="{{$product->getFirstMediaUrl('image')}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl('image')}}" alt="{{ $product->name }}" title="{{ $product->name }}"></a>--}}
                                         </div>
                                     </div>
                                 </article>

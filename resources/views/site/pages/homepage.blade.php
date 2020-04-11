@@ -9,14 +9,14 @@
                     @forelse($products as $product)
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <figure class="card card-product bg border border-secondary">
-{{--                                @if ($product->id <=18)--}}
-{{--                                    <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}"></a></div>--}}
-{{--                                @else--}}
-{{--                                    <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>--}}
-{{--                                @endif--}}
-                                <div class="img-wrap padding-y">
-                                    <a href="{{$product->getFirstMediaUrl('image')}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl('image')}}" alt="{{ $product->name }}" title="{{ $product->name }}" ></a>
-                                </div>
+                                @if ($product->id <=18)
+                                    <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}"></a></div>
+                                @else
+                                    <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
+                                @endif
+{{--                                <div class="img-wrap padding-y">--}}
+{{--                                    <a href="{{$product->getFirstMediaUrl('image')}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl('image')}}" alt="{{ $product->name }}" title="{{ $product->name }}" ></a>--}}
+{{--                                </div>--}}
                                     <div class="card-body border-top">
                                         <p class="card-text m-0"><strong>Product: </strong>{{ $product->name }}</p>
                                         <p class="card-text text-justify" style="height: 60px; overflow: hidden"><strong>Description:</strong> <br> {{ $product->description }}</p>

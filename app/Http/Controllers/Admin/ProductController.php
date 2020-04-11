@@ -60,7 +60,7 @@ class ProductController extends Controller implements ProductControllerInterface
             $category = Category::where('slug', $item)->first();
             $product->getCategories()->attach($category);
         }
-        $product->addMediaFromUrl($request->validated()['image_url'])->toMediaCollection('image');
+//        $product->addMediaFromUrl($request->validated()['image_url'])->toMediaCollection('image');
         return redirect(route('admin.products.index'));
     }
 
@@ -115,8 +115,8 @@ class ProductController extends Controller implements ProductControllerInterface
             $product->getCategories()->attach($category);
         }
         $product->save();
-        $product->clearMediaCollection('image');
-        $product->addMediaFromUrl($request->validated()['image_url'])->toMediaCollection('image');
+//        $product->clearMediaCollection('image');
+//        $product->addMediaFromUrl($request->validated()['image_url'])->toMediaCollection('image');
         flash($product_name . ' has been updated successfully.');
         return view('admin.products.show')
             ->with(compact('product'));
