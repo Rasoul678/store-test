@@ -6,6 +6,10 @@ use App\Http\Requests\StoreProduct;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileDoesNotExist;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig;
 
 interface ProductControllerInterface
 {
@@ -53,6 +57,10 @@ interface ProductControllerInterface
      * @param StoreProduct $request
      * @param Product $product
      * @return View
+     * @throws FileCannotBeAdded
+     * @throws DiskDoesNotExist
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function update(StoreProduct $request, Product $product);
 

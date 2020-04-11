@@ -9,6 +9,10 @@ use App\Models\Enums\ProductStatus;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileDoesNotExist;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig;
 
 class ProductController extends Controller implements ProductControllerInterface
 {
@@ -56,6 +60,7 @@ class ProductController extends Controller implements ProductControllerInterface
             $category = Category::where('slug', $item)->first();
             $product->getCategories()->attach($category);
         }
+        $product->addMediaFromUrl($request->validated()['image_url'])->toMediaCollection('image');
         return redirect(route('admin.products.index'));
     }
 
@@ -94,6 +99,10 @@ class ProductController extends Controller implements ProductControllerInterface
      * @param StoreProduct $request
      * @param Product $product
      * @return View
+     * @throws FileCannotBeAdded
+     * @throws DiskDoesNotExist
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function update(StoreProduct $request, Product $product)
     {
@@ -106,6 +115,8 @@ class ProductController extends Controller implements ProductControllerInterface
             $product->getCategories()->attach($category);
         }
         $product->save();
+        $product->clearMediaCollection('image');
+        $product->addMediaFromUrl($request->validated()['image_url'])->toMediaCollection('image');
         flash($product_name . ' has been updated successfully.');
         return view('admin.products.show')
             ->with(compact('product'));
