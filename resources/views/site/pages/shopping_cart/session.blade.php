@@ -18,47 +18,37 @@
 {{--    @endif--}}
     @include('flash::message')
     <div class="container mt-3">
-        <div class="row">
-            <div class="center col-md-4 order-md-2 mb-4">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Your cart</span>
-                    @if($carts)
-                        <span class="badge badge-secondary badge-pill">{{count($carts)}}</span>
-                    @endif
-                </h4>
-                <ul class="list-group mb-3">
-                    @if($carts)
-                        @foreach($carts as $key=>$value)
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div>
-                                    <h6 class="my-0">{{$key}}</h6>
-                                    <small class="text-muted">Quantity: {{$value['quantity']}}</small>
-                                </div>
-                                <span class="text-muted">${{$value['price']}}</span>
-                                <div>
-                                    <form action="{{route('cart.removeSessionCart',['cart_item'=>$key])}}"
-                                          method="POST">
-                                        @csrf @method('DELETE')
-                                        <button class="btn" type="submit"><i class="fa fa-minus"></i></button>
-                                    </form>
-                                </div>
-                            </li>
-                        @endforeach
-                        {{--                        <li class="list-group-item d-flex justify-content-between">--}}
-                        {{--                            <span>Total (IRR)</span>--}}
-                        {{--                            <strong>${{$total_price}}</strong>--}}
-                        {{--                        </li>--}}
-                    @else
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Cart is empty.</h6>
-                                <small class="text-muted"></small>
-                            </div>
-                            <span class="text-muted"></span>
-                        </li>
-                    @endif
-                </ul>
-            </div>
-        </div>
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span>Your cart</span>
+            @if($carts)
+                <span class="badge badge-success badge-pill">{{count($carts)}}</span>
+            @endif
+        </h4>
+        <hr>
+        <ul class="list-group mb-3">
+            @if($carts)
+                @foreach($carts as $key=>$value)
+                    <li class="row">
+                        <h6 class="my-0 col mt-2">{{$key}}</h6>
+                        <small class="col text-center mt-2"><strong>Quantity: {{$value['quantity']}}</strong></small>
+                        <h6 class="my-0 col text-center mt-2">${{$value['price']}}</h6>
+                        <form class="col text-right" action="{{route('cart.removeSessionCart',['cart_item'=>$key])}}"
+                              method="POST">
+                            @csrf @method('DELETE')
+                            <button class="btn" type="submit"><i class="fa fa-times text-danger"></i></button>
+                        </form>
+                    </li>
+                    <hr>
+                @endforeach
+            @else
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h5 class="my-0">Cart is empty.</h5>
+                        <small class="text-muted"></small>
+                    </div>
+                    <span class="text-muted"></span>
+                </li>
+            @endif
+        </ul>
     </div>
 @endsection

@@ -18,9 +18,9 @@
 {{--                                <div class="img-wrap padding-y">--}}
 {{--                                    <a href="{{$product->getFirstMediaUrl('image')}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl('image')}}" alt="{{ $product->name }}" title="{{ $product->name }}" ></a>--}}
 {{--                                </div>--}}
-                                    <div class="card-body border-top">
+                                    <div class="card-body border-top p-3">
                                         <p class="card-text m-0"><strong>Product: </strong>{{ $product->name }}</p>
-                                        <p class="card-text text-justify" style="height: 60px; overflow: hidden"><strong>Description:</strong> <br> {{ $product->description }}</p>
+                                        <p class="card-text text-justify" style="height: 80px; overflow: hidden"><strong>Description:</strong> <br> {{ $product->description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                             <a class="btn btn-md btn-outline-primary rounded mr-1" href="{{route('product.show',['product'=>$product->id])}}" role="button">Details</a>
@@ -35,7 +35,7 @@
                                                 <button type="submit" class="btn btn-md btn-outline-success"><i class="fas fa-shopping-cart"></i></button>
                                             </form>
                                             </div>
-                                            <small class="text-dark">${{ $product->price }}</small>
+                                            <strong class="text-dark">${{ $product->price }}</strong>
                                         </div>
                                     </div>
                             </figure>

@@ -8,6 +8,7 @@
 {{--            </h5>--}}
 {{--        </div>--}}
 {{--    </section>--}}
+@include('flash::message')
     <section class="section-content bg padding-y border-top" id="site">
         <div class="container">
             <div class="row">
@@ -47,7 +48,7 @@
                                        </div>
                                         <div class="col-12 col-md-7 text-center mt-3 mt-md-0">
                                             <var class="price h4 text-success">
-                                                Price: <span class="num" id="productPrice">{{$product->price}}</span>
+                                                Price: <span class="num" id="productPrice">${{$product->price}}</span>
                                             </var>
                                         </div>
                                     </div>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-light bg-light border-bottom border-dark">
     <a class="navbar-brand" href="{{ url('/') }}">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-3"
             aria-controls="navbarSupportedContent-3" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
                 @foreach($cat->items as $category)
                     @if ($category->items->count() > 0)
                         <li class="nav-item">
-                            <a class="nav-link dropdown-toggle" href="{{ route('category.show', $category->slug) }}" id="{{ $category->slug }}"
+                            <a class="nav-link dropdown-toggle text-dark" href="{{ route('category.show', $category->slug) }}" id="{{ $category->slug }}"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 16px">{{ $category->name }}</a>
                             <div class="dropdown-menu" aria-labelledby="{{ $category->slug }}">
                                 @foreach($category->items as $item)
@@ -20,7 +20,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('category.show', $category->slug) }}" style="font-size: 16px">{{ $category->name }}</a>
+                            <a class="nav-link text-dark" href="{{ route('category.show', $category->slug) }}" style="font-size: 16px">{{ $category->name }}</a>
                         </li>
                     @endif
                 @endforeach
@@ -48,7 +48,7 @@
                 @else
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <i class="fas fa-user text-light"></i>
+                        <i class="fas fa-user text-dark"></i>
                     </a>
                 @endguest
                 <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink">

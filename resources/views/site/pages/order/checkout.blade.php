@@ -4,43 +4,47 @@
     @include('flash::message')
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-4 order-md-2 mb-4">
+            <div class="col-md-5 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Your cart</span>
-                    <span class="badge badge-secondary badge-pill">{{$shopping_cart->getCartItem->count()}}</span>
+                    <span>Your cart</span>
+                    <span class="badge badge-success badge-pill">{{$shopping_cart->getCartItem->count()}}</span>
                 </h4>
+                <hr>
                 <ul class="list-group mb-3">
                     @forelse($shopping_cart->getCartItem as $cartItem)
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <li class="row">
+
+                                <h6 class="my-0 col mt-2 text-truncate">{{$cartItem->getProduct->name}}</h6>
+                                <small class="col text-center mt-2"><strong>Quantity: {{$cartItem->quantity}}</strong></small>
+
+                            <h6 class="my-0 col text-center mt-2">${{$cartItem->total_price}}</h6>
                             <div>
-                                <h6 class="my-0">{{$cartItem->getProduct->name}}</h6>
-                                <small class="text-muted">Quantity: {{$cartItem->quantity}}</small>
-                            </div>
-                            <span class="text-muted">${{$cartItem->total_price}}</span>
-                            <div>
-                                <form action="{{route('cart.remove',$cartItem->id)}}" method="POST">
+                                <form class="col text-right" action="{{route('cart.remove',$cartItem->id)}}" method="POST">
                                     @csrf @method('DELETE')
-                                    <button class="btn" type="submit"><i class="fa fa-minus"></i></button>
+                                    <button class="btn pr-0" type="submit"><i class="fa fa-times text-danger"></i></button>
                                 </form>
                             </div>
                         </li>
+                        <hr>
                     @empty
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
-                                <h6 class="my-0">No Product added yet.</h6>
-                                <small class="text-muted">At first, add product to cart.</small>
+                                <h5 class="my-0">Cart is empty.</h5>
+                                <small class="text-muted"></small>
                             </div>
                             <span class="text-muted"></span>
                         </li>
                     @endforelse
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (IRR)</span>
-                        <strong>${{$total_price}}</strong>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>Total (IRR)</span>
+                            <strong>${{$total_price}}</strong>
+                        </div>
                     </li>
                 </ul>
             </div>
 {{--            @if($shopping_cart->getCartItem->first())--}}
-                <div class="col-md-8 order-md-1">
+                <div class="col-md-7 order-md-1">
                     <h4 class="mb-3">Checkout Form</h4>
                     <form class="needs-validation" novalidate="" action="{{route('order.checkout')}}"
                           method="POST">
