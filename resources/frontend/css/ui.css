@@ -1,5 +1,5 @@
 /* ========================
-UIkit bootstrap-ecommerce.com 
+UIkit bootstrap-ecommerce.com
 ===================== */
 /* ==================== INCLUDE FONTS ======================= */
 @import url("../fonts/roboto/font.css");
@@ -494,8 +494,8 @@ article:after,
 .lh-lg {
   line-height: 1.6; }
 
-/*! 
- * grid for 24 of 1 
+/*!
+ * grid for 24 of 1
  * made by bootstrap-ecommerce.com
 */
 .col-1-24 {
@@ -2249,5 +2249,3 @@ ul.row, ul.row-sm {
   .menu-category li:hover .submenu {
     display: block;
     margin-left: 0px; }
-
-/*# sourceMappingURL=ui.css.map */
