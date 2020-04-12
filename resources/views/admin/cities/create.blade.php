@@ -16,28 +16,28 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        @error('city')
-                        <div class="alert alert-danger">{{$message}}</div>
-                        @enderror
                         <input type="text" class="form-control" id="name" name="city" value="{{ old('city') }}">
+                        @error('city')
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="state">State</label>
-                        @error('state')
-                        <div class="alert alert-danger">{{$message}}</div>
-                        @enderror
                         <input type="text" class="form-control" id="state" name="state" value="{{ old('state') }}">
+                        @error('state')
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="country">Country</label>
-                        @error('country')
-                        <div class="alert alert-danger">{{$message}}</div>
-                        @enderror
                         <input type="text" class="form-control" id="name" name="country" value="{{ old('country') }}">
+                        @error('country')
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
             </div>

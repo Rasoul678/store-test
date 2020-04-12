@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <label for="name"><h6>Name</h6></label>
                         @error('name')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="name" name="name"
                                value="{{ old('name', $product->name) }}">
@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label for="type"><h6>Type</h6></label>
                         @error('type')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="name" name="type" value="{{ old('type', $product->type) }}">
                     </div>
@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label for="price"><h6>Price</h6></label>
                         @error('price')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="price" name="price"
                                value="{{ old('price', $product->price) }}">
@@ -56,7 +56,7 @@
                             @endforeach
                         </select>
                         @error('status')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                         @endforeach
                     </div>
                     @error('categories')
-                    <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger custom-error">{{$message}}</div>
                     @enderror
                 </div>
             </div>
@@ -85,7 +85,7 @@
 {{--                <div class="col-md-12">--}}
 {{--                    <label for="image_url" class="form-check-label"><h6>Image URL</h6></label>--}}
 {{--                    @error('image_url')--}}
-{{--                    <div class="alert alert-danger">{{$message}}</div>--}}
+{{--                    <div class="alert alert-danger custom-error">{{$message}}</div>--}}
 {{--                    @enderror--}}
 {{--                    <input type="text" class="form-control" id="image_url" name="image_url"--}}
 {{--                           value="{{ old('image_url',(count($product->getMedia('image'))>0) ? $product->getMedia('image')[0]->getFullUrl() :'') }}"--}}
@@ -96,7 +96,7 @@
             <div class="form-group">
                 <label for="description"><h6>Description</h6></label>
                 @error('description')
-                <div class="alert alert-danger">{{$message}}</div>
+                <div class="alert alert-danger custom-error">{{$message}}</div>
                 @enderror
                 <textarea class="form-control" id="description"
                           name="description" style="font-size: 18px">{{ old('description', $product->description) }}</textarea>

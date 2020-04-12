@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-success btn-block"> Sign Up </button>
                         </div>
-                        <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our Terms of use and Privacy Policy.</small>
+{{--                        <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our Terms of use and Privacy Policy.</small>--}}
                     </form>
                 </article>
                 <div class="border-top card-body text-center">Have an account? <a href="{{ route('login') }}">Log In</a></div>

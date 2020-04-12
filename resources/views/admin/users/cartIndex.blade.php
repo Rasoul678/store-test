@@ -7,6 +7,7 @@
             <h1><i class="fa fa-shopping-cart"></i> Cart Items</h1>
         </div>
     </div>
+    @include('flash::message')
     <div class="container">
         <div class="table-responsive-xl mt-3">
             <table class="table table-hover table-sm">

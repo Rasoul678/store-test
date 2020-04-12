@@ -60,6 +60,7 @@ class ProductController extends Controller implements ProductControllerInterface
             $category = Category::where('slug', $item)->first();
             $product->getCategories()->attach($category);
         }
+        flash($product->name . ' has been created successfully.');
 //        $product->addMediaFromUrl($request->validated()['image_url'])->toMediaCollection('image');
         return redirect(route('admin.products.index'));
     }

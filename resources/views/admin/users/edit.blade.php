@@ -40,7 +40,7 @@
                                value="{{ old('first_name', $user->first_name) }}" style="font-size: 20px">
                     </div>
                     @error('first_name')
-                    <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger custom-error">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="col md-6">
@@ -50,7 +50,7 @@
                                value="{{ old('last_name', $user->last_name) }}" style="font-size: 20px">
                     </div>
                     @error('last_name')
-                    <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger custom-error">{{$message}}</div>
                     @enderror
                 </div>
             </div>
@@ -77,7 +77,7 @@
                         @endforeach
                     </div>
                     @error('role')
-                    <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger custom-error">{{$message}}</div>
                     @enderror
                 </div>
             </div>

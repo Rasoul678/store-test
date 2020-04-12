@@ -75,7 +75,7 @@ class UserController extends Controller implements UserControllerInterface
         ]);
         $user->update($user_data);
         $user->save();
-        flash($user->getFullNameAttribute() . ' has been updated successfully.');
+        flash('User: ' . $user->getFullNameAttribute() . ' has been updated successfully.');
         return redirect()->route('admin.users.show', compact('user'));
     }
 

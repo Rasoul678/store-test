@@ -22,6 +22,7 @@
             </h1>
         </div>
     </div>
+    @include('flash::message')
     <div class="d-flex justify-content-center">
         <table class="table table-hover table-sm mt-3" style="max-width: 120px">
             <thead class="thead-dark">

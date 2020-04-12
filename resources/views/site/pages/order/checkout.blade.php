@@ -1,6 +1,7 @@
 @extends('site.app')
 @section('title', 'Order')
 @section('content')
+    @include('flash::message')
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
@@ -50,7 +51,7 @@
                                 <input type="text" class="form-control" name="street" id="street" placeholder=""
                                        value="{{old('street') ?? $address->street ?? ''}}">
                                 @error('street')
-                                <div class="alert alert-danger">{{$message}}</div>
+                                <div class="alert alert-danger custom-error">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
@@ -59,7 +60,7 @@
                                        placeholder="**********"
                                        value="{{old('postal_code') ?? $address->postal_code ?? ''}}">
                                 @error('postal_code')
-                                <div class="alert alert-danger">{{$message}}</div>
+                                <div class="alert alert-danger custom-error">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
@@ -69,7 +70,7 @@
                                 <input type="text" class="form-control" name="distinct" id="distinct" placeholder=""
                                        value="{{old('distinct') ?? $address->distinct ?? ''}}" required="">
                                 @error('distinct')
-                                <div class="alert alert-danger">{{$message}}</div>
+                                <div class="alert alert-danger custom-error">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
@@ -77,7 +78,7 @@
                                 <input type="text" class="form-control" name="floor" id="floor" placeholder=""
                                        value="{{old('floor') ?? $address->floor ?? ''}}" required="">
                                 @error('floor')
-                                <div class="alert alert-danger">{{$message}}</div>
+                                <div class="alert alert-danger custom-error">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
@@ -85,7 +86,7 @@
                                 <input type="text" class="form-control" name="number" id="number" placeholder=""
                                        value="{{old('number') ?? $address->number ?? ''}}" required="">
                                 @error('number')
-                                <div class="alert alert-danger">{{$message}}</div>
+                                <div class="alert alert-danger custom-error">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
@@ -96,7 +97,7 @@
                                    placeholder="Tehran, Valiasr st, ..." required=""
                                    value="{{old('description') ?? $address->description ?? ''}}">
                             @error('description')
-                            <div class="alert alert-danger">{{$message}}</div>
+                            <div class="alert alert-danger custom-error">{{$message}}</div>
                             @enderror
                         </div>
 
@@ -110,7 +111,7 @@
                                     @endforeach
                                 </select>
                                 @error('city_id')
-                                <div class="alert alert-danger">{{$message}}</div>
+                                <div class="alert alert-danger custom-error">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>

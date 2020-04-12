@@ -44,6 +44,7 @@ class OrderController extends Controller implements OrderControllerInterface
         ]);
         $order->status = $data['status'];
         $order->save();
-        return redirect()->back();
+        flash('Order: ' . $order->id . ' has been updated successfully.');
+        return $this->index();
     }
 }

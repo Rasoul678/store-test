@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         @error('city')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="name" name="city"
                                value="{{ old('name', $city->city) }}">
@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="state">State</label>
                         @error('state')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="name" name="state"
                                value="{{ old('name', $city->state) }}">
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="name">Country</label>
                         @error('country')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="name" name="country"
                                value="{{ old('name', $city->country) }}">

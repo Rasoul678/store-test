@@ -41,6 +41,7 @@ class RolePermissionController extends Controller implements RolePermissionContr
     {
         $role = Role::create(['name' => $request->validated()['name']]);
         $role->givePermissionTo($request->validated()['permissions']);
+        flash('Role: ' . $role->name . ' has been successfully created.');
         return $this->indexRole();
     }
 
@@ -57,12 +58,15 @@ class RolePermissionController extends Controller implements RolePermissionContr
         $role->syncPermissions($request->validated()['permissions']);
         $role->name = $request->validated()['name'];
         $role->save();
-        return redirect()->back();
+        flash('Role: ' . $role->name . ' has been successfully updated.');
+        return $this->indexRole();
     }
 
     public function deleteRole(Role $role)
     {
+        $role_name=$role->name;
         $role->delete();
-        return redirect()->back();
+        flash('Role: ' . $role_name . ' has been successfully deleted.');
+        return $this->indexRole();
     }
 }

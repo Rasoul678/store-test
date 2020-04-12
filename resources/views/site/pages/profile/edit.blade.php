@@ -32,7 +32,7 @@
                                value="{{ old('price', $user->first_name) }}">
                     </div>
                     @error('first_name')
-                    <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger custom-error">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="col-md-6">
@@ -42,7 +42,7 @@
                                value="{{ old('price', $user->last_name) }}">
                     </div>
                     @error('last_name')
-                    <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger custom-error">{{$message}}</div>
                     @enderror
                 </div>
             </div>

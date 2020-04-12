@@ -92,7 +92,7 @@ class CityController extends Controller
     {
         $city_name = $city->city;
         $city->delete();
-        flash('City: ' . $city_name . ' has been successfully deleted.');
+        flash('City: ' . $city_name . ' has been deleted successfully.');
         return $this->index();
     }
 }

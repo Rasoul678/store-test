@@ -1,6 +1,7 @@
 @extends('site.app')
 @section('title', 'Order')
 @section('content')
+    @include('flash::message')
     <div class="container">
         <div class="row mt-3 mb-5">
             <div class="col-12 col-md-6">

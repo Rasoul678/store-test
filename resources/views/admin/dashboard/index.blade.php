@@ -6,6 +6,7 @@
             <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
         </div>
     </div>
+    @include('flash::message')
     <div class="row">
         <div class="col-sm-6 col-lg-4 col-xl-3">
             <div class="widget-small primary coloured-icon bg-secondary text-light">

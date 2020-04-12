@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label for="name"><h6>Name</h6></label>
                 @error('name')
-                <div class="alert alert-danger">{{$message}}</div>
+                <div class="alert alert-danger custom-error">{{$message}}</div>
                 @enderror
                 <input type="text" class="form-control" id="name" name="name"
                        value="{{ old('name', $category->name) }}">
@@ -23,6 +23,9 @@
 
             <div class="form-group">
                 <label for="description"><h6>Description</h6></label>
+                @error('description')
+                <div class="alert alert-danger custom-error">{{$message}}</div>
+                @enderror
                 <textarea class="form-control" id="description"
                           name="description" rows="4">{{ old('description', $category->description) }}</textarea>
             </div>

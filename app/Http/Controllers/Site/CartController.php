@@ -34,7 +34,7 @@ class CartController extends Controller implements CartControllerInterface
     public function index()
     {
         if (!Auth::check()) {
-            $carts = $this->sessionIndex();
+            return $this->sessionIndex();
         }
         $shopping_cart = $this->shoppingCartRepository->all();
         $total_price = (float)0;
@@ -49,6 +49,11 @@ class CartController extends Controller implements CartControllerInterface
     public function sessionIndex()
     {
         $carts = $this->shoppingCartRepository->sessionIndex();
+        if (!$carts) {
+            flash('Your cart is empty at the moment.')->important();
+        } else {
+            flash('You need to log in or sign up to be able to checkout.')->error()->important();
+        }
         return view('site.pages.shopping_cart.session', compact('carts'));
     }
 
@@ -97,16 +102,20 @@ class CartController extends Controller implements CartControllerInterface
      */
     public function remove(CartItem $cartItem)
     {
+        $cart_name = $cartItem->getProduct->name;
         $cartItem->delete();
+        flash($cart_name . ' has been successfully deleted from cart.');
         return redirect()->back();
     }
 
     public function removeSessionCart($cart)
     {
+        $cart_name = $cart;
         if (!Auth::check()) {
             session()->forget('cartItem.' . $cart);
         }
-        return redirect()->back();
+        flash($cart_name . ' has been successfully deleted from cart.');
+        return $this->sessionIndex();
     }
 
     public function checkoutForm()

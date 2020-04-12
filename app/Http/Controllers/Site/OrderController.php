@@ -70,6 +70,7 @@ class OrderController extends Controller implements OrderControllerInterface
         $address->user_id = Auth::id();
         $address->save();
         $order = $this->orderRepository->checkout($address);
+        flash('Order has been successfully submitted.') ;
         return redirect()->route('order.show', ['order' => $order->id]);
     }
 }

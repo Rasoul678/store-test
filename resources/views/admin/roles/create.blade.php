@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         @error('name')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                     </div>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 @error('permissions')
-                <div class="alert alert-danger">{{$message}}</div>
+                <div class="alert alert-danger custom-error">{{$message}}</div>
                 @enderror
             </div>
 

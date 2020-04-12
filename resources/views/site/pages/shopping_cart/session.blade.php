@@ -1,12 +1,25 @@
 @extends('site.app')
 @section('title','Cart')
 @section('content')
+{{--    @if($carts)--}}
+{{--        <div class="alert alert-danger alert-dismissible fade show" role="alert" >--}}
+{{--            You need to log in or sign up to be able to checkout.--}}
+{{--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+{{--                <span aria-hidden="true">&times;</span>--}}
+{{--            </button>--}}
+{{--        </div>--}}
+{{--    @else--}}
+{{--        <div class="alert alert-warning alert-dismissible fade show" role="alert" >--}}
+{{--            Your cart is empty at the moment.--}}
+{{--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+{{--                <span aria-hidden="true">&times;</span>--}}
+{{--            </button>--}}
+{{--        </div>--}}
+{{--    @endif--}}
+    @include('flash::message')
     <div class="container mt-3">
         <div class="row">
             <div class="center col-md-4 order-md-2 mb-4">
-                @if($carts)
-                <strong class="alert-danger">You need to log in or sign up to be able to checkout.</strong>
-                @endif
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Your cart</span>
                     @if($carts)
@@ -38,8 +51,8 @@
                     @else
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
-                                <h6 class="my-0">No Product added yet.</h6>
-                                <small class="text-muted">At first, add product to cart.</small>
+                                <h6 class="my-0">Cart is empty.</h6>
+                                <small class="text-muted"></small>
                             </div>
                             <span class="text-muted"></span>
                         </li>

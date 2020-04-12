@@ -72,9 +72,9 @@
                     <a class="treeview-item" href="{{route('admin.cities.index')}}"><i class="icon fa fa-chevron-right"></i> Cities</a>
                 </li>
                 @endrole
-                <li>
-                    <a class="treeview-item" href="#"><i class="icon fa fa-chevron-right"></i> Other</a>
-                </li>
+{{--                <li>--}}
+{{--                    <a class="treeview-item" href="#"><i class="icon fa fa-chevron-right"></i> Other</a>--}}
+{{--                </li>--}}
             </ul>
         </li>
     </ul>
