@@ -25,7 +25,7 @@ class StoreCity extends FormRequest
     {
         return [
             'city' => 'required',
-            'state' => 'nullable',
+            'state' => 'required',
             'country' => 'required',
         ];
     }
