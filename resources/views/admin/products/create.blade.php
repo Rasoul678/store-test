@@ -1,17 +1,8 @@
 @extends('admin.app')
-@section('title') Create Product @endsection
+@section('title', 'Create Product')
+@section('page-title') <i class="fa fa-shopping-bag"></i> Create Product @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-shopping-bag"></i> Products</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container">
-        <div class="mb-3">
-            <h4>Add New Product</h4>
-        </div>
-        <hr>
         <form action="{{ route('admin.products.store') }}" method="POST">
             @csrf
             <div class="row">

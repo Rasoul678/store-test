@@ -7,13 +7,16 @@
     @include('site.partials.styles')
 </head>
 <body>
-    <div id="container">
-        <div id="main">
-            @include('site.partials.header')
-            @yield('content')
+<div id="container">
+    <div id="main">
+        @include('site.partials.header')
+        <div class="container">
+            @include('flash::message')
         </div>
+        @yield('content')
     </div>
-    @include('site.partials.footer')
-    @include('site.partials.scripts')
+</div>
+@include('site.partials.footer')
+@include('site.partials.scripts')
 </body>
 </html>

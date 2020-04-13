@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Order Detail: {{$order->id}} @endsection
+@section('title', 'Order Detail: ' . $order->id)
+@section('page-title') <i class="fa fa-truck"></i> Order Detail: {{$order->getUser->getFullNameAttribute()}} @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-truck"></i> Orders</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container mt-2">
             <div class=" row">
                 <h4 class="col-12 col-md-5">

@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Add City @endsection
+@section('title', 'Add city')
+@section('page-title') <i class="fa fa-map-marker"></i> Add city @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-map-marker"></i> Cities</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container mt-3">
         <form action="{{ route('admin.cities.store') }}" method="POST">
             @csrf

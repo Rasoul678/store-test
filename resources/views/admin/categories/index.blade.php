@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Categories @endsection
+@section('title', 'Categories')
+@section('page-title') <i class="fa fa-tags"></i> Categories @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-tags"></i> Categories</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container">
         <div class="row">
             <div class="mt-1 col-xs-12 col-sm-4 col-md-5 col-lg-3 col-xl-2">

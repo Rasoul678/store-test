@@ -1,13 +1,7 @@
 @extends('admin.app')
-@section('title') Cart Items
-@endsection
+@section('title', 'Cart Items')
+@section('page-title') <i class="fa fa-shopping-cart"></i> Cart Items @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-shopping-cart"></i> Cart Items</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container">
         <div class="table-responsive-xl mt-3">
             <table class="table table-hover table-sm">

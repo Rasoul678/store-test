@@ -8,7 +8,6 @@
 {{--            </h5>--}}
 {{--        </div>--}}
 {{--    </section>--}}
-@include('flash::message')
     <section class="section-content bg padding-y border-top" id="site">
         <div class="container">
             <div class="row">

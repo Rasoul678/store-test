@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Roles @endsection
+@section('title', 'Roles')
+@section('page-title') <i class="fa fa-user-o"></i> Roles @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-user-plus"></i> Roles</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container-fluid mt-2">
         <div class="row">
             <div class="col-md-4">

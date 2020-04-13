@@ -8,21 +8,17 @@
         Users
     @endif
 @endsection
+@section('page-title')
+    <i class="fa fa-group"></i>
+    @if(request()->has('admins'))
+        Admins
+    @elseif(request()->has('customers'))
+        Customers
+    @else
+        Users
+    @endif
+@endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-group"></i>
-                @if(request()->has('admins'))
-                    Admins
-                @elseif(request()->has('customers'))
-                    Customers
-                @else
-                    Users
-                @endif
-            </h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="d-flex justify-content-center">
         <table class="table table-hover table-sm mt-3" style="max-width: 120px">
             <thead class="thead-dark">

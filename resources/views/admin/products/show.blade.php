@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Edit Product @endsection
+@section('title', 'Product: ' . $product->name)
+@section('page-title') <i class="fa fa-shopping-bag"></i> Product: {{$product->name}} @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-shopping-bag"></i> Products</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container mt-4">
         <div class="card">
             <div class="row no-gutters">
@@ -34,7 +29,7 @@
                             <div class="col-lg-4">
                                 <h5 class="d-inline">Category:</h5>
                                 @foreach($product->getCategories as $category)
-                                    <h6 class="d-inline">{{ $category->name }}</h6>&nbsp;
+                                    <h6 class="d-inline">{{ $category->name }}@if($loop->count > 1 && !$loop->last),@endif</h6>&nbsp;
                                 @endforeach
                             </div>
                         </div>

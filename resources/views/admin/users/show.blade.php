@@ -1,20 +1,16 @@
 @extends('admin.app')
-@section('title'){{$user->getFullNameAttribute()}}@endsection
+@section('title', 'User: ' . $user->getFullNameAttribute())
+@section('page-title')
+    <i class="fa fa-user"></i>
+    @if(request()->has('admins'))
+        Admin
+    @elseif(request()->has('customers'))
+        Customer
+    @else
+        User
+    @endif
+@endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-group"></i>
-                @if(request()->has('admins'))
-                    Admins
-                @elseif(request()->has('customers'))
-                    Customers
-                @else
-                    Users
-                @endif
-            </h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container" style="max-width: 800px">
         <div class="card">
             <div class="card-body">

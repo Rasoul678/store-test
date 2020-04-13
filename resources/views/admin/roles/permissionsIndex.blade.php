@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Permissions @endsection
+@section('title', 'Permissions')
+@section('page-title') <i class="fa fa-key"></i> Permissions @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-key"></i> Permissions</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container-fluid">
         <div class="mt-4 m-auto" style="max-width: 700px">
             <table class="table table-hover table-sm" style="min-height: 417px">

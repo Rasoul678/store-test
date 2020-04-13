@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Create Role @endsection
+@section('title', 'Create Role')
+@section('page-title') <i class="fa fa-user-plus"></i> Create Role @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-user-plus"></i> Roles</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container mt-2">
         <form action="{{ route('admin.roles.store') }}" method="POST">
             @csrf

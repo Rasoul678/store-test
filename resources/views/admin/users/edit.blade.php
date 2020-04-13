@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title'){{$user->getFullNameAttribute()}}@endsection
+@section('title', 'User: ' . $user->getFullNameAttribute())
+@section('page-title') <i class="fa fa-group"></i> User: {{$user->getFullNameAttribute()}} @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-group"></i> Users</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container">
             <h2>
                 User: {{$user->getFullNameAttribute()}}

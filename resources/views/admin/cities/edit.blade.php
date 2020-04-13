@@ -1,15 +1,8 @@
 @extends('admin.app')
-@section('title') Edit City: {{$city->city}} @endsection
+@section('title', 'Edit City: ' . $city->city)
+@section('page-title') <i class="fa fa-map-marker"></i> Edit City: {{$city->city}} @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-map-marker"></i> Cities</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container">
-        <h4 class="mt-2 mb-3">Edit: {{$city->city}}</h4>
-        <hr>
         <form action="{{ route('admin.cities.update',['city'=>$city->id]) }}" method="POST">
             @method('PATCH')
             @csrf

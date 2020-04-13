@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Edit City @endsection
+@section('title', 'City: ' . $city->city)
+@section('page-title') <i class="fa fa-map-marker"></i> City: {{$city->city}} @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-map-marker"></i> City: {{$city->city}}</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container mt-5">
         <div class="card">
             <div class="card-body">

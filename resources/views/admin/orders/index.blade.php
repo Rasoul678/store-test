@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Orders @endsection
+@section('title', 'Orders')
+@section('page-title') <i class="fa fa-truck"></i> Orders @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-truck"></i> Orders</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="d-flex justify-content-center" style="min-height: 407px">
         <table class="table table-hover table-sm mt-3" style="max-width: 120px">
             <thead class="thead-dark">

@@ -1,17 +1,8 @@
 @extends('admin.app')
-@section('title') Create Category @endsection
+@section('title', 'Create Category')
+@section('page-title') <i class="fa fa-tags"></i> Create Category @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-tags"></i> Categories</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container">
-        <div class="mt-4 mb-3">
-            <h4>Add New Category</h4>
-        </div>
-        <hr>
         <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">

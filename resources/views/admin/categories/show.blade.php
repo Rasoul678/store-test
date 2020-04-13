@@ -1,12 +1,7 @@
 @extends('admin.app')
-@section('title') Edit Category @endsection
+@section('title', 'Category: ' . $category->name)
+@section('page-title') <i class="fa fa-tags"></i> Category: {{$category->name}} @endsection
 @section('content')
-    <div class="app-title">
-        <div>
-            <h1><i class="fa fa-tags"></i> Categories</h1>
-        </div>
-    </div>
-    @include('flash::message')
     <div class="container">
         <div class="card">
             <div class="card-body">

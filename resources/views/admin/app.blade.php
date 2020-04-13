@@ -14,6 +14,12 @@
     @include('admin.partials.header')
     @include('admin.partials.sidebar')
     <main class="app-content">
+        <div class="app-title">
+            <div>
+                <h1>@yield('page-title')</h1>
+            </div>
+        </div>
+        @include('flash::message')
         @yield('content')
     </main>
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>--}}
