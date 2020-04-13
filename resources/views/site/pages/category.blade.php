@@ -54,7 +54,7 @@
                         </div>
                     @endforelse
                 </div>
-{{--                {{ $category->getProducts->links('pagination.default')}}--}}
+                {{ $category_link->links('pagination.default')}}
             </div>
         </div>
     </section>
