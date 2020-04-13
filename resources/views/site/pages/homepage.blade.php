@@ -20,7 +20,9 @@
 {{--                                </div>--}}
                                     <div class="card-body border-top p-3">
                                         <p class="card-text m-0"><strong>Product: </strong>{{ $product->name }}</p>
-                                        <p class="card-text text-justify" style="height: 80px; overflow: hidden"><strong>Description:</strong> <br> {{ $product->description }}</p>
+                                        <p class="card-text text-justify" style="height: 80px; overflow: hidden"><strong>Description:</strong> <br> {{ \Illuminate\Support\Str::limit($product->description .
+                                        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias blanditiis dicta earum eius error,',60, ' (...)')}}
+                                        </p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                             <a class="btn btn-md btn-outline-primary rounded mr-1" href="{{route('product.show',['product'=>$product->id])}}" role="button">Details</a>

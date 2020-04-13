@@ -35,22 +35,16 @@ class CartController extends Controller implements CartControllerInterface
     {
         if (!Auth::check()) {
             return $this->sessionIndex();
+        }else{
+            return $this->checkoutForm();
         }
-        $shopping_cart = $this->shoppingCartRepository->all();
-        $total_price = (float)0;
-        foreach ($shopping_cart->getCartItem as $cart_item) {
-            $total_price += $cart_item->total_price;
-        }
-        return view('site.pages.shopping_cart.show')
-            ->with(compact('shopping_cart'))
-            ->with(compact('total_price'));
     }
 
     public function sessionIndex()
     {
         $carts = $this->shoppingCartRepository->sessionIndex();
         if (!$carts) {
-            flash('Your cart is empty at the moment.')->important();
+            flash('Your cart is empty at the moment.')->warning()->important();
         } else {
             flash('You need to log in or sign up to be able to checkout.')->error()->important();
         }
@@ -97,7 +91,7 @@ class CartController extends Controller implements CartControllerInterface
      * Remove a cart item from shopping cart.
      *
      * @param CartItem $cartItem
-     * @return RedirectResponse
+     * @return View
      * @throws \Exception
      */
     public function remove(CartItem $cartItem)
@@ -105,7 +99,7 @@ class CartController extends Controller implements CartControllerInterface
         $cart_name = $cartItem->getProduct->name;
         $cartItem->delete();
         flash($cart_name . ' has been successfully deleted from cart.');
-        return redirect()->back();
+        return $this->index();
     }
 
     public function removeSessionCart($cart)
@@ -133,6 +127,9 @@ class CartController extends Controller implements CartControllerInterface
             $total_price += $cart_item->total_price;
         }
         $cities = City::orderBy('id')->get();
+        if (count($shopping_cart->getCartItem)==0){
+            flash('Your cart is empty at the moment.')->warning()->important();
+        }
         return view('site.pages.order.checkout')
             ->with(compact('address'))
             ->with(compact('shopping_cart'))
