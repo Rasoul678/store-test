@@ -32,7 +32,7 @@ class StoreProduct extends FormRequest
             'categories.*' => 'required',
             'description' => 'nullable',
             'type' => 'nullable',
-            'price' => 'nullable|numeric',
+            'price' => 'nullable|digits_between:1,7',
             'status'=>'nullable',
 //            'image_url'=>'nullable',
 //            'status' => 'required|enum_value:' . ProductStatus::class,
