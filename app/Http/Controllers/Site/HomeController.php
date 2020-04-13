@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -16,8 +17,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('updated_at', 'asc')->paginate(12);
-        return view('site.pages.homepage', compact('products'));
+        $categories = Category::orderBy('updated_at', 'asc')->get();
+        $AllProducts = Product::inRandomOrder()->paginate(8);
+        return view('site.pages.homepage', compact('AllProducts', 'categories'));
     }
     
     
