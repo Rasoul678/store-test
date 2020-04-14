@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\View\View;
 
 interface OrderControllerInterface

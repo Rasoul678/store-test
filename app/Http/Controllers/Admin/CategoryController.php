@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategory;
 use App\Models\Category;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -29,9 +30,11 @@ class CategoryController extends Controller implements CategoryInterface
      * Show the form for creating a new category.
      *
      * @return View
+     * @throws AuthorizationException
      */
     public function create()
     {
+        $this->authorize('create', Category::class);
         $categories = Category::orderBy('name', 'ASC')
             ->get()
             ->nest()
@@ -44,9 +47,11 @@ class CategoryController extends Controller implements CategoryInterface
      *
      * @param StoreCategory $request
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store(StoreCategory $request)
     {
+        $this->authorize('create', Category::class);
         $category = Category::create($request->validated());
         flash($category->name . ' has been created successfully.')->success();
         return redirect(route('admin.categories.index'));
@@ -62,23 +67,25 @@ class CategoryController extends Controller implements CategoryInterface
     {
         return view('admin.categories.show', compact('category'));
     }
-    
-    
+
+
     /**
      * Show the form for editing the specified category.
      *
      * @param Category $category
-     * @return \Illuminate\Contracts\View\Factory|View
+     * @return View
+     * @throws AuthorizationException
      */
     public function edit(Category $category)
     {
+        $this->authorize('update', $category);
         $targetCategory = Category::findOrFail(request('id'));
         $categories = Category::orderBy('name', 'ASC')
             ->get()
             ->nest()
             ->listsFlattened('name');
-        
-        return view('admin.categories.edit', compact('categories','category', 'targetCategory'));
+
+        return view('admin.categories.edit', compact('categories', 'category', 'targetCategory'));
     }
 
     /**
@@ -87,9 +94,11 @@ class CategoryController extends Controller implements CategoryInterface
      * @param StoreCategory $request
      * @param Category $category
      * @return View
+     * @throws AuthorizationException
      */
     public function update(StoreCategory $request, Category $category)
     {
+        $this->authorize('update', $category);
         $category->update($request->validated());
         flash($category->name . ' has been updated successfully.');
         return view('admin.categories.show')
@@ -106,6 +115,7 @@ class CategoryController extends Controller implements CategoryInterface
     public function restore($category_slug)
     {
         $category = Category::withTrashed()->where('slug', $category_slug)->firstOrFail();
+        $this->authorize('restore', $category);
         $category->restore();
         flash($category->name . ' has been restored successfully.');
         return redirect(route('admin.categories.index'));
@@ -120,6 +130,7 @@ class CategoryController extends Controller implements CategoryInterface
      */
     public function destroy(Category $category)
     {
+        $this->authorize('delete', $category);
         $name = $category->name;
         $category->delete();
         flash($name . ' has been deleted successfully.');
@@ -136,10 +147,11 @@ class CategoryController extends Controller implements CategoryInterface
     public function forceDestroy($category_slug)
     {
         $category = Category::withTrashed()->where('slug', $category_slug)->first();
+        $this->authorize('forceDelete', $category);
         $name = $category->name;
         $category->forceDelete();
         flash($name . ' has been deleted permanently.');
         return redirect(route('admin.categories.index'));
     }
-    
+
 }

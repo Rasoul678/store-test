@@ -48,9 +48,11 @@ class OrderController extends Controller implements OrderControllerInterface
      *
      * @param Order $order
      * @return RedirectResponse|View
+     * @throws AuthorizationException
      */
     public function show(Order $order)
     {
+        $this->authorize('view', $order);
         $order = $this->orderRepository->customerShow($order);
         if ($order) {
             return view('site.pages.order.show', compact('order'));
@@ -64,9 +66,11 @@ class OrderController extends Controller implements OrderControllerInterface
      *
      * @param StoreOrder $request
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function checkout(StoreOrder $request)
     {
+        $this->authorize('create', Order::class);
         $address = Address::firstOrNew($request->validated());
         $address->user_id = Auth::id();
         $address->save();

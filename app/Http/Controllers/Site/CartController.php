@@ -8,6 +8,7 @@ use App\Models\CartItem;
 use App\Models\City;
 use App\Models\Product;
 use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -61,10 +62,12 @@ class CartController extends Controller implements CartControllerInterface
      *
      * @param Product $product
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function add(Product $product)
     {
         if (Auth::check()) {
+            $this->authorize('create', CartItem::class);
             $this->shoppingCartRepository->addCartItem($product);
         } else {
             $this->shoppingCartRepository->addGuestCartItem($product);
@@ -78,10 +81,12 @@ class CartController extends Controller implements CartControllerInterface
      *
      * @param CartItem $cartItem
      * @return View
+     * @throws AuthorizationException
      * @throws \Exception
      */
     public function remove(CartItem $cartItem)
     {
+        $this->authorize('delete', $cartItem);
         $cart_name = $cartItem->getProduct->name;
         $cartItem->delete();
         flash($cart_name . ' has been successfully deleted from cart.');

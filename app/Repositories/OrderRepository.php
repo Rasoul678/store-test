@@ -45,14 +45,12 @@ class OrderRepository implements OrderRepositoryInterface
      */
     public function customerShow(Order $order): Order
     {
-        if ($order->customer_id == Auth::id()) {
-            $order->load([
-                'getOrderItem' => function ($query) {
-                    $query->orderBy('created_at', 'desc');
-                }
-            ]);
-            return $order;
-        }
+        $order->load([
+            'getOrderItem' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }
+        ]);
+        return $order;
     }
 
     /**

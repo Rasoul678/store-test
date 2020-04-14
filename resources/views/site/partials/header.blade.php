@@ -56,7 +56,7 @@
                     <a class="dropdown-item" href="{{ route('login') }}">Login</a>
                     <a class="dropdown-item" href="{{ route('register') }}">Sign Up</a>
                     @else
-                        @can('add product')
+                        @can('admin')
                             <a class="dropdown-item" href="{{route('admin.dashboard')}}">{{ Auth::user()->full_name }}</a>
                         @else
                             <a class="dropdown-item" href="{{route('profile.show')}}">{{ Auth::user()->full_name }}</a>

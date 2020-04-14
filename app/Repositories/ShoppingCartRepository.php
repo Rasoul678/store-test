@@ -171,6 +171,9 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     {
         $shopping_cart = $this->findOrCreate($event->user->id);
         if (count($this->guestIndex())!=0) {
+            if (!$event->user->can('add cart item')){
+                abort(403,'You don\'t have required permission to add cart item, at first remove your cart items then login.');
+            }
             $cart = $this->guestIndex();
             unset($cart['total_price']);
             foreach ($cart as $key => $value) {

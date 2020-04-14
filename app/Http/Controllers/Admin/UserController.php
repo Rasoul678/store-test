@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ShoppingCart;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
@@ -47,9 +48,11 @@ class UserController extends Controller implements UserControllerInterface
      *
      * @param User $user
      * @return View
+     * @throws AuthorizationException
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         $role = Role::all();
         return view('admin.users.edit')
             ->with(compact('user'))
@@ -61,9 +64,11 @@ class UserController extends Controller implements UserControllerInterface
      *
      * @param User $user
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(User $user)
     {
+        $this->authorize('update', $user);
         $role = request()->validate([
             'role' => 'required'
         ]);
