@@ -1,14 +1,41 @@
 @extends('site.app')
 @section('title', 'Homepage')
 @section('content')
-
+{{-------------------------------------------------------carousel  with a fade transition---------------------------------------------------------}}
+<div class="container" style="margin-top: 80px">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100 rounded" src="{{ asset('frontend/images/baners/baner1.jpg') }}"
+                     alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100 rounded" src="{{ asset('frontend/images/baners/baner2.jpg') }}"
+                     alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100 rounded" src="{{ asset('frontend/images/baners/baner3.jpg') }}"
+                     alt="Third slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+{{--------------------------------------------------End of carousel  with a fade transition---------------------------------------------------}}
     <section class="section-content padding-y">
         <div class="container">
             <p class="font-weight-bold">All Products</p>
             <hr class="my-4">
             <div id="code_prod_complex">
                 <div class="row">
-                    @forelse($AllProducts as $product)
+                    @forelse($allProducts as $product)
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <figure class="card card-product bg border border-secondary">
                                 @if ($product->id <=18)
@@ -49,27 +76,27 @@
                         </div>
                     @endforelse
                 </div>
-                {{ $AllProducts->links('pagination.default')}}
+                {{ $allProducts->links('pagination.default')}}
             </div>
         </div>
     </section>
     {{------------------------------------------------------------- SliderImage  ------------------------------------------------}}
     @foreach($categories as $category)
-        @if($category->name !== 'Root')
-            <div class="container my-4">
+        @if($category->name !== 'Root' && !$category->getProducts->isEmpty())
+            <div class="container my-4 p-4">
 
-                <p class="font-weight-bold">Bootstrap carousel multiple items</p>
+                <p class="font-weight-bold">See more on <span><a href="{{ route('category.show', $category->slug) }}" class="btn text-danger font-weight-bold">{{ $category->name }}</a></span></p>
 
                 <hr class="my-4">
 
                 <!--Carousel Wrapper-->
-                <div id="{{ $category->name }}" class="carousel slide carousel-multi-item" data-ride="carousel">
+                <div id="{{ $category->id }}" class="carousel slide carousel-multi-item" data-ride="carousel">
 
                     <!--Controls-->
                     <div class="d-flex justify-content-between controls-top text-center">
-                        <a class="btn" href="#{{ $category->name }}" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-                        <a href="{{ route('category.show', $category->slug) }}" class="btn"><strong>{{ $category->name }}</strong></a>
-                        <a class="btn" href="#{{ $category->name }}" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+                        <a class="btn" href="#{{ $category->id }}" data-slide="prev"><i class="fa fa-chevron-left text-danger"></i></a>
+                        <a href="{{ route('category.show', $category->slug) }}" class="btn"><h5>{{ $category->name }}</h5></a>
+                        <a class="btn" href="#{{ $category->id }}" data-slide="next"><i class="fa fa-chevron-right text-danger"></i></a>
                     </div>
                     <!--/.Controls-->
 
@@ -78,31 +105,53 @@
                         @foreach($category->getProducts->chunk(3) as $products)
                             @if($loop->first)
                                 <div class="carousel-item active">
-                                    @foreach($products as $item)
+                                    @foreach($products as $product)
                                         @if($loop->first)
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="card mb-2">
-                                                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                                             alt="Card image cap">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">{{ $item->name }}</h4>
-                                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                                                card's content.</p>
-                                                            <a class="btn btn-primary">Button</a>
+                                                        @if ($product->id <=18)
+                                                            <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
+                                                        @else
+                                                            <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
+                                                        @endif
+{{--                                                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"--}}
+{{--                                                             alt="Card image cap">--}}
+                                                        <div class="card-body bg">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <h6 class="card-title">{{ $product->name }}</h6>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <h6 class="card-title text-right">${{ $product->price }}</h6>
+                                                                </div>
+                                                            </div>
+                                                            <p class="card-text text-truncate">{{ $product->description }}</p>
+{{--                                                            <a href="{{route('product.show',['product'=>$product->id])}}" class="btn btn-block btn-primary">View Details</a>--}}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 @else
                                                     <div class="col-md-4 clearfix d-none d-md-block">
-                                                        <div class="card mb-2">
-                                                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
-                                                                 alt="Card image cap">
-                                                            <div class="card-body">
-                                                                <h4 class="card-title">{{ $item->name }}</h4>
-                                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                                                    card's content.</p>
-                                                                <a class="btn btn-primary">Button</a>
+                                                        <div class="card mb-4">
+                                                            @if ($product->id <=18)
+                                                                <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
+                                                            @else
+                                                                <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
+                                                            @endif
+{{--                                                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"--}}
+{{--                                                                 alt="Card image cap">--}}
+                                                            <div class="card-body bg">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <h6 class="card-title">{{ $product->name }}</h6>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <h6 class="card-title text-right">${{ $product->price }}</h6>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="card-text text-truncate">{{ $product->description }}</p>
+{{--                                                                <a href="{{route('product.show',['product'=>$product->id])}}" class="btn btn-block btn-primary">View Details</a>--}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -113,31 +162,53 @@
                                 </div>
                             @else
                                 <div class="carousel-item">
-                                    @foreach($products as $item)
+                                    @foreach($products as $product)
                                         @if($loop->first)
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="card mb-2">
-                                                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                                             alt="Card image cap">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">{{ $item->name }}</h4>
-                                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                                                card's content.</p>
-                                                            <a class="btn btn-primary">Button</a>
+                                                        @if ($product->id <=18)
+                                                            <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
+                                                        @else
+                                                            <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
+                                                        @endif
+{{--                                                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"--}}
+{{--                                                             alt="Card image cap">--}}
+                                                        <div class="card-body bg">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <h6 class="card-title">{{ $product->name }}</h6>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <h6 class="card-title text-right">${{ $product->price }}</h6>
+                                                                </div>
+                                                            </div>
+                                                            <p class="card-text text-truncate">{{ $product->description }}</p>
+{{--                                                            <a href="{{route('product.show',['product'=>$product->id])}}" class="btn btn-block btn-primary">View Details</a>--}}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 @else
                                                     <div class="col-md-4 clearfix d-none d-md-block">
-                                                        <div class="card mb-2">
-                                                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
-                                                                 alt="Card image cap">
-                                                            <div class="card-body">
-                                                                <h4 class="card-title">{{ $item->name }}</h4>
-                                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                                                    card's content.</p>
-                                                                <a class="btn btn-primary">Button</a>
+                                                        <div class="card mb-4">
+                                                            @if ($product->id <=18)
+                                                                <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
+                                                            @else
+                                                                <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
+                                                            @endif
+{{--                                                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"--}}
+{{--                                                                 alt="Card image cap">--}}
+                                                            <div class="card-body bg">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <h6 class="card-title">{{ $product->name }}</h6>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <h6 class="card-title text-right">${{ $product->price }}</h6>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="card-text text-truncate">{{ $product->description }}</p>
+{{--                                                                <a href="{{route('product.show',['product'=>$product->id])}}" class="btn btn-block btn-primary">View Details</a>--}}
                                                             </div>
                                                         </div>
                                                     </div>

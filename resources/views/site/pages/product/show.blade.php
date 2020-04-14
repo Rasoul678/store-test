@@ -31,7 +31,10 @@
                             <aside class="col-sm-7">
                                 <article class="p-3">
                                     <h3 class="title text-center mb-3">{{ $product->name }}</h3>
-                                    <h5 class="text-center">Category: {{ $product->getCategories->first()->name }}</h5>
+                                    <div class="text-center">
+                                        <a href="{{ route('category.show', $product->getCategories->first()->slug) }}" class="btn font-weight-bold text-danger">Category: {{ $product->getCategories->first()->name }}</a>
+                                    </div>
+{{--                                    <h5 class="text-center">Category: {{ $product->getCategories->first()->name }}</h5>--}}
                                     <div class="row mb-3 mt-3">
                                        <div class="col-12 col-md-5">
                                            <form action="{{route('cart.add',['product'=>$product->id])}}" method="POST" role="form" id="addToCart">
@@ -46,8 +49,8 @@
                                            </form>
                                        </div>
                                         <div class="col-12 col-md-7 text-center mt-3 mt-md-0">
-                                            <var class="price h4 text-success">
-                                                Price: <span class="num" id="productPrice">${{$product->price}}</span>
+                                            <var class="price h4">
+                                                Price: <span class="num text-success" id="productPrice">${{$product->price}}</span>
                                             </var>
                                         </div>
                                     </div>

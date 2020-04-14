@@ -61,10 +61,10 @@
         </section>
         <section class="footer-bottom row border-top-white">
             <div class="col-sm-6">
-                <p class="text-white-50"> Powered by Laravel</p>
+                <p class="text-dark-50"> Powered by Laravel</p>
             </div>
             <div class="col-sm-6">
-                <p class="text-md-right text-white-50">
+                <p class="text-md-right text-dark-50">
                     Copyright &copy 2020
                 </p>
             </div>

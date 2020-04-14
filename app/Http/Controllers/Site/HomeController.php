@@ -18,15 +18,16 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::orderBy('updated_at', 'asc')->get();
-        $AllProducts = Product::inRandomOrder()->paginate(8);
-        return view('site.pages.homepage', compact('AllProducts', 'categories'));
+        $allProducts = Product::inRandomOrder()->paginate(8);
+        return view('site.pages.homepage', compact('allProducts', 'categories'));
     }
     
     
     public function search(Request $request)
     {
+        $categories = Category::orderBy('updated_at', 'asc')->get();
         $search = $request->get('search');
-        $products = Product::where('name', 'like', '%'.$search.'%')->paginate(12);
-        return view('site.pages.homepage', compact('products'));
+        $allProducts = Product::where('name', 'like', '%'.$search.'%')->paginate(12);
+        return view('site.pages.homepage', compact('allProducts', 'categories'));
     }
 }
