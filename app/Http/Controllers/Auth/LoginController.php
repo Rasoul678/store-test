@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
 use Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -40,4 +41,14 @@ class LoginController extends Controller
         $this->middleware('guest:web')->except('logout');
     }
 
+    protected function redirectTo()
+    {
+        if (Cookie::has('preUrl')) {
+            $url = Cookie::get('preUrl');
+            Cookie::queue(Cookie::forget('preUrl'));
+            return $url;
+        } else {
+            return $this->redirectTo;
+        }
+    }
 }
