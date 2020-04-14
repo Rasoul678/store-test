@@ -5,10 +5,10 @@
     <div class="container">
         <div class="row mt-3 mb-5">
             <div class="col-12 col-md-6">
-                <h3 class="text-center">Order Details</h3>
+                <h4 class="text-center rounded p-1">Order Details</h4>
             </div>
             <div class="col-12 col-md-6">
-                <h3 class="text-center">Total price: ${{$order->total_price}}</h3>
+                <h4 class="text-center rounded p-1">Total price: ${{$order->total_price}}</h4>
             </div>
         </div>
 

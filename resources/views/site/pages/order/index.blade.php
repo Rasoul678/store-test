@@ -3,19 +3,19 @@
 @section('content')
     @include('flash::message')
     <div class="container">
-        <h1>Order List</h1>
+        <h3 class="text-center mt-3">Order List</h3>
         <table class="table">
-            <thead>
+            <thead class="thead-dark">
             <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
+                <th scope="col" class="text-center">Date</th>
+                <th scope="col" class="text-center">Status</th>
             </tr>
             </thead>
             <tbody>
             @forelse($order as $item)
                 <tr>
-                    <td scope="row"><a href="{{route('order.show',['order'=>$item->id])}}">{{$item->created_at}}</a></td>
-                    <td>{{$item->status->description}}</td>
+                    <td scope="row" class="text-center"><a class="btn" href="{{route('order.show',['order'=>$item->id])}}">{{$item->created_at}}</a></td>
+                    <td class="text-center">{{$item->status->description}}</td>
                     @empty
                         <p>There are not any orders submitted yet!</p>
                 </tr>

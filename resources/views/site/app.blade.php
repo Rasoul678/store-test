@@ -7,7 +7,7 @@
     @include('site.partials.styles')
 </head>
 <body>
-<div class="mt-5" id="container">
+<div id="container">
     <div id="main">
         @include('site.partials.header')
         <div class="container">
