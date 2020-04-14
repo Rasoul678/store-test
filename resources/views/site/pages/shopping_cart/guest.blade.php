@@ -31,7 +31,7 @@
                         <h6 class="my-0 col mt-2">{{$key}}</h6>
                         <small class="col text-center mt-2"><strong>Quantity: {{$value['quantity']}}</strong></small>
                         <h6 class="my-0 col text-center mt-2">${{$value['price']}}</h6>
-                        <form class="col text-right" action="{{route('cart.removeSessionCart',['cart_item'=>$key])}}"
+                        <form class="col text-right" action="{{route('cart.removeGuestCart',['cart_item'=>$key])}}"
                               method="POST">
                             @csrf @method('DELETE')
                             <button class="btn" type="submit"><i class="fa fa-times text-danger"></i></button>

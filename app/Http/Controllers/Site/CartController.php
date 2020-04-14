@@ -10,8 +10,6 @@ use App\Models\Product;
 use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class CartController extends Controller implements CartControllerInterface
@@ -34,21 +32,21 @@ class CartController extends Controller implements CartControllerInterface
     public function index()
     {
         if (!Auth::check()) {
-            return $this->sessionIndex();
-        }else{
+            return $this->cookieIndex();
+        } else {
             return $this->checkoutForm();
         }
     }
 
-    public function sessionIndex()
+    public function cookieIndex()
     {
-        $carts = $this->shoppingCartRepository->sessionIndex();
+        $carts = $this->shoppingCartRepository->cookieIndex();
         if (!$carts) {
             flash('Your cart is empty at the moment.')->warning()->important();
         } else {
             flash('You need to log in or sign up to be able to checkout.')->error()->important();
         }
-        return view('site.pages.shopping_cart.session', compact('carts'));
+        return view('site.pages.shopping_cart.guest', compact('carts'));
     }
 
     /**
@@ -62,26 +60,7 @@ class CartController extends Controller implements CartControllerInterface
         if (Auth::check()) {
             $this->shoppingCartRepository->addCartItem($product);
         } else {
-            $data = session('cartItem');
-            if (is_null($data)) {
-                $data = [$product->name => ['id' => $product->id, 'quantity' => 1, 'price' => $product->price]];
-                session()->put('cartItem', $data);
-            } else {
-                $state = true;
-                foreach ($data as $key => $value) {
-                    if ($product->id == $key && $state) {
-                        $newData = session()->pull('cartItem');
-                        $newData[$key]['quantity'] += 1;
-                        session()->put('cartItem', $newData);
-                        $state = false;
-                    }
-                }
-                if ($state) {
-                    $newData = session()->pull('cartItem');
-                    $data = [$product->name => ['id' => $product->id, 'quantity' => 1, 'price' => $product->price]];
-                    session()->put('cartItem', array_merge($newData, $data));
-                }
-            }
+            $this->shoppingCartRepository->addGuestCartItem($product);
         }
         flash($product->name . ' has been added to cart.');
         return redirect()->back();
@@ -102,20 +81,20 @@ class CartController extends Controller implements CartControllerInterface
         return $this->index();
     }
 
-    public function removeSessionCart($cart)
+    public function removeGuestCart($cart)
     {
         $cart_name = $cart;
         if (!Auth::check()) {
-            session()->forget('cartItem.' . $cart);
+            $this->shoppingCartRepository->removeGuestCart($cart);
         }
-        flash($cart_name . ' has been successfully deleted from cart.');
-        return $this->sessionIndex();
+        return redirect()->route('cart.index')
+            ->with('flash', $cart_name . ' has been successfully deleted from cart.');
     }
 
     public function checkoutForm()
     {
         if (!Auth::check()) {
-            return $this->sessionIndex();
+            return $this->cookieIndex();
         }
         $address = Address::where('user_id', Auth::id())
             ->orderBy('updated_at')
@@ -127,7 +106,7 @@ class CartController extends Controller implements CartControllerInterface
             $total_price += $cart_item->total_price;
         }
         $cities = City::orderBy('id')->get();
-        if (count($shopping_cart->getCartItem)==0){
+        if (count($shopping_cart->getCartItem) == 0) {
             flash('Your cart is empty at the moment.')->warning()->important();
         }
         return view('site.pages.order.checkout')

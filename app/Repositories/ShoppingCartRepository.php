@@ -8,8 +8,9 @@ use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\ShoppingCart;
 use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
-use Illuminate\Contracts\View\View;
+use Illuminate\Cookie\CookieJar;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class ShoppingCartRepository implements ShoppingCartRepositoryInterface
 {
@@ -24,16 +25,13 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
-     * Get cart items of a guest from session.
+     * Get cart items of a guest from cookie.
      *
-     * @return view
+     * @return CookieJar|\Symfony\Component\HttpFoundation\Cookie
      */
-    public function sessionIndex()
+    public function cookieIndex()
     {
-        if (!session()->exists('cartItem')) {
-            session(['cartItem' => null]);
-        }
-        return session()->get('cartItem');
+        return json_decode(Cookie::get('cartItem'),true);
     }
 
     /**
@@ -75,6 +73,51 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
+     * Add product to cookie.
+     *
+     * @param Product $product
+     */
+    public function addGuestCartItem(Product $product)
+    {
+        $data = json_decode(Cookie::get('cartItem'),true);
+        if (is_null($data)) {
+            $data = [$product->name => ['id' => $product->id, 'quantity' => 1, 'price' => $product->price]];
+            Cookie::queue(Cookie('cartItem',json_encode($data)));
+        } else {
+            $state = true;
+            foreach ($data as $key => $value) {
+                if ($product->name == $key && $state) {
+                    $data[$key]['quantity'] += 1;
+                    Cookie::queue(Cookie('cartItem',json_encode($data)));
+                    $state = false;
+                }
+            }
+            if ($state) {
+                $newData = json_decode(Cookie::get('cartItem'),true);
+                $data = [$product->name => ['id' => $product->id, 'quantity' => 1, 'price' => $product->price]];
+                Cookie::queue(Cookie('cartItem',json_encode(array_merge($newData, $data))));
+            }
+        }
+    }
+
+    /**
+     * Remove guest cart item from cookie.
+     *
+     * @param $cart
+     */
+    public function removeGuestCart($cart)
+    {
+        $data = json_decode(Cookie::get('cartItem'), true);
+        foreach ($data as $key => $item) {
+            if ($key == $cart) {
+                unset($data[$key]);
+                Cookie::queue(Cookie('cartItem', json_encode($data)));
+                break;
+            }
+        }
+    }
+
+    /**
      * Find shopping cart of an authenticated user.
      *
      * @return ShoppingCart
@@ -92,19 +135,21 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
 
     /**
      * Handle creating/finding shopping cart for the logged in or
-     * registered user and add cart items to it from session.
+     * registered user and add cart items to it from cookie.
      *
      * @param $event
      */
     public function handleShoppingCart($event)
     {
         $shopping_cart = $this->findOrCreate($event->user->id);
-        if (session()->has('cartItem')) {
-            foreach (session('cartItem') as $key => $value) {
-                $product = Product::where('id',$value['id'])->first();
-                $quantity = $value['quantity'];
+        if (Cookie::get('cartItem')) {
+            $data=json_decode(Cookie::get('cartItem'),true);
+            foreach ($data as $key => $value) {
+                $product = Product::where('id',$data[$key]['id'])->first();
+                $quantity = $data[$key]['quantity'];
                 $this->addCartItem($product, $quantity, $shopping_cart);
             }
+            Cookie::queue(Cookie::forget('cartItem'));
         }
     }
 

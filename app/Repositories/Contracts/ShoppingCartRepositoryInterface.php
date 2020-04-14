@@ -20,16 +20,30 @@ interface ShoppingCartRepositoryInterface
      *
      * @return View
      */
-    public function sessionIndex();
+    public function cookieIndex();
 
     /**
-     * Add cart items to shopping cart.
+     * Add cart items to shopping cart for guest.
      *
      * @param Product $product
      * @param int $quantity
      * @param ShoppingCart|null $shopping_cart
      */
     public function addCartItem(Product $product, $quantity = null, $shopping_cart = null);
+
+    /**
+     * Add product to cookie.
+     *
+     * @param Product $product
+     */
+    public function addGuestCartItem(Product $product);
+
+    /**
+     * Remove guest cart item from cookie.
+     *
+     * @param $cart
+     */
+    public function removeGuestCart($cart);
 
     /**
      * Find shopping cart of an authenticated user.

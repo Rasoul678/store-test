@@ -12,6 +12,9 @@
         @include('site.partials.header')
         <div class="container">
             @include('flash::message')
+            @if(session()->has('flash'))
+                <div class="alert alert-success" role="alert">{{session('flash')}}</div>
+            @endif
         </div>
         @yield('content')
     </div>
