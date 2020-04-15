@@ -218,9 +218,11 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     {
         $sum = 0;
         foreach ($cart as $key => $value) {
-            $sum += isset($cart[$key])
-                ? $cart[$key]['quantity'] * $cart[$key]['price']
-                : 0;
+            if (isset($cart[$key]['quantity']) && isset($cart[$key]['quantity'])) {
+                $sum += $cart[$key]['quantity'] * $cart[$key]['price'];
+            } else {
+                $sum += 0;
+            }
         }
         return $sum;
     }
