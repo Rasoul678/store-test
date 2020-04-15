@@ -4,7 +4,8 @@ namespace App\Repositories\Contracts;
 
 use App\Models\Product;
 use App\Models\ShoppingCart;
-use Illuminate\Support\Facades\View;
+use Illuminate\Cookie\CookieJar;
+use Symfony\Component\HttpFoundation\Cookie;
 
 interface ShoppingCartRepositoryInterface
 {
@@ -16,14 +17,14 @@ interface ShoppingCartRepositoryInterface
     public function all(): ShoppingCart;
 
     /**
-     * Get cart items of a guest from session.
+     * Get cart data from cookie as an associative array.
      *
-     * @return View
+     * @return CookieJar|Cookie
      */
-    public function cookieIndex();
+    public function guestIndex();
 
     /**
-     * Add cart items to shopping cart for guest.
+     * Add cart items to shopping cart.
      *
      * @param Product $product
      * @param int $quantity
@@ -32,14 +33,14 @@ interface ShoppingCartRepositoryInterface
     public function addCartItem(Product $product, $quantity = null, $shopping_cart = null);
 
     /**
-     * Add product to cookie.
+     * Add guest user cart item.
      *
      * @param Product $product
      */
     public function addGuestCartItem(Product $product);
 
     /**
-     * Remove guest cart item from cookie.
+     * Remove guest cart item.
      *
      * @param $cart
      */
@@ -62,7 +63,7 @@ interface ShoppingCartRepositoryInterface
 
     /**
      * Handle creating/finding shopping cart for the logged in or
-     * registered user and add cart items to it from session.
+     * registered user and add guest cart items to it.
      *
      * @param $event
      */

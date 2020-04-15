@@ -25,13 +25,31 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
-     * Get cart items of a guest from cookie.
+     * Get cart data from cookie as an associative array.
      *
      * @return CookieJar|\Symfony\Component\HttpFoundation\Cookie
      */
-    public function cookieIndex()
+    public function guestIndex()
     {
-        return json_decode(Cookie::get('cartItem'),true);
+        return json_decode(Cookie::get('cartItem'), true);
+    }
+
+    /**
+     * Write cart data to cookie in json format.
+     *
+     * @param $cart
+     */
+    private function addGuestData($cart)
+    {
+        Cookie::queue(Cookie('cartItem', json_encode($cart)));
+    }
+
+    /**
+     * Clear cookie from cart data.
+     */
+    private function clearCookie()
+    {
+        Cookie::queue(Cookie::forget('cartItem'));
     }
 
     /**
@@ -73,45 +91,55 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
-     * Add product to cookie.
+     * Add guest user cart item.
      *
      * @param Product $product
      */
     public function addGuestCartItem(Product $product)
     {
-        $data = json_decode(Cookie::get('cartItem'),true);
-        if (is_null($data)) {
-            $data = [$product->name => ['id' => $product->id, 'quantity' => 1, 'price' => $product->price]];
-            Cookie::queue(Cookie('cartItem',json_encode($data)));
+        $cart = $this->guestIndex();
+        if (is_null($cart)) {
+            $cart = $this->guestData($product);
+            $cart['total_price'] = $this->totalGuestCartPrice($cart);
+            $this->addGuestData($cart);
         } else {
             $state = true;
-            foreach ($data as $key => $value) {
+            foreach ($cart as $key => $value) {
                 if ($product->name == $key && $state) {
-                    $data[$key]['quantity'] += 1;
-                    Cookie::queue(Cookie('cartItem',json_encode($data)));
+                    $cart[$key]['quantity'] += 1;
+                    $cart['total_price'] = $this->totalGuestCartPrice($cart);
+                    $this->addGuestData($cart);
                     $state = false;
+                    break;
                 }
             }
             if ($state) {
-                $newData = json_decode(Cookie::get('cartItem'),true);
-                $data = [$product->name => ['id' => $product->id, 'quantity' => 1, 'price' => $product->price]];
-                Cookie::queue(Cookie('cartItem',json_encode(array_merge($newData, $data))));
+                $newCart = $this->guestData($product);
+                $result = array_merge($newCart, $cart);
+                $result['total_price'] = $this->totalGuestCartPrice($result);
+                $this->addGuestData($result);
             }
         }
     }
 
     /**
-     * Remove guest cart item from cookie.
+     * Remove guest cart item.
      *
      * @param $cart
      */
     public function removeGuestCart($cart)
     {
-        $data = json_decode(Cookie::get('cartItem'), true);
-        foreach ($data as $key => $item) {
+        $cart = $this->guestIndex();
+        foreach ($cart as $key => $item) {
             if ($key == $cart) {
-                unset($data[$key]);
-                Cookie::queue(Cookie('cartItem', json_encode($data)));
+                unset($cart[$key]);
+                $total_price = $this->totalGuestCartPrice($cart);
+                if ($total_price != 0) {
+                    $cart['total_price'] = $total_price;
+                } else {
+                    unset($cart['total_price']);
+                }
+                $this->addGuestData($cart);
                 break;
             }
         }
@@ -135,21 +163,22 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
 
     /**
      * Handle creating/finding shopping cart for the logged in or
-     * registered user and add cart items to it from cookie.
+     * registered user and add guest cart items to it.
      *
      * @param $event
      */
     public function handleShoppingCart($event)
     {
         $shopping_cart = $this->findOrCreate($event->user->id);
-        if (Cookie::get('cartItem')) {
-            $data=json_decode(Cookie::get('cartItem'),true);
-            foreach ($data as $key => $value) {
-                $product = Product::where('id',$data[$key]['id'])->first();
-                $quantity = $data[$key]['quantity'];
+        if (count($this->guestIndex())!=0) {
+            $cart = $this->guestIndex();
+            unset($cart['total_price']);
+            foreach ($cart as $key => $value) {
+                $product = Product::where('id', $cart[$key]['id'])->first();
+                $quantity = $cart[$key]['quantity'];
                 $this->addCartItem($product, $quantity, $shopping_cart);
             }
-            Cookie::queue(Cookie::forget('cartItem'));
+            $this->clearCookie();
         }
     }
 
@@ -173,5 +202,32 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     private function totalCartPrice($cart): float
     {
         return $cart->quantity * $cart->price;
+    }
+
+    /**
+     * Multiply the quantity and the price of all products in guest cart..
+     *
+     * @param $cart
+     * @return float
+     */
+    private function totalGuestCartPrice($cart): float
+    {
+        $sum = 0;
+        foreach ($cart as $key => $value) {
+            $sum += $cart[$key]['quantity'] * $cart[$key]['price'];
+        }
+        return $sum;
+    }
+
+    private function guestData($product)
+    {
+        return [
+            $product->name => [
+                'id' => $product->id,
+                'quantity' => 1,
+                'price' => $product->price,
+            ],
+            'total_price' => 0,
+        ];
     }
 }

@@ -32,15 +32,15 @@ class CartController extends Controller implements CartControllerInterface
     public function index()
     {
         if (!Auth::check()) {
-            return $this->cookieIndex();
+            return $this->guestIndex();
         } else {
             return $this->checkoutForm();
         }
     }
 
-    public function cookieIndex()
+    public function guestIndex()
     {
-        $carts = $this->shoppingCartRepository->cookieIndex();
+        $carts = $this->shoppingCartRepository->guestIndex();
         if (!$carts) {
             flash('Your cart is empty at the moment.')->warning()->important();
         } else {
@@ -94,7 +94,7 @@ class CartController extends Controller implements CartControllerInterface
     public function checkoutForm()
     {
         if (!Auth::check()) {
-            return $this->cookieIndex();
+            return $this->guestIndex();
         }
         $address = Address::where('user_id', Auth::id())
             ->orderBy('updated_at')
