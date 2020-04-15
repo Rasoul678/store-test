@@ -3,18 +3,11 @@
     <div class="app-sidebar__user">
         <div>
             <h4><p class="app-sidebar__user-name">{{ $user_name }}</p></h4>
-            @role('SuperAdmin')
-                <h4>
-                    <p class="app-sidebar__user-designation badge badge-warning">Super Admin</p>
-                </h4>
-            @else
-                <h4>
-                    <p class="app-sidebar__user-designation badge badge-primary">Admin</p>
-{{--                    @foreach($role_names as $role_name)--}}
-{{--                        <span class="badge badge-warning">{{$role_name}}</span>--}}
-{{--                    @endforeach--}}
-                </h4>
-            @endrole
+            <h4>
+            @foreach($role_names as $role_name)
+                <p class="app-sidebar__user-designation badge badge-warning">{{$role_name}}</p>
+            @endforeach
+            </h4>
         </div>
     </div>
     <ul class="app-menu">
@@ -61,7 +54,6 @@
                 <i class="treeview-indicator fa fa-chevron-right"></i>
             </a>
             <ul class="treeview-menu">
-                @role('SuperAdmin')
                 <li>
                     <a class="treeview-item" href="{{route('admin.roles.index')}}" rel="noopener noreferrer"><i class="icon fa fa-chevron-right"></i> Roles</a>
                 </li>
@@ -71,7 +63,6 @@
                 <li>
                     <a class="treeview-item" href="{{route('admin.cities.index')}}"><i class="icon fa fa-chevron-right"></i> Cities</a>
                 </li>
-                @endrole
 {{--                <li>--}}
 {{--                    <a class="treeview-item" href="#"><i class="icon fa fa-chevron-right"></i> Other</a>--}}
 {{--                </li>--}}

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProduct;
 use App\Models\Category;
 use App\Models\Enums\ProductStatus;
 use App\Models\Product;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded;
@@ -37,9 +38,11 @@ class ProductController extends Controller implements ProductControllerInterface
      * Show the form for creating a new product.
      *
      * @return View
+     * @throws AuthorizationException
      */
     public function create()
     {
+        $this->authorize('create', Product::class);
         $categories = Category::orderBy('name', 'desc')->get();
         $status = ProductStatus::toSelectArray();
         return view('admin.products.create')
@@ -52,9 +55,11 @@ class ProductController extends Controller implements ProductControllerInterface
      *
      * @param StoreProduct $request
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store(StoreProduct $request)
     {
+        $this->authorize('create', Product::class);
         $product = Product::create($request->validated());
         foreach ($request->validated()['categories'] as $item) {
             $category = Category::where('slug', $item)->first();
@@ -82,9 +87,11 @@ class ProductController extends Controller implements ProductControllerInterface
      *
      * @param Product $product
      * @return View
+     * @throws AuthorizationException
      */
     public function edit(Product $product)
     {
+        $this->authorize('update', $product);
         $categories = Category::orderBy('name', 'desc')->get();
         $product->load('getCategories');
         $status = ProductStatus::toSelectArray();
@@ -107,6 +114,7 @@ class ProductController extends Controller implements ProductControllerInterface
      */
     public function update(StoreProduct $request, Product $product)
     {
+        $this->authorize('update', $product);
         $product_name = $product->name;
         $data = $request->validated();
         $product->update($data);
@@ -128,11 +136,12 @@ class ProductController extends Controller implements ProductControllerInterface
      *
      * @param $product_id
      * @return RedirectResponse
-     * @throws \Exception
+     * @throws AuthorizationException
      */
     public function restore($product_id)
     {
         $product = Product::withTrashed()->where('id', $product_id)->firstOrFail();
+        $this->authorize('restore', $product);
         $product->restore();
         flash($product->name . ' has been restored successfully.');
         return redirect(route('admin.products.index'));
@@ -143,10 +152,12 @@ class ProductController extends Controller implements ProductControllerInterface
      *
      * @param Product $product
      * @return RedirectResponse
+     * @throws AuthorizationException
      * @throws \Exception
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete', $product);
         $product_name = $product->name;
         $product->delete();
         flash($product_name . ' has been deleted successfully.');
@@ -158,10 +169,12 @@ class ProductController extends Controller implements ProductControllerInterface
      *
      * @param $product_id
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function forceDestroy($product_id)
     {
         $product = Product::withTrashed()->where('id', $product_id)->firstOrFail();
+        $this->authorize('forceDelete', $product);
         $product_name = $product->name;
         $product->forceDelete();
         flash($product_name . ' has been deleted permanently.');

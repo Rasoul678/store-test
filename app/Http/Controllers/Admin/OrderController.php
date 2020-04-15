@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Enums\OrderStatus;
 use App\Models\Order;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\View\View;
 
 class OrderController extends Controller implements OrderControllerInterface
@@ -42,9 +43,11 @@ class OrderController extends Controller implements OrderControllerInterface
      *
      * @param Order $order
      * @return View
+     * @throws AuthorizationException
      */
     public function update(Order $order)
     {
+        $this->authorize('update', $order);
         $data = request()->validate([
             'status' => 'required',
         ]);
