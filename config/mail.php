@@ -15,8 +15,8 @@ return [
     |            "postmark", "log", "array"
     |
     */
-
-    'driver' => 'mailgun',
+    
+    'driver' => 'smtp',
 
     /*
     |--------------------------------------------------------------------------
@@ -28,8 +28,8 @@ return [
     | the Mailgun mail service which will provide reliable deliveries.
     |
     */
-
-    'host' =>'smtp.mailgun.org',
+    
+    'host' => 'smtp.googlemail.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => 465,
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => 'ssl',
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => 'store.app.online@gmail.com',
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => 's1357tore',
 
     /*
     |--------------------------------------------------------------------------

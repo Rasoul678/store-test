@@ -19,7 +19,7 @@
     @endif
 @endsection
 @section('content')
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="min-height: 400px">
         <table class="table table-hover table-sm mt-3" style="max-width: 120px">
             <thead class="thead-dark">
             <tr>
@@ -83,8 +83,8 @@
                 @endforeach
                 </tbody>
             </table>
-            {{ $users->links('pagination.default')}}
         </div>
     </div>
+    {{ $users->links('pagination.default')}}
 
 @endsection
