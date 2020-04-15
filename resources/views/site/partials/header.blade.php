@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light border-bottom border-secondary">
+<nav class="navbar navbar-expand-md navbar-light bg-light shadow">
     <a class="navbar-brand" href="{{ url('/') }}">Home</a>
     <button class="navbar-toggler border-secondary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-3"
             aria-controls="navbarSupportedContent-3" aria-expanded="false" aria-label="Toggle navigation">

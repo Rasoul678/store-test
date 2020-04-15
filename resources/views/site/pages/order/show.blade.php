@@ -3,7 +3,7 @@
 @section('content')
     @include('flash::message')
     <div class="container">
-        <div class="row mt-3 mb-5">
+        <div class="row mt-5 mb-3">
             <div class="col-12 col-md-6">
                 <h4 class="text-center rounded p-1">Order Details</h4>
             </div>
@@ -26,10 +26,10 @@
             @forelse($order->getOrderItem as $item)
                 <tr>
 {{--                    <th class="text-center" scope="row">{{$loop->iteration}}</th>--}}
-                    <td class="text-center text-truncate" scope="row">{{$item->getProduct->name}}</td>
-                    <td class="text-center">{{$item->quantity}}</td>
-                    <td class="text-center">{{$item->created_at->format('Y M d')}}</td>
-                    <td class="text-center">{{$item->total_price}}</td>
+                    <td class="text-center text-truncate" scope="row"><strong>{{$item->getProduct->name}}</strong></td>
+                    <td class="text-center"><strong>{{$item->quantity}}</strong></td>
+                    <td class="text-center"><strong>{{$item->created_at->format('Y M d')}}</strong></td>
+                    <td class="text-center"><strong>{{$item->total_price}}</strong></td>
                     @empty
                         <p>The are not any products added yet!</p>
                 </tr>

@@ -37,7 +37,7 @@
                 <div class="row">
                     @forelse($allProducts as $product)
                         <div class="col-sm-6 col-md-4 col-lg-3">
-                            <figure class="card card-product bg border border-secondary">
+                            <figure class="card card-product bg shadow">
                                 @if ($product->id <=18)
                                     <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}"></a></div>
                                 @else
@@ -85,7 +85,7 @@
         @if($category->name !== 'Root' && !$category->getProducts->isEmpty())
             <div class="container my-4 p-4">
 
-                <p class="font-weight-bold">See more on <span><a href="{{ route('category.show', $category->slug) }}" class="btn text-danger font-weight-bold">{{ $category->name }}</a></span></p>
+                <h5 class="font-weight-bold">See more on <span><a href="{{ route('category.show', $category->slug) }}" class="btn text-danger font-weight-bold">{{ $category->name }}</a></span></h5>
 
                 <hr class="my-4">
 
@@ -109,7 +109,7 @@
                                         @if($loop->first)
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <div class="card mb-2">
+                                                    <div class="card mb-2 shadow">
                                                         @if ($product->id <=18)
                                                             <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
                                                         @else
@@ -133,7 +133,7 @@
                                                 </div>
                                                 @else
                                                     <div class="col-md-4 clearfix d-none d-md-block">
-                                                        <div class="card mb-4">
+                                                        <div class="card mb-4 shadow">
                                                             @if ($product->id <=18)
                                                                 <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
                                                             @else
@@ -166,7 +166,7 @@
                                         @if($loop->first)
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <div class="card mb-2">
+                                                    <div class="card mb-2 shadow">
                                                         @if ($product->id <=18)
                                                             <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
                                                         @else
@@ -190,7 +190,7 @@
                                                 </div>
                                                 @else
                                                     <div class="col-md-4 clearfix d-none d-md-block">
-                                                        <div class="card mb-4">
+                                                        <div class="card mb-4 shadow">
                                                             @if ($product->id <=18)
                                                                 <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
                                                             @else
