@@ -170,9 +170,10 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     public function handleShoppingCart($event)
     {
         $shopping_cart = $this->findOrCreate($event->user->id);
-        if (count($this->guestIndex())!=0) {
-            if (!$event->user->can('add cart item')){
-                abort(403,'You don\'t have required permission to add cart item, at first remove your cart items then login.');
+        if (count($this->guestIndex()) != 0) {
+            if (!$event->user->can('add cart item')) {
+                abort(403,
+                    'You don\'t have required permission to add cart item, at first remove your cart items then login.');
             }
             $cart = $this->guestIndex();
             unset($cart['total_price']);
@@ -211,13 +212,17 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
      * Multiply the quantity and the price of all products in guest cart..
      *
      * @param $cart
-     * @return float
+     * @return float|int
      */
-    private function totalGuestCartPrice($cart): float
+    private function totalGuestCartPrice($cart)
     {
         $sum = 0;
         foreach ($cart as $key => $value) {
-            $sum += $cart[$key]['quantity'] * $cart[$key]['price'];
+            if (isset($cart[$key]['quantity']) && isset($cart[$key]['quantity'])) {
+                $sum += $cart[$key]['quantity'] * $cart[$key]['price'];
+            } else {
+                $sum += 0;
+            }
         }
         return $sum;
     }
