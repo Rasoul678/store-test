@@ -8,6 +8,8 @@ use App\Models\CartItem;
 use App\Models\City;
 use App\Models\Product;
 use App\Repositories\Contracts\ShoppingCartRepositoryInterface;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -38,6 +40,11 @@ class CartController extends Controller implements CartControllerInterface
         }
     }
 
+    /**
+     * Display carts of guest user.
+     *
+     * @return Application|Factory|View
+     */
     public function guestIndex()
     {
         $carts = $this->shoppingCartRepository->guestIndex();
@@ -81,6 +88,12 @@ class CartController extends Controller implements CartControllerInterface
         return $this->index();
     }
 
+    /**
+     * Remove product from cart of guest user.
+     *
+     * @param $cart
+     * @return RedirectResponse
+     */
     public function removeGuestCart($cart)
     {
         $cart_name = $cart;
@@ -91,6 +104,11 @@ class CartController extends Controller implements CartControllerInterface
             ->with('flash', $cart_name . ' has been successfully deleted from cart.');
     }
 
+    /**
+     * Display checkout form and address of the user if available.
+     *
+     * @return Application|Factory|View
+     */
     public function checkoutForm()
     {
         if (!Auth::check()) {

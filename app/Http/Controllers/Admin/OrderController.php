@@ -37,6 +37,12 @@ class OrderController extends Controller implements OrderControllerInterface
             ->with(compact('status'));
     }
 
+    /**
+     * Update status of order.
+     *
+     * @param Order $order
+     * @return View
+     */
     public function update(Order $order)
     {
         $data = request()->validate([

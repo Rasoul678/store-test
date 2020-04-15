@@ -53,7 +53,6 @@ class OrderRepository implements OrderRepositoryInterface
             ]);
             return $order;
         }
-        return null;
     }
 
     /**
@@ -65,7 +64,7 @@ class OrderRepository implements OrderRepositoryInterface
     public function checkout(Address $address): Order
     {
         $shopping_cart = $this->shoppingCartRepository->findByAuthId();
-        if (!$shopping_cart->getCartItem->isNotEmpty()){
+        if (!$shopping_cart->getCartItem->isNotEmpty()) {
             abort('400', 'There isn\'t any products in your cart.');
         }
         $order = new Order([

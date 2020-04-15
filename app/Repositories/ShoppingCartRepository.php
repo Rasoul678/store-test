@@ -27,11 +27,11 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     /**
      * Get cart data from cookie as an associative array.
      *
-     * @return CookieJar|\Symfony\Component\HttpFoundation\Cookie
+     * @return array|CookieJar|\Symfony\Component\HttpFoundation\Cookie
      */
     public function guestIndex()
     {
-        return json_decode(Cookie::get('cartItem'), true);
+        return json_decode(Cookie::get('cartItem'), true) ?? [];
     }
 
     /**
@@ -125,13 +125,13 @@ class ShoppingCartRepository implements ShoppingCartRepositoryInterface
     /**
      * Remove guest cart item.
      *
-     * @param $cart
+     * @param $cartItem
      */
-    public function removeGuestCart($cart)
+    public function removeGuestCart($cartItem)
     {
         $cart = $this->guestIndex();
         foreach ($cart as $key => $item) {
-            if ($key == $cart) {
+            if ($key == $cartItem) {
                 unset($cart[$key]);
                 $total_price = $this->totalGuestCartPrice($cart);
                 if ($total_price != 0) {

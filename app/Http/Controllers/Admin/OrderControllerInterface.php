@@ -21,4 +21,12 @@ interface OrderControllerInterface
      * @return View
      */
     public function show(Order $order);
+
+    /**
+     * Update status of order.
+     *
+     * @param Order $order
+     * @return View
+     */
+    public function update(Order $order);
 }
