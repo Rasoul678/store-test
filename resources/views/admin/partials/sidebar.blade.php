@@ -23,13 +23,22 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item" href="{{ route('admin.users.index') }}" rel="noopener noreferrer"><span class="badge badge-primary mr-2">{{ $users_all}}</span><i class="icon fa fa-chevron-right"></i> All Users</a>
+                    <a class="treeview-item d-flex justify-content-between" style="padding: 12px 15px;" href="{{ route('admin.users.index') }}" rel="noopener noreferrer">
+                        <span>All Users</span>
+                        <span class="badge badge-primary mr-2">{{ $users_all}}</span>
+                    </a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{route('admin.users.index',['admins'])}}"><span class="badge badge-primary mr-2">{{ $admins_count}}</span><i class="icon fa fa-chevron-right"></i> Admins</a>
+                    <a class="treeview-item d-flex justify-content-between" style="padding: 12px 15px;" href="{{route('admin.users.index',['admins'])}}">
+                        <span>Admins</span>
+                        <span class="badge badge-primary mr-2">{{ $admins_count}}</span>
+                    </a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{route('admin.users.index',['customers'])}}"><span class="badge badge-primary mr-2">{{ $customers_count }}</span><i class="icon fa fa-chevron-right"></i> Customers</a>
+                    <a class="treeview-item d-flex justify-content-between" style="padding: 12px 15px;" href="{{route('admin.users.index',['customers'])}}">
+                        <span>Customers</span>
+                        <span class="badge badge-primary mr-2">{{ $customers_count }}</span>
+                    </a>
                 </li>
             </ul>
         </li>
@@ -55,13 +64,13 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item" href="{{route('admin.roles.index')}}" rel="noopener noreferrer"><i class="icon fa fa-chevron-right"></i> Roles</a>
+                    <a class="treeview-item" href="{{route('admin.roles.index')}}" rel="noopener noreferrer">Roles</a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{route('admin.permissions.index')}}"><i class="icon fa fa-chevron-right"></i> Permissions</a>
+                    <a class="treeview-item" href="{{route('admin.permissions.index')}}">Permissions</a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{route('admin.cities.index')}}"><i class="icon fa fa-chevron-right"></i> Cities</a>
+                    <a class="treeview-item" href="{{route('admin.cities.index')}}">Cities</a>
                 </li>
 {{--                <li>--}}
 {{--                    <a class="treeview-item" href="#"><i class="icon fa fa-chevron-right"></i> Other</a>--}}
