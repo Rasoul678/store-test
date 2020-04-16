@@ -120,7 +120,7 @@ class CartController extends Controller implements CartControllerInterface
             return $this->guestIndex();
         }
         $address = Address::where('user_id', Auth::id())
-            ->orderBy('updated_at')
+            ->orderBy('updated_at','desc')
             ->with('getCity')
             ->first();
         $shopping_cart = $this->shoppingCartRepository->findByAuthId();

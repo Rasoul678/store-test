@@ -23,6 +23,11 @@ class Address extends Model implements AddressInterface
         'number',
         'city_id',
     ];
+    protected $casts = [
+        'floor' => 'integer',
+        'number' => 'integer',
+        'postal_code' => 'integer',
+    ];
 
     /**
      * Get user as a one to many relationship.

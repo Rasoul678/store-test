@@ -24,13 +24,13 @@ class StoreOrder extends FormRequest
     public function rules()
     {
         return [
-            'postal_code'=>'required|digits_between:2,5',
+            'postal_code'=>'required|digits:10',
             'street'=>'required',
             'distinct'=>'required',
-            'floor'=>'required|digits_between:1,5',
-            'number'=>'required|digits_between:1,5',
+            'floor'=>'required|digits_between:1,3',
+            'number'=>'required|digits_between:1,3',
             'description'=>'required',
-            'city_id'=>'required|min:1|numeric',
+            'city_id'=>'required',
         ];
     }
 }
