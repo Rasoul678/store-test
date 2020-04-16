@@ -28,16 +28,16 @@
         </a>
     </div>
 </div>
+<hr class="my-3">
 {{--------------------------------------------------End of carousel  with a fade transition---------------------------------------------------}}
-    <section class="section-content padding-y">
+    <section class="section-content">
         <div class="container">
             <p class="font-weight-bold">All Products</p>
-            <hr class="my-4">
             <div id="code_prod_complex">
                 <div class="row">
                     @forelse($allProducts as $product)
                         <div class="col-sm-6 col-md-4 col-lg-3">
-                            <figure class="card card-product bg shadow">
+                            <figure class="card card-product bg">
                                 @if ($product->id <=18)
                                     <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}"></a></div>
                                 @else
@@ -62,7 +62,7 @@
                                                         <input type="hidden" name="price" id="finalPrice" value="{{ $product->price }}">
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-md btn-outline-success"><i class="fas fa-shopping-cart"></i></button>
+                                                <button type="submit" class="btn btn-md btn-primary"><i class="fas fa-shopping-cart"></i></button>
                                             </form>
                                             </div>
                                             <strong class="text-dark">${{ $product->price }}</strong>
@@ -76,18 +76,16 @@
                         </div>
                     @endforelse
                 </div>
-                {{ $allProducts->links('pagination.default')}}
+                    {{ $allProducts->links()}}
             </div>
         </div>
     </section>
     {{------------------------------------------------------------- SliderImage  ------------------------------------------------}}
     @foreach($categories as $category)
         @if($category->name !== 'Root' && !$category->getProducts->isEmpty())
-            <div class="container my-4 p-4">
-
-                <h5 class="font-weight-bold">See more on <span><a href="{{ route('category.show', $category->slug) }}" class="btn text-danger font-weight-bold">{{ $category->name }}</a></span></h5>
-
-                <hr class="my-4">
+            <hr>
+            <div class="container mt-0">
+                <p class="m-0"><span class="font-weight-bold">See more on: </span><a href="{{ route('category.show', $category->slug) }}" class="btn text-danger font-weight-bold pl-0">{{ $category->name }}</a></p>
 
                 <!--Carousel Wrapper-->
                 <div id="{{ $category->id }}" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -109,7 +107,7 @@
                                         @if($loop->first)
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <div class="card mb-2 shadow">
+                                                    <div class="card mb-2">
                                                         @if ($product->id <=18)
                                                             <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
                                                         @else
@@ -133,7 +131,7 @@
                                                 </div>
                                                 @else
                                                     <div class="col-md-4 clearfix d-none d-md-block">
-                                                        <div class="card mb-4 shadow">
+                                                        <div class="card mb-4">
                                                             @if ($product->id <=18)
                                                                 <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
                                                             @else
@@ -166,7 +164,7 @@
                                         @if($loop->first)
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <div class="card mb-2 shadow">
+                                                    <div class="card mb-2">
                                                         @if ($product->id <=18)
                                                             <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
                                                         @else
@@ -190,7 +188,7 @@
                                                 </div>
                                                 @else
                                                     <div class="col-md-4 clearfix d-none d-md-block">
-                                                        <div class="card mb-4 shadow">
+                                                        <div class="card mb-4">
                                                             @if ($product->id <=18)
                                                                 <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}" style="height: 100px; min-height: 100px"></a></div>
                                                             @else

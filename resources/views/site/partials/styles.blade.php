@@ -8,3 +8,12 @@
 <link href="{{ asset('frontend/css/ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    a.hover-link:hover{
+        color: orangered !important;
+        font-weight: bold;
+    }
+    ul.pagination{
+        justify-content: center !important;
+    }
+</style>
