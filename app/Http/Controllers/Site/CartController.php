@@ -60,12 +60,12 @@ class CartController extends Controller implements CartControllerInterface
     /**
      * Add cart item to the specified shopping cart.
      *
-     * @param Product $product
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function add(Product $product)
+    public function add()
     {
+        $product = Product::findOrFail(request('productId'));
         if (Auth::check()) {
             $this->authorize('create', CartItem::class);
             $this->shoppingCartRepository->addCartItem($product);

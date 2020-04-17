@@ -54,7 +54,7 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                             <a class="btn btn-md btn-outline-primary rounded mr-1" href="{{route('product.show',['product'=>$product->id])}}" role="button">Details</a>
-                                            <form action="{{route('cart.add',['product'=>$product->id])}}" method="POST" role="form" id="addToCart">
+                                            <form role="form" id="addToCart">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-sm-12">
@@ -113,8 +113,6 @@
                                                         @else
                                                             <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
                                                         @endif
-{{--                                                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"--}}
-{{--                                                             alt="Card image cap">--}}
                                                         <div class="card-body bg">
                                                             <div class="row">
                                                                 <div class="col">
@@ -125,7 +123,6 @@
                                                                 </div>
                                                             </div>
                                                             <p class="card-text text-truncate">{{ $product->description }}</p>
-{{--                                                            <a href="{{route('product.show',['product'=>$product->id])}}" class="btn btn-block btn-primary">View Details</a>--}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -137,8 +134,6 @@
                                                             @else
                                                                 <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
                                                             @endif
-{{--                                                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"--}}
-{{--                                                                 alt="Card image cap">--}}
                                                             <div class="card-body bg">
                                                                 <div class="row">
                                                                     <div class="col">
@@ -149,12 +144,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <p class="card-text text-truncate">{{ $product->description }}</p>
-{{--                                                                <a href="{{route('product.show',['product'=>$product->id])}}" class="btn btn-block btn-primary">View Details</a>--}}
                                                             </div>
                                                         </div>
                                                     </div>
                                                 @endif
-
                                                 @endforeach
                                             </div>
                                 </div>
@@ -170,8 +163,6 @@
                                                         @else
                                                             <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
                                                         @endif
-{{--                                                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"--}}
-{{--                                                             alt="Card image cap">--}}
                                                         <div class="card-body bg">
                                                             <div class="row">
                                                                 <div class="col">
@@ -182,7 +173,6 @@
                                                                 </div>
                                                             </div>
                                                             <p class="card-text text-truncate">{{ $product->description }}</p>
-{{--                                                            <a href="{{route('product.show',['product'=>$product->id])}}" class="btn btn-block btn-primary">View Details</a>--}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -194,8 +184,6 @@
                                                             @else
                                                                 <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
                                                             @endif
-{{--                                                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"--}}
-{{--                                                                 alt="Card image cap">--}}
                                                             <div class="card-body bg">
                                                                 <div class="row">
                                                                     <div class="col">
@@ -206,12 +194,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <p class="card-text text-truncate">{{ $product->description }}</p>
-{{--                                                                <a href="{{route('product.show',['product'=>$product->id])}}" class="btn btn-block btn-primary">View Details</a>--}}
                                                             </div>
                                                         </div>
                                                     </div>
                                                 @endif
-
                                                 @endforeach
                                             </div>
                                 </div>
@@ -221,13 +207,9 @@
                     <!--/.Slides-->
                 </div>
                 <!--/.Carousel Wrapper-->
-
-
             </div>
         @endif
-
     @endforeach
-
     {{----------------------------------------------------------------------------  EndOfSliderImage  ------------------------------------------------------------------------}}
 
 @stop

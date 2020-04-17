@@ -28,10 +28,9 @@ interface CartControllerInterface
     /**
      * Add cart item to the specified shopping cart.
      *
-     * @param Product $product
      * @return RedirectResponse
      */
-    public function add(Product $product);
+    public function add();
 
     /**
      * Remove a cart item from shopping cart.
