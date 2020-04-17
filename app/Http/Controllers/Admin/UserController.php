@@ -89,7 +89,7 @@ class UserController extends Controller implements UserControllerInterface
         $cart_items = ShoppingCart::where('customer_id', $user->id)
             ->firstOrFail()
             ->getCartItem()
-            ->paginate(10);
+            ->paginate(12);
         return view('admin.users.cartIndex')
             ->with(compact('user'))
             ->with(compact('cart_items'));

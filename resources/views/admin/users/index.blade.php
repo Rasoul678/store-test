@@ -20,16 +20,16 @@
 @endsection
 @section('content')
 
-    <div class="table-responsive-lg" style="min-height: 400px">
+    <div class="table-responsive-lg" style="min-height: 410px">
         <table class="table table-striped table-sm">
             <thead class="thead-dark">
             <tr>
-                <th scope="col"><h6>#</h6></th>
-                <th scope="col"><h6>Name</h6></th>
-                <th scope="col"><h6>Email</h6></th>
-                <th scope="col" style="min-width: 120px"><h6>Joined</h6></th>
-                <th scope="col"><h6>Role</h6></th>
-                <th scope="col" style="min-width: 120px"><h6 class="text-center">Actions</h6></th>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col" style="min-width: 120px">Joined</th>
+                <th scope="col">Role</th>
+                <th class="text-center" scope="col" style="min-width: 120px">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -73,56 +73,6 @@
             </tbody>
         </table>
     </div>
-
-
-{{--    <div class="table-responsive-md mt-3 " style="min-height: 400px">--}}
-{{--        <table class="table table-hover table-sm">--}}
-{{--            <thead class="thead-dark">--}}
-{{--            <tr>--}}
-{{--                <th scope="col">Name</th>--}}
-{{--                <th scope="col">Email</th>--}}
-{{--                <th scope="col">Joined</th>--}}
-{{--                <th scope="col">Role</th>--}}
-{{--                <th scope="col">Actions</th>--}}
-{{--            </tr>--}}
-{{--            </thead>--}}
-{{--            <tbody>--}}
-{{--            @foreach($users as $item)--}}
-{{--                <tr>--}}
-{{--                    <th scope="row">{{ $loop }}</th>--}}
-{{--                    <td>{{$item->first_name}} {{$item->last_name}}</td>--}}
-{{--                    <td>{{$item->email}}</td>--}}
-{{--                    <td >{{$item->created_at->format('Y M d, h:i:s')}}</td>--}}
-{{--                    <td>--}}
-{{--                        @forelse($item->getRoleNames() as $role)--}}
-{{--                            @if($role == 'Admin')--}}
-{{--                                <span class="badge badge-warning">{{ $role }}</span>--}}
-{{--                            @elseif($role == 'SuperAdmin')--}}
-{{--                                <span class="badge badge-warning">{{ $role }}</span>--}}
-{{--                            @else--}}
-{{--                                <span class="badge badge-info">{{ $role }}</span>--}}
-{{--                            @endif--}}
-{{--                        @empty--}}
-{{--                            <h5 class="text-center">no role!</h5>--}}
-{{--                        @endforelse--}}
-{{--                    </td>--}}
-{{--                    <td class="row justify-content-center ml-1" style="min-width: 120px">--}}
-{{--                        <form class="mr-1"--}}
-{{--                              action="{{route('admin.users.show',['user'=>$item->id])}}"--}}
-{{--                              method="get">@csrf--}}
-{{--                            <button class="btn btn-primary btn-sm" type="submit">View</button>--}}
-{{--                        </form>--}}
-{{--                        <form--}}
-{{--                                action="{{route('admin.users.carts',['user'=>$item->id])}}"--}}
-{{--                                method="get">@csrf--}}
-{{--                            <button class="btn btn-primary btn-sm" type="submit">Cart</button>--}}
-{{--                        </form>--}}
-{{--                    </td>--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
-{{--            </tbody>--}}
-{{--        </table>--}}
-{{--    </div>--}}
     {{ $users->links()}}
 
 @endsection
