@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/main.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/font-awesome/4.7.0/css/font-awesome.min.css') }}"/>
+    <style>
+        ul.pagination{
+            justify-content: center !important;
+        }
+        .treeview-item{
+            padding: 12px 15px;
+        }
+    </style>
 </head>
 <body class="app sidebar-mini rtl">
     @include('admin.partials.header')

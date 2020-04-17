@@ -1,6 +1,6 @@
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-    <div class="app-sidebar__user">
+    <div class="app-sidebar__user justify-content-center">
         <div>
             <h4><p class="app-sidebar__user-name">{{ $user_name }}</p></h4>
             <h4>
@@ -23,19 +23,19 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item d-flex justify-content-between" style="padding: 12px 15px;" href="{{ route('admin.users.index') }}" rel="noopener noreferrer">
+                    <a class="treeview-item d-flex justify-content-between" href="{{ route('admin.users.index') }}" rel="noopener noreferrer">
                         <span>All Users</span>
                         <span class="badge badge-primary mr-2">{{ $users_all}}</span>
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item d-flex justify-content-between" style="padding: 12px 15px;" href="{{route('admin.users.index',['admins'])}}">
+                    <a class="treeview-item d-flex justify-content-between" href="{{route('admin.users.index',['admins'])}}">
                         <span>Admins</span>
                         <span class="badge badge-primary mr-2">{{ $admins_count}}</span>
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item d-flex justify-content-between" style="padding: 12px 15px;" href="{{route('admin.users.index',['customers'])}}">
+                    <a class="treeview-item d-flex justify-content-between" href="{{route('admin.users.index',['customers'])}}">
                         <span>Customers</span>
                         <span class="badge badge-primary mr-2">{{ $customers_count }}</span>
                     </a>

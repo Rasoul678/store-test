@@ -21,13 +21,13 @@ class UserController extends Controller implements UserControllerInterface
     {
         if (request()->has('admins')) {
             $users = User::permission('admin')->orderBy('updated_at', 'desc')
-                ->paginate(7);
+                ->paginate(10);
         } elseif (request()->has('customers')) {
             $users = User::role('Customer')->orderBy('updated_at', 'desc')
-                ->paginate(7);
+                ->paginate(10);
         } else {
             $users = User::orderBy('updated_at', 'desc')
-                ->paginate(7);
+                ->paginate(10);
         }
         return view('admin.users.index', compact('users'));
     }
