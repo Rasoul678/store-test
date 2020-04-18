@@ -2,7 +2,7 @@
 @section('title', 'Homepage')
 @section('content')
 {{-------------------------------------------------------carousel  with a fade transition---------------------------------------------------------}}
-<div class="container mt-3">
+<div class="container mt-3 p-sm-0">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">

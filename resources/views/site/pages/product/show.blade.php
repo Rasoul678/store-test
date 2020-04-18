@@ -13,15 +13,25 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card bg">
-                        <div class="row no-gutters">
+                        <div class="row no-gutters card-product">
                             <aside class="col-sm-5 border-right">
                                 <article class="gallery-wrap">
                                     <div class="img-big-wrap">
-                                        <div class="">
+                                        <div>
                                             @if ($product->id <= 18)
-                                                <a href="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" data-fancybox=""><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt=""></a>
+                                                <div class="items">
+                                                    <a href="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" data-fancybox="">
+                                                        <img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}">
+                                                    </a>
+                                                    <button class="my-btn" style="display: none"></button>
+                                                </div>
                                             @else
-                                                <a href="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" data-fancybox=""><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt=""></a>
+                                                <div class="items">
+                                                    <a href="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" data-fancybox="">
+                                                        <img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="{{ $product->name }}">
+                                                    </a>
+                                                    <button class="my-btn" style="display: none"></button>
+                                                </div>
                                             @endif
 {{--                                            <a href="{{$product->getFirstMediaUrl('image')}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl('image')}}" alt="{{ $product->name }}" title="{{ $product->name }}"></a>--}}
                                         </div>
@@ -45,12 +55,12 @@
                                                        <input type="hidden" name="price" id="finalPrice" value="{{ $product->price }}">
                                                    </div>
                                                </div>
-                                               <button type="submit" class="btn btn-success btn-block"><i class="fas fa-shopping-cart"></i> Add To Cart</button>
+                                               <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i> Add To Cart</button>
                                            </form>
                                        </div>
                                         <div class="col-12 col-md-7 text-center mt-3 mt-md-0">
-                                            <var class="price h4">
-                                                Price: <span class="num text-success" id="productPrice">${{$product->price}}</span>
+                                            <var class="price h5">
+                                                Price: <span class="num" id="productPrice">${{$product->price}}</span>
                                             </var>
                                         </div>
                                     </div>
