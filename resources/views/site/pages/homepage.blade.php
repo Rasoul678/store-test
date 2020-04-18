@@ -39,9 +39,19 @@
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <figure class="card card-product bg">
                                 @if ($product->id <=18)
-                                    <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}"></a></div>
+                                    <div class="img-wrap padding-y items">
+                                        <a href="{{route('product.show',['product'=>$product->id])}}">
+                                            <img src="{{ asset('frontend/images/items/'.$product->id.'.jpg') }}" alt="{{ $product->name }}" title="{{ $product->name }}">
+                                        </a>
+                                        <button class="my-btn" style="display: none"></button>
+                                    </div>
                                 @else
-                                    <div class="img-wrap padding-y"><a href="{{route('product.show',['product'=>$product->id])}}"><img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name"></a></div>
+                                    <div class="img-wrap padding-y items">
+                                        <a href="{{route('product.show',['product'=>$product->id])}}">
+                                            <img src="{{'https://picsum.photos/id/'.$product->id.'2/700/700'}}" alt="product name">
+                                        </a>
+                                        <button class="my-btn" style="display: none"></button>
+                                    </div>
                                 @endif
 {{--                                <div class="img-wrap padding-y">--}}
 {{--                                    <a href="{{$product->getFirstMediaUrl('image')}}" data-fancybox=""><img src="{{$product->getFirstMediaUrl('image')}}" alt="{{ $product->name }}" title="{{ $product->name }}" ></a>--}}
