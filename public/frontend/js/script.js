@@ -9,12 +9,12 @@ if(window.innerWidth < 767){
       cartBigScreen.classList.add('cart');
 };
 
-// reload the page on screen change for cart icon movement
-window.addEventListener("resize", ()=>{
-      if(window.innerWidth < 767){
-            window.location.reload();
-      };
-});
+// // reload the page on screen change for cart icon movement
+// window.addEventListener("resize", ()=>{
+//       if(window.innerWidth < 767){
+//             window.location.reload();
+//       };
+// });
 
 // Fly to cart script
 $('.items').flyto({

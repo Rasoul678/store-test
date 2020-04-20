@@ -7,7 +7,7 @@
                 <h4 class="m-0 mt-2">{{ $user->full_name }}</h4>
             </div>
             <div class="col-4 col-lg-3">
-                <a class="btn btn-block btn-secondary" href="{{route('order.index')}}"> Orders</a>
+                <a class="btn btn-block btn-primary" href="{{route('order.index')}}"> Orders</a>
             </div>
         </div>
         <hr>
@@ -21,8 +21,8 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="email"><h6>Joined</h6></label>
-                    <input disabled type="text" class="form-control" id="email"
+                    <label for="date"><h6>Joined</h6></label>
+                    <input disabled type="text" class="form-control" id="date"
                            value="{{ old('name', $user->created_at->diffForHumans()) }}">
                 </div>
             </div>
@@ -46,7 +46,7 @@
         </div>
         <form action="{{route('profile.edit')}}"
               method="get">@csrf
-            <button class="btn btn-success" type="submit">
+            <button class="btn btn-secondary" type="submit">
                 Edit Profile
             </button>
         </form>

@@ -26,9 +26,9 @@ class ProductController extends Controller implements ProductControllerInterface
     {
         $status = request()->has('status') ? request()->query('status') : 1;
         if (request()->has('only_trash')) {
-            $products = Product::onlyTrashed()->where('status', $status)->orderBy('deleted_at', 'desc')->paginate(6);
+            $products = Product::onlyTrashed()->where('status', $status)->orderBy('deleted_at', 'desc')->paginate(8);
         } else {
-            $products = Product::withoutTrashed()->where('status', $status)->orderBy('updated_at', 'desc')->paginate(6);
+            $products = Product::withoutTrashed()->where('status', $status)->orderBy('updated_at', 'desc')->paginate(8);
         }
         $products->load('getCategories');
         return view('admin.products.index', compact('products'));

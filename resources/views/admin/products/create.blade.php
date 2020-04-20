@@ -52,11 +52,11 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-12">
                     <label class="form-check-label"><h6>Select Category: </h6></label>
-                    <div class="form-group custom-control-inline">
+                    <div class="form-group row px-4">
                         @foreach($categories as $category)
-                            <div class="form-check">
+                            <div class="form-check col-4 col-md-3 col-lg-2">
                                 <input name="categories[]" class="form-check-input" type="checkbox"
                                        value="{{$category->slug}}"
                                        id="defaultCheck1"
@@ -91,8 +91,8 @@
                 <textarea class="form-control" id="description" name="description" style="font-size: 18px">{{ old('description') }}</textarea>
             </div>
             <div class="mt-3">
-                <button type="submit" class="btn btn-primary btn-lg">Save</button>
-                <a class="btn btn-danger btn-lg" role="button" href="{{ route('admin.products.index') }}">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn btn-danger" role="button" href="{{ route('admin.products.index') }}">Cancel</a>
             </div>
         </form>
     </div>

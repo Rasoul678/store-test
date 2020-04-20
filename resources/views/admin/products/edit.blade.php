@@ -52,16 +52,20 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
-                <div class="col md-6">
+                <div class="col-12">
                     <label class="form-check-label"><h6>Select Category: </h6></label>
-                    <div class="form-group custom-control-inline">
+                    <div class="form-group row px-4">
                         @foreach($categories as $category)
-                            <div class="form-check">
-                                <input {{in_array($category->id, $product->getCategories->pluck('id')->toArray()) ? 'checked' : ''}} name="categories[]" type="checkbox"
-                                       value="{{$category->slug}}">
-                                <label>
-                                    <strong>{{$category->name}}</strong>
+                            <div class="form-check col-4 col-md-3 col-lg-2">
+                                <input {{in_array($category->id, $product->getCategories->pluck('id')->toArray()) ? 'checked' : ''}}
+                                       name="categories[]" class="form-check-input" type="checkbox"
+                                       value="{{$category->slug}}"
+                                       id="defaultCheck1"
+                                >
+                                <label class="form-check-label" for="defaultCheck1">
+                                    <h6>{{$category->name}}&nbsp;</h6>
                                 </label>
                             </div>
                         @endforeach
@@ -94,8 +98,8 @@
             </div>
 
             <div class="mt-3">
-                <button type="submit" class="btn btn-primary btn-lg">Update</button>
-                <a class="btn btn-danger btn-lg" role="button"
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a class="btn btn-danger" role="button"
                    href="{{ route('admin.products.index') }}">Cancel</a>
             </div>
         </form>
