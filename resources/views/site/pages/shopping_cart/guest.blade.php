@@ -1,57 +1,72 @@
 @extends('site.app')
 @section('title','Cart')
 @section('content')
-    {{--    @if($carts)--}}
-    {{--        <div class="alert alert-danger alert-dismissible fade show" role="alert" >--}}
-    {{--            You need to log in or sign up to be able to checkout.--}}
-    {{--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
-    {{--                <span aria-hidden="true">&times;</span>--}}
-    {{--            </button>--}}
-    {{--        </div>--}}
-    {{--    @else--}}
-    {{--        <div class="alert alert-warning alert-dismissible fade show" role="alert" >--}}
-    {{--            Your cart is empty at the moment.--}}
-    {{--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
-    {{--                <span aria-hidden="true">&times;</span>--}}
-    {{--            </button>--}}
-    {{--        </div>--}}
-    {{--    @endif--}}
     <div class="container mt-3">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Your cart</span>
-            @if($carts)
-                <span class="badge badge-success badge-pill">{{count($carts)-1}}</span>
-            @endif
-        </h4>
-        <hr>
-        <ul class="list-group mb-3">
-            @if($carts)
-                @foreach($carts as $key=>$value)
-                    @if($key!='total_price')
-                        <li class="row">
-                            <h6 class="my-0 col mt-2">{{$key}}</h6>
-                            <small
-                                class="col text-center mt-2"><strong>Quantity: {{$value['quantity']}}</strong></small>
-                            <h6 class="my-0 col text-center mt-2">${{$value['price']}}</h6>
-                            <form class="col text-right" action="{{route('cart.removeGuestCart',['cart_item'=>$key])}}"
-                                  method="POST">
-                                @csrf @method('DELETE')
-                                <button class="btn" type="submit"><i class="fa fa-times text-danger"></i></button>
-                            </form>
-                        </li>
-                        <hr>
+        <div class="d-flex justify-content-center">
+            <div class="col-lg-10 p-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span>Your cart</span>
+                    @if($carts)
+                        <span class="badge badge-success badge-pill">{{count($carts)-1}}</span>
+                    @else
+                        <span class="badge badge-success badge-pill">0</span>
                     @endif
-                @endforeach
-                    <h6 class="justify-content-start align-items-center mb-3"><strong>Total Price: ${{$carts['total_price']}}</strong></h6>
-            @else
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h5 class="my-0">Cart is empty.</h5>
-                        <small class="text-muted"></small>
-                    </div>
-                    <span class="text-muted"></span>
-                </li>
-            @endif
-        </ul>
+                </h4>
+                <div class="table-responsive-sm">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="text-left w-50" scope="row">Product</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center w-">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if($carts)
+                            @foreach($carts as $key=>$value)
+                                @if($key!='total_price')
+                                    <tr>
+                                        <th class="text-left align-middle" scope="row">
+                                            <h6 class="text-truncate">{{$key}}</h6>
+                                        </th>
+                                        <td class="text-center align-middle">{{$value['quantity']}}</td>
+                                        <td class="text-center align-middle">${{$value['price']}}</td>
+                                        <td class="text-center align-middle">
+                                            <div class="custom-control-inline">
+                                                <form action="{{route('product.show',['product'=>$value['id']])}}"
+                                                      method="GET">
+                                                    @csrf
+                                                    <button class="btn btn-outline-primary text-dark" type="submit">
+                                                        View
+                                                    </button>
+                                                </form>
+                                                <form action="{{route('cart.removeGuestCart',['cart_item'=>$key])}}"
+                                                      method="POST">
+                                                    @csrf @method('DELETE')
+                                                    <button class="btn btn-outline-danger text-dark" type="submit">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td class="align-middle" colspan="2"><strong>Total Price</strong></td>
+                            <td class="text-center align-middle">${{$carts['total_price']}}</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        </tfoot>
+                        @endif
+                    </table>
+
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
