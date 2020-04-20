@@ -8,7 +8,7 @@
 {{--            </h5>--}}
 {{--        </div>--}}
 {{--    </section>--}}
-    <section class="section-content bg padding-y border-top" id="site">
+    <section class="section-content padding-y" id="site">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

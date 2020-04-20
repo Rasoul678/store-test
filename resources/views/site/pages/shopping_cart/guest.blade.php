@@ -37,14 +37,14 @@
                                                 <form action="{{route('product.show',['product'=>$value['id']])}}"
                                                       method="GET">
                                                     @csrf
-                                                    <button class="btn btn-outline-primary text-dark" type="submit">
+                                                    <button class="btn btn-primary" type="submit">
                                                         View
                                                     </button>
                                                 </form>
-                                                <form action="{{route('cart.removeGuestCart',['cart_item'=>$key])}}"
+                                                <form class="ml-1" action="{{route('cart.removeGuestCart',['cart_item'=>$key])}}"
                                                       method="POST">
                                                     @csrf @method('DELETE')
-                                                    <button class="btn btn-outline-danger text-dark" type="submit">
+                                                    <button class="btn btn-secondary" type="submit">
                                                         Delete
                                                     </button>
                                                 </form>
