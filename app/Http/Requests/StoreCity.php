@@ -24,9 +24,23 @@ class StoreCity extends FormRequest
     public function rules()
     {
         return [
-            'city' => 'required',
-            'state' => 'required',
-            'country' => 'required',
+            'city' => 'required|not_regex:/[0-9]/|not_regex:/[.]/',
+            'state' => 'required|not_regex:/[0-9]/|not_regex:/[.]/',
+            'country' => 'required|not_regex:/[0-9]/|not_regex:/[.]/',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'city.not_regex' => 'City cannot have dot or any digits.',
+            'state.not_regex' => 'State cannot have dot or any digits',
+            'country.not_regex' => 'Country cannot have dot or any digits',
         ];
     }
 }

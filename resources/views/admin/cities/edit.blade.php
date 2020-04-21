@@ -14,7 +14,7 @@
                         <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="name" name="city"
-                               value="{{ old('name', $city->city) }}">
+                               value="{{ old('city', $city->city) }}">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -24,7 +24,7 @@
                         <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="name" name="state"
-                               value="{{ old('name', $city->state) }}">
+                               value="{{ old('state', $city->state) }}">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -34,7 +34,7 @@
                         <div class="alert alert-danger custom-error">{{$message}}</div>
                         @enderror
                         <input type="text" class="form-control" id="name" name="country"
-                               value="{{ old('name', $city->country) }}">
+                               value="{{ old('country', $city->country) }}">
                     </div>
                 </div>
             </div>

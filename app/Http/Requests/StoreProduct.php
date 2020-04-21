@@ -29,13 +29,25 @@ class StoreProduct extends FormRequest
     {
         return [
             'name' => 'required',
-            'categories.*' => 'required',
+            'categories' => 'required',
             'description' => 'nullable',
             'type' => 'nullable',
-            'price' => 'nullable|digits_between:1,7',
-            'status'=>'nullable',
+            'price' => 'regex:/^[0-9]{0,5}(\.[0-9]{0,2})?$/',
+            'status' => 'nullable',
 //            'image_url'=>'nullable',
 //            'status' => 'required|enum_value:' . ProductStatus::class,
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'price.regex' => 'The price may have maximum 5 digits and 2 decimals.',
         ];
     }
 }
