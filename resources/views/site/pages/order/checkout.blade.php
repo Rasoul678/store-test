@@ -3,51 +3,63 @@
 @section('content')
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-5 order-md-2 mb-4">
+            <div class="table-responsive-sm col-md-5 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span>Your cart</span>
-                    <span class="badge badge-success badge-pill">{{$shopping_cart->getCartItem->count()}}</span>
+                    <span class="badge badge-secondary badge-pill">{{$shopping_cart->getCartItem->count()}}</span>
                 </h4>
-                <hr>
-                <ul class="list-group mb-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="text-left w-50" scope="row">Product</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center w-">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     @forelse($shopping_cart->getCartItem as $cartItem)
-                        <li class="row">
-
-                            <h6 class="my-0 col mt-2 text-truncate"><a
-                                    href="{{route('product.show',['product'=>$cartItem->getProduct->id])}}">{{$cartItem->getProduct->name}}</a>
-                            </h6>
-                            <small
-                                class="col text-center mt-2"><strong>Quantity: {{$cartItem->quantity}}</strong></small>
-
-                            <h6 class="my-0 col text-center mt-2">${{$cartItem->total_price}}</h6>
-                            <div>
-                                <form class="col text-right" action="{{route('cart.remove',$cartItem->id)}}"
-                                      method="POST">
-                                    @csrf @method('DELETE')
-                                    <button class="btn pr-0" type="submit"><i class="fa fa-times text-danger"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </li>
-                        <hr>
+                        <tr>
+                            <th class="text-left align-middle" scope="row">
+                                <h6 class="text-truncate">{{$cartItem->getProduct->name}}</h6>
+                            </th>
+                            <td class="text-center align-middle">{{$cartItem->quantity}}</td>
+                            <td class="text-center align-middle">${{$cartItem->total_price}}</td>
+                            <td class="text-center align-middle">
+                                <div class="custom-control-inline">
+                                    <form action="{{route('product.show',['product'=>$cartItem->getProduct->id])}}"
+                                          method="GET">
+                                        @csrf
+                                        <button class="btn btn-primary" type="submit">
+                                            View
+                                        </button>
+                                    </form>
+                                    <form class="ml-1"
+                                          action="{{route('cart.remove',$cartItem->id)}}"
+                                          method="POST">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-secondary" type="submit">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
                     @empty
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h5 class="my-0">Cart is empty.</h5>
-                                <small class="text-muted"></small>
-                            </div>
-                            <span class="text-muted"></span>
-                        </li>
+                        <tr>
+                            <td>Cart is empty.</td>
+                        </tr>
                     @endforelse
-                    <li class="list-group-item">
-                        <div class="d-flex justify-content-between">
-                            <span>Total</span>
-                            <strong>${{$total_price}}</strong>
-                        </div>
-                    </li>
-                </ul>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td class="align-middle" colspan="2"><strong>Total Price</strong></td>
+                        <td class="text-center align-middle">${{$total_price}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </tfoot>
+                </table>
             </div>
-            {{--            @if($shopping_cart->getCartItem->first())--}}
             <div class="col-md-7 order-md-1">
                 <h4 class="mb-3">Checkout Form</h4>
                 <form class="needs-validation" novalidate="" action="{{route('order.checkout')}}"
@@ -132,7 +144,6 @@
                             {{ $dis_check }} type="submit">{{ $empty_check }}</button>
                 </form>
             </div>
-            {{--            @endif--}}
         </div>
     </div>
 @endsection
