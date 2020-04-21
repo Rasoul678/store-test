@@ -35,7 +35,7 @@
 {{--                                    </div>--}}
                                 <div class="card-body border-top">
                                     <p class="card-text m-0"><strong>Product: </strong>{{ $product->name }}</p>
-                                    <p class="card-text text-justify" style="height: 60px; overflow: hidden"><strong>Description:</strong><br> {{ \Illuminate\Support\Str::limit($product->description .
+                                    <p class="card-text text-justify" style="height: 85px; overflow: hidden"><strong>Description:</strong><br> {{ \Illuminate\Support\Str::limit($product->description .
                                         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias blanditiis dicta earum eius error,',60, ' (...)')}}
                                     </p>
                                     <div class="d-flex justify-content-between align-items-center">
