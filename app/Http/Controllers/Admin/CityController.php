@@ -18,7 +18,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::orderBy('id')->paginate(5);
+        $cities = City::orderBy('id')->paginate(7);
         return view('admin.cities.index', compact('cities'));
     }
 

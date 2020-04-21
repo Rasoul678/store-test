@@ -9,10 +9,15 @@
 <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
-    a.hover-link:hover{
+
+    a.active-cat{
         color: orangered !important;
-        font-weight: bold;
     }
+
+    a.hover-link:hover{
+        border-bottom: 1px solid orangered !important;
+    }
+
     ul.pagination{
         justify-content: center !important;
     }
