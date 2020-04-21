@@ -5,8 +5,6 @@
     <div class="container mt-2">
         <form action="{{ route('admin.roles.store') }}" method="POST">
             @csrf
-            <h4>Add New Role</h4>
-            <hr>
             <div class="row">
                 <div class="col md-6">
                     <div class="form-group">
@@ -18,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row container">
                 <label class="form-check-label">Select Permissions: </label>
                 <div class="form-group custom-control">
                     <div class="row">
@@ -42,8 +40,8 @@
             </div>
 
             <div class="mt-1">
-                <button type="submit" class="btn btn-primary btn-lg">Save</button>
-                <a class="btn btn-danger btn-lg" role="button" href="{{ route('admin.roles.index') }}">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn btn-danger" role="button" href="{{ route('admin.roles.index') }}">Cancel</a>
             </div>
 
         </form>

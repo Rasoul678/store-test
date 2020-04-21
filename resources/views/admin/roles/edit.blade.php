@@ -6,8 +6,6 @@
         <form action="{{ route('admin.roles.update',['role'=>$role->id]) }}" method="POST">
             @method('PATCH')
             @csrf
-            <h4>Edit {{$role->name}} Role</h4>
-            <hr>
             <div class="row">
                 <div class="col md-6">
                     <div class="form-group">
@@ -20,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row container">
                 <label class="form-check-label">Select Permissions: </label>
                 <div class="form-group custom-control">
                     <div class="row">
@@ -45,11 +43,10 @@
             </div>
 
             <div class="mt-1">
-                <button type="submit" class="btn btn-primary btn-lg">Update</button>
-                <a class="btn btn-danger btn-lg" role="button"
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a class="btn btn-danger" role="button"
                    href="{{ route('admin.roles.index') }}">Cancel</a>
             </div>
-
         </form>
     </div>
 @endsection

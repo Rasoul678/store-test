@@ -5,71 +5,57 @@
     <div class="container">
         <div class="row">
             <div class="mt-1 col-xs-12 col-sm-4 col-md-5 col-lg-3 col-xl-2">
-                <a href="{{route('admin.cities.create')}}" class="btn btn-primary btn-lg btn-block" role="button">Add
-                    City</a>
+                <a href="{{route('admin.cities.create')}}" class="btn btn-info btn-block" role="button">
+                    Add City
+                </a>
             </div>
         </div>
-        <div class="d-flex justify-content-center mb-2 mb-sm-0" style="min-height: 383px">
-            <table class="table table-hover table-sm mt-3" style="max-width: 120px">
+        <div class="table-responsive-lg mt-3" style="min-height: 350px">
+            <table class="table table-striped table-sm">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col"><h6 class="text-center m-0 mr-lg-5 ml-lg-5 p-1">City</h6></th>
+                    <th scope="col">#</th>
+                    <th scope="col">City</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Country</th>
+                    <th class="text-center" scope="col" style="min-width: 120px">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($cities as $city)
                     <tr>
-                        <th scope="row" style="height: 53px"><h6 class="text-center text-truncate m-0" style="max-width: 120px">{{ $city->city }}</h6></th>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <th scope="row">{{ $city->city }}</th>
+                        <th scope="row">{{ $city->state }}</th>
+                        <th scope="row">{{ $city->country }}</th>
+                        <td class="row justify-content-center" style="min-width: 220px">
+                            <form class="mr-1"
+                                  action="{{ route('admin.cities.show', ['city'=>$city->id]) }}"
+                                  method="GET">@csrf
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    Details
+                                </button>
+                            </form>
+                            <form class="mr-1"
+                                  action="{{ route('admin.cities.edit', ['city'=>$city->id]) }}"
+                                  method="GET">@csrf
+                                <button class="btn btn-secondary btn-sm" type="submit">
+                                    Edit
+                                </button>
+                            </form>
+                            <form class="mr-1"
+                                  action="{{ route('admin.cities.destroy', ['city'=>$city->id]) }}"
+                                  method="POST">@method('DELETE')@csrf
+                                <button class="btn btn-danger btn-sm" type="submit">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-            <div class="table-responsive mt-3">
-                <table class="table table-hover table-sm">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col"><h6 class="text-center m-0 mr-lg-5 ml-lg-5  p-1">State</h6></th>
-                        <th scope="col"><h6 class="text-center m-0 mr-lg-5 ml-lg-5  p-1">Country</h6></th>
-                        <th scope="col"><h6 class="text-center m-0 p-1">Actions</h6></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @forelse($cities as $city)
-                        <tr>
-                            <td><h5 class="text-center">{{ $city->state }}</h5></td>
-                            <td><h5 class="text-center">{{ $city->country }}</h5></td>
-                            <td class="d-flex justify-content-center mr-0">
-                                <form class="mr-1"
-                                        action="{{ route('admin.cities.show', ['city'=>$city->id]) }}"
-                                        method="GET">@csrf
-                                    <button class="btn btn-info btn-sm" type="submit"><i
-                                                class="material-icons">visibility</i>
-                                    </button>
-                                </form>
-                                <form class="mr-1"
-                                        action="{{ route('admin.cities.edit', ['city'=>$city->id]) }}"
-                                        method="GET">@csrf
-                                    <button class="btn btn-success btn-sm" type="submit"><i
-                                                class="material-icons">edit</i>
-                                    </button>
-                                </form>
-                                <form class="mr-1"
-                                        action="{{ route('admin.cities.destroy', ['city'=>$city->id]) }}"
-                                        method="POST">@method('DELETE')@csrf
-                                    <button class="btn btn-danger btn-sm" type="submit"><i
-                                                class="material-icons">delete_forever</i>
-                                    </button>
-                                </form>
-                            </td>
-                            @empty
-                                <td><h5>There aren't any cities added yet.</h5></td>
-                        </tr>
-                    @endforelse
-                    </tbody>
-                </table>
-            </div>
         </div>
-
         {{$cities->links()}}
     </div>
 @endsection
