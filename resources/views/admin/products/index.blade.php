@@ -55,7 +55,6 @@
                                         <form
                                               action="{{ route('admin.products.edit', ['product'=>$product->id]) }}"
                                               method="get">@csrf
-                                            <input type="hidden" name="id" value="{{ $category->id  }}">
                                             <button class="btn btn-secondary btn-sm py-0" type="submit" title="Edit Product">
                                                 Edit
                                             </button>

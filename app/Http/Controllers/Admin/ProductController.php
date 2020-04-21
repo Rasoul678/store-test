@@ -144,7 +144,7 @@ class ProductController extends Controller implements ProductControllerInterface
         $this->authorize('restore', $product);
         $product->restore();
         flash($product->name . ' has been restored successfully.');
-        return redirect(route('admin.products.index'));
+        return redirect()->back();
     }
 
     /**
@@ -161,7 +161,7 @@ class ProductController extends Controller implements ProductControllerInterface
         $product_name = $product->name;
         $product->delete();
         flash($product_name . ' has been deleted successfully.');
-        return redirect(route('admin.products.index'));
+        return redirect()->back();
     }
 
     /**
@@ -178,6 +178,6 @@ class ProductController extends Controller implements ProductControllerInterface
         $product_name = $product->name;
         $product->forceDelete();
         flash($product_name . ' has been deleted permanently.');
-        return redirect(route('admin.products.index'));
+        return redirect()->back();
     }
 }

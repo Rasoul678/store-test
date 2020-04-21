@@ -118,7 +118,7 @@ class CategoryController extends Controller implements CategoryInterface
         $this->authorize('restore', $category);
         $category->restore();
         flash($category->name . ' has been restored successfully.');
-        return redirect(route('admin.categories.index'));
+        return redirect()->back();
     }
 
     /**
@@ -134,7 +134,7 @@ class CategoryController extends Controller implements CategoryInterface
         $name = $category->name;
         $category->delete();
         flash($name . ' has been deleted successfully.');
-        return redirect(route('admin.categories.index'));
+        return redirect()->back();
     }
 
     /**
@@ -151,7 +151,7 @@ class CategoryController extends Controller implements CategoryInterface
         $name = $category->name;
         $category->forceDelete();
         flash($name . ' has been deleted permanently.');
-        return redirect(route('admin.categories.index'));
+        return redirect()->back();
     }
 
 }
